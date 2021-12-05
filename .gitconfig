@@ -9,9 +9,14 @@
 [commit]
 	template = ~/.gitmessage
 [user]
-	email = muhammadkhan1607@gmail.com
-	name = mbm_1607
+	email = saadkhankxt@hotmail.com
+	name = Saad Khan
 [pull]
 	rebase = false
 [init]
 	defaultBranch = master
+[credential]
+	helper =
+	helper = /usr/bin/git-credential-manager-core
+[credential "https://dev.azure.com"]
+	useHttpPath = true
