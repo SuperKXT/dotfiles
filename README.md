@@ -12,7 +12,7 @@ Then run the install script, it will take care of making symlinks of your dotfil
 
 ``` ./install.sh ```
 
-For Windows:
+### For Windows:
 - Clone the repo at C:/Users/{{Username}}.
 - Copy all dotfiles to parent folder
 - Copy the contents of vscode folder to C:/Users/{{Username}}/AppData/Roaming/Code/User
