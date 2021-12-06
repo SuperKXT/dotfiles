@@ -13,6 +13,7 @@ olddir=~/dotfiles_old
 
 # list of files/folders to symlink in homedir
 files=".bashrc .gitconfig .gitmessage .gitignore"
+folders='vscode'
 
 
 # create dotfiles_old in homedir
@@ -31,6 +32,14 @@ for file in $files; do
 	mv ~/$file ~/dotfiles_old/
 	echo "Creating symlink to $file in home directory."
 	ln -s $dir/$file ~/$file
+done
+
+# move any existing dotfolders in homedir to dotfiles_old directory, then create symlinks
+for folder in $folders; do
+	echo "Moving any existing dotfiles from ~ to $olddir"
+	mv ~/$folder ~/dotfiles_old/
+	echo "Creating symlink to $folder in home directory."
+	ln -s $dir/$folder ~/.$folder
 done
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash

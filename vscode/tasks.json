@@ -1,0 +1,38 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "workspaceTerminalSetup",
+			"dependsOn": ["RenameDefaultTerminalToApp", "splitTerminalonStartup"],
+			"dependsOrder": "sequence",
+			"runOptions": { "runOn": "folderOpen" },
+			"presentation": {
+				"echo": true,
+				"focus": true,
+				"panel": "new",
+				"clear": false,
+			},
+		},
+		{
+			"label": "RenameDefaultTerminalToApp",
+			"command": "${input:renameAppTerminal}",
+			"type": "shell",
+		},
+		{
+			"label": "splitTerminalonStartup",
+			"command": "${command:workbench.action.terminal.splitInActiveWorkspace}",
+			"type": "shell",
+		},
+
+	],
+	"inputs": [
+		{
+			"id": "renameAppTerminal",
+			"type": "command",
+			"command": "workbench.action.terminal.renameWithArg",
+			"args": {
+				"name": "app",
+			}
+		},
+	]
+}
