@@ -66,7 +66,7 @@ export EDITOR="code -w"
 ##############################################################################
 
 # simple update alias
-alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove'
+alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update'
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
@@ -89,7 +89,7 @@ mkcdir ()
 ##############################################################################
 
 if [ -f ~/.git-completion.bash ]; then
-  . ~/.git-completion.bash
+	. ~/.git-completion.bash
 fi
 
 export NVM_DIR="$HOME/.nvm"
