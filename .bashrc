@@ -66,7 +66,7 @@ export EDITOR="code -w"
 ##############################################################################
 
 # simple update alias
-alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update'
+alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && npm-check -g -u'
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
