@@ -1,4 +1,4 @@
- #!/usr/bin/env bash
+#!/usr/bin/env bash
 ############################
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
@@ -21,15 +21,15 @@ echo "...done"
 
 # change to the dotfiles directory
 echo "Changing to the $dir"
-cd $dir
+cd $dir || return
 echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
 	echo "Moving any existing dotfiles from ~ to $olddir"
-	mv ~/$file $olddir/
+	mv "$HOME/$file" "$olddir/"
 	echo "Creating symlink to $file in home directory."
-	ln -s $dir/$file ~/$file
+	ln -s "$dir/$file" "$HOME/$file"
 done
 
 # move vscode tasks.json file to ~/.config/Code/User
