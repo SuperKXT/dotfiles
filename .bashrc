@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 ##############################################################################
 # Sections:                                                                  #
 #   01. General ................. General Bash behavior                      #
@@ -71,7 +72,7 @@ alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --f
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ssh-hosts="grep -P \"^Host ([^*]+)$\" $HOME/.ssh/config | sed 's/Host //'"
+alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'"
 
 
 ##############################################################################
@@ -81,15 +82,16 @@ alias ssh-hosts="grep -P \"^Host ([^*]+)$\" $HOME/.ssh/config | sed 's/Host //'"
 # Make a directory and move into it
 mkcdir ()
 {
-	mkdir -p -- "$1" && cd -P -- "$1"
+	mkdir -p -- "$1" && cd -P -- "$1" || exit
 }
 
 ##############################################################################
 # 04. Ruby                                                                   #
 ##############################################################################
 
-if [ -f ~/.git-completion.bash ]; then
-	. ~/.git-completion.bash
+AUTCOMPLETE_LOCATION=~/.git-completion.bash
+if [ -f $AUTCOMPLETE_LOCATION ]; then
+	. "$AUTCOMPLETE_LOCATION"
 fi
 
 export NVM_DIR="$HOME/.nvm"
