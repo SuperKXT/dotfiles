@@ -12,15 +12,15 @@
 ##############################################################################
 
 WHITE='\[\e[1;37m\]'
-RED='\[\e[0;31m\]'
+#RED='\[\e[0;31m\]'
 YELLOW='\[\e[1;33m\]'
 BLUE='\[\e[0;36m\]'
 PURPLE='\[\e[1;34m\]'
 COLOR_RESET='\[\e[0m\]'
 NODE='\[\e[1;32m'
-RUBY_VERSION='\[\e[1;31m\]'
-PYTHON='\[\e[1;32m\]'
-PYTHON='\[\e[1;36m\]'
+#RUBY_VERSION='\[\e[1;31m\]'
+#PYTHON='\[\e[1;32m\]'
+#PYTHON='\[\e[1;36m\]'
 
 
 function git_prompt() {
@@ -87,7 +87,7 @@ mkcdir ()
 
 # Kill a process that is holding the port number supplied
 killport() {
-	sudo kill -9 $(sudo fuser -n tcp $1 2> /dev/null);
+	sudo kill -9 "$(sudo fuser -n tcp "$1" 2> /dev/null)";
 }
 
 ##############################################################################
