@@ -87,7 +87,7 @@ mkcdir ()
 
 # Kill a process that is holding the port number supplied
 killport() {
-	sudo kill -9 "$(sudo fuser -n tcp "$1" 2> /dev/null)";
+	sudo fuser -k -TERM "$1"/tcp;
 }
 
 checkppas() {
