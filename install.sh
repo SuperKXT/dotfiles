@@ -32,11 +32,4 @@ for file in $files; do
 	ln -s "$dir/$file" "$HOME/$file"
 done
 
-# move vscode tasks.json file to ~/.config/Code/User
-codeTaskDir=~/.config/Code/User
-echo "Moving existing tasks.json from $codeTaskDir to $olddir/vscode"
-mv $codeTaskDir/tasks.json $olddir/vscode
-echo "Moving vscode tasks.json file to $codeTaskDir"
-ln -s $dir/vscode/tasks.json $codeTaskDir/tasks.json
-
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
