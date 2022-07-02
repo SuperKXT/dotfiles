@@ -90,6 +90,11 @@ killport() {
 	sudo fuser -n tcp -k "$1";
 }
 
+# alias for git log --oneline -n $1
+gimme() {
+	git log --oneline -n "$1";
+}
+
 checkppas() {
 	for f in /etc/apt/sources.list.d/*.list; do
 		grep -Po "(?<=^deb\s).*?(?=#|$)" "$f" | while read -r ENTRY ; do
