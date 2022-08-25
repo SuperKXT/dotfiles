@@ -2,6 +2,11 @@
 
 Dotfiles repository for bash and git configuration.
 
+---
+❗️Largely copied over from https://github.com/mbm1607
+
+---
+
 ## Installation
 
 All you need to do is clone the repository in your home ~ directory inside the dotfiles folder.
@@ -15,4 +20,3 @@ Then run the install script, it will take care of making symlinks of your dotfil
 ### For Windows:
 - Clone the repo at C:/Users/{{Username}}.
 - Copy all dotfiles to parent folder
-- Copy the contents of vscode folder to C:/Users/{{Username}}/AppData/Roaming/Code/User
