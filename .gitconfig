@@ -3,6 +3,8 @@
 	graph = log --all --graph --decorate --oneline
 	assume-unchanged = update-index --assume-unchanged
 	no-assume-unchanged = update-index --no-assume-unchanged
+[branch]
+	autosetupmerge = always
 [core]
 	editor = code -w
 	excludesfile = ~/.gitignore
@@ -10,13 +12,8 @@
 	template = ~/.gitmessage
 [user]
 	email = saadkhankxt@hotmail.com
-	name = Saad Khan
+	name = SuperKXT
 [pull]
 	rebase = false
 [init]
 	defaultBranch = master
-[credential]
-	helper =
-	helper = /usr/bin/git-credential-manager-core
-[credential "https://dev.azure.com"]
-	useHttpPath = true
