@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 ##############################################################################
 # Sections:                                                                  #
-#   01. General ................. General Bash behavior                      #
-#   02. Aliases ................. Aliases                                    #
-#   03. Functions ............... Helper functions                           #
-#   04. Ruby .................... ruby installation                          #
+#   01. General ............................. General Bash behavior          #
+#   02. Aliases ............................. Aliases                        #
+#   03. Functions ........................... Helper functions               #
+#   04. Setup Environments .................. node, nvm and bash setup       #
 ##############################################################################
 
 ##############################################################################
@@ -51,7 +51,7 @@ function git_prompt() {
 
 function node_version() {
 	# Get the node version currently in use
-	echo "$BLUE─[$COLOR_RESET$NODE⬢  - $(nvm version | cut -d'v' -f2-)$COLOR_RESET$BLUE]"
+	echo "$BLUE─[$COLOR_RESET$NODE⬢  - $(node -v | cut -d'v' -f2-)$COLOR_RESET$BLUE]"
 }
 
 function prompt() {
@@ -74,20 +74,28 @@ alias la='ls -A'
 alias l='ls -CF'
 alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'"
 
-
 ##############################################################################
 # 03. Functions                                                              #
 ##############################################################################
 
 # Make a directory and move into it
-mkcdir ()
-{
+mkcdir () {
 	mkdir -p -- "$1" && cd -P -- "$1" || exit
 }
 
 # Kill a process that is holding the port number supplied
 killport() {
-	sudo fuser -n tcp -k "$1";
+	sudo kill -9 $(sudo fuser -n tcp $1 2> /dev/null);
+}
+
+# Get all local ips
+local_ip() {
+	ifconfig | grep "inet" | grep -Fv 127.0.0.1 | awk '{print $2}'
+}
+
+# Get public ip
+public_ip() {
+	curl ipinfo.io/ip
 }
 
 # alias for git log --oneline -n $1
@@ -96,13 +104,22 @@ gimme() {
 }
 
 ##############################################################################
-# 04. Ruby                                                                   #
+# 04. Setup Environments                                                     #
 ##############################################################################
 
-AUTCOMPLETE_LOCATION=~/.git-completion.bash
-if [ -f $AUTCOMPLETE_LOCATION ]; then
-	. "$AUTCOMPLETE_LOCATION"
+if [ -f ~/.git-completion.bash ]; then
+	. ~/.git-completion.bash
 fi
+
+if [ -f ~/.ssh-completion.bash ]; then
+	. ~/.ssh-completion.bash
+fi
+
+if [ -f ~/.bash.profile ]; then
+	. ~/.bash.profile
+fi
+
+eval "$(direnv hook bash)"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
