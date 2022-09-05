@@ -22,13 +22,11 @@ NODE='\[\e[1;32m'
 #PYTHON='\[\e[1;32m\]'
 #PYTHON='\[\e[1;36m\]'
 
-
 function git_prompt() {
 	# GIT PROMPT
 	COLOR_GIT_CLEAN='\[\e[0;32m\]'
 	COLOR_GIT_MODIFIED='\[\e[0;31m\]'
 	COLOR_GIT_STAGED='\[\e[0;33m\]'
-
 
 	if [ -e ".git" ]; then
 		branch_name=$(git symbolic-ref -q HEAD)
@@ -37,12 +35,12 @@ function git_prompt() {
 
 		echo -n "-["
 
-		if [[ $(git status 2> /dev/null | tail -n1) = *"nothing to commit"* ]]; then
-		echo -n "$COLOR_GIT_CLEAN$branch_name$COLOR_RESET"
-		elif [[ $(git status 2> /dev/null | head -n5) = *"Changes to be committed"* ]]; then
-		echo -n "$COLOR_GIT_STAGED$branch_name$COLOR_RESET"
+		if [[ $(git status 2>/dev/null | tail -n1) = *"nothing to commit"* ]]; then
+			echo -n "$COLOR_GIT_CLEAN$branch_name$COLOR_RESET"
+		elif [[ $(git status 2>/dev/null | head -n5) = *"Changes to be committed"* ]]; then
+			echo -n "$COLOR_GIT_STAGED$branch_name$COLOR_RESET"
 		else
-		echo -n "$COLOR_GIT_MODIFIED$branch_name*$COLOR_RESET"
+			echo -n "$COLOR_GIT_MODIFIED$branch_name*$COLOR_RESET"
 		fi
 
 		echo -n "$BLUE]$COLOR_RESET"
@@ -80,13 +78,18 @@ alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'
 ##############################################################################
 
 # Make a directory and move into it
-mkcdir () {
+mkcdir() {
 	mkdir -p -- "$1" && cd -P -- "$1" || exit
 }
 
 # Kill a process that is holding the port number supplied
 killport() {
-	sudo kill -9 $(sudo fuser -n tcp $1 2> /dev/null);
+	sudo kill -9 $(sudo fuser -n tcp $1 2>/dev/null)
+}
+
+# Kill a process that is holding the port number supplied
+wordle() {
+	cd ~/repos/personal/code-challenges/ && yarn wordle "$@" && cd -
 }
 
 # Get all local ips
@@ -101,7 +104,7 @@ public_ip() {
 
 # alias for git log --oneline -n $1
 gimme() {
-	git log --oneline -n "$1";
+	git log --oneline -n "$1"
 }
 
 ##############################################################################
@@ -121,50 +124,50 @@ if [ -f ~/.bash.profile ]; then
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 cdnvm() {
-    command cd "$@";
-    nvm_path=$(nvm_find_up .nvmrc | tr -d '\n')
+	command cd "$@"
+	nvm_path=$(nvm_find_up .nvmrc | tr -d '\n')
 
-    # If there are no .nvmrc file, use the default nvm version
-    if [[ ! $nvm_path = *[^[:space:]]* ]]; then
+	# If there are no .nvmrc file, use the default nvm version
+	if [[ ! $nvm_path = *[^[:space:]]* ]]; then
 
-        declare default_version;
-        default_version=$(nvm version default);
+		declare default_version
+		default_version=$(nvm version default)
 
-        # If there is no default version, set it to `node`
-        # This will use the latest version on your machine
-        if [[ $default_version == "N/A" ]]; then
-            nvm alias default node;
-            default_version=$(nvm version default);
-        fi
+		# If there is no default version, set it to `node`
+		# This will use the latest version on your machine
+		if [[ $default_version == "N/A" ]]; then
+			nvm alias default node
+			default_version=$(nvm version default)
+		fi
 
-        # If the current version is not the default version, set it to use the default version
-        if [[ $(nvm current) != "$default_version" ]]; then
-            nvm use default;
-        fi
+		# If the current version is not the default version, set it to use the default version
+		if [[ $(nvm current) != "$default_version" ]]; then
+			nvm use default
+		fi
 
-    elif [[ -s $nvm_path/.nvmrc && -r $nvm_path/.nvmrc ]]; then
-        declare nvm_version
-        nvm_version=$(<"$nvm_path"/.nvmrc)
+	elif [[ -s $nvm_path/.nvmrc && -r $nvm_path/.nvmrc ]]; then
+		declare nvm_version
+		nvm_version=$(<"$nvm_path"/.nvmrc)
 
-        declare locally_resolved_nvm_version
-        # `nvm ls` will check all locally-available versions
-        # If there are multiple matching versions, take the latest one
-        # Remove the `->` and `*` characters and spaces
-        # `locally_resolved_nvm_version` will be `N/A` if no local versions are found
-        locally_resolved_nvm_version=$(nvm ls --no-colors "$nvm_version" | tail -1 | tr -d '\->*' | tr -d '[:space:]')
+		declare locally_resolved_nvm_version
+		# `nvm ls` will check all locally-available versions
+		# If there are multiple matching versions, take the latest one
+		# Remove the `->` and `*` characters and spaces
+		# `locally_resolved_nvm_version` will be `N/A` if no local versions are found
+		locally_resolved_nvm_version=$(nvm ls --no-colors "$nvm_version" | tail -1 | tr -d '\->*' | tr -d '[:space:]')
 
-        # If it is not already installed, install it
-        # `nvm install` will implicitly use the newly-installed version
-        if [[ "$locally_resolved_nvm_version" == "N/A" ]]; then
-            nvm install "$nvm_version";
-        elif [[ $(nvm current) != "$locally_resolved_nvm_version" ]]; then
-            nvm use "$nvm_version";
-        fi
-    fi
+		# If it is not already installed, install it
+		# `nvm install` will implicitly use the newly-installed version
+		if [[ "$locally_resolved_nvm_version" == "N/A" ]]; then
+			nvm install "$nvm_version"
+		elif [[ $(nvm current) != "$locally_resolved_nvm_version" ]]; then
+			nvm use "$nvm_version"
+		fi
+	fi
 }
 alias cd='cdnvm'
 cd "$PWD"
