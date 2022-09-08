@@ -72,7 +72,7 @@ alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
 alias ls='ls --color=auto'
 alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'"
-alias apt-i="sudo apt list --installed"
+alias apti="apt list --installed"
 
 ##############################################################################
 # 03. Functions                                                              #

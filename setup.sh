@@ -17,14 +17,16 @@ source ~/.bashrc
 # Install node lts
 nvm install lts/*
 
+NPM_PACKAGES="nodemon node-gyp npm-check electron eslint tldr serve create-react-app pm2 jsdoc electron-icon-builder ngrok yarn yarn-check eslint-plugin-jsdoc vsce typescript @svgr/cli expo-cli ngrok ts-node dotenv-vault npkill"
+
 #install global npm modules for node lts
-npm i -g nodemon node-gyp npm-check electron eslint tldr serve create-react-app pm2 jsdoc electron-icon-builder ngrok yarn yarn-check eslint-plugin-jsdoc vsce typescript @svgr/cli expo-cli ngrok ts-node dotenv-vault npkill
+npm i -g $NPM_PACKAGES
 
 # Install node latest
 nvm install node
 
 #install global npm modules for node lts
-npm i -g nodemon node-gyp npm-check electron eslint tldr serve create-react-app pm2 jsdoc electron-icon-builder ngrok yarn yarn-check eslint-plugin-jsdoc vsce typescript @svgr/cli expo-cli ngrok ts-node dotenv-vault
+npm i -g $NPM_PACKAGES
 
 nvm alias lts/* default
 nvm use default
