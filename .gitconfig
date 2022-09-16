@@ -1,21 +1,21 @@
 # global setting
 [alias]
-	graph = log --all --graph --decorate --oneline
-	assume-unchanged = update-index --assume-unchanged
-	no-assume-unchanged = update-index --no-assume-unchanged
+graph = log --all --graph --decorate --oneline
+assume-unchanged = update-index --assume-unchanged
+no-assume-unchanged = update-index --no-assume-unchanged
 [branch]
-	autosetupmerge = always
+autosetupmerge = always
 [core]
-	editor = code -w
-	excludesfile = ~/.gitignore
+editor = code -w
+excludesfile = ~/.gitignore
 [commit]
-	template = ~/.gitmessage
+template = ~/.gitmessage
 [user]
-	email = saadkhankxt@hotmail.com
-	name = SuperKXT
+email = saadkhankxt@hotmail.com
+name = SuperKXT
 [pull]
-	rebase = false
+rebase = false
 [init]
-	defaultBranch = master
+defaultBranch = main
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+insteadOf = https://github.com/
