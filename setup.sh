@@ -19,6 +19,9 @@ nvm install lts/*
 
 NPM_PACKAGES="nodemon node-gyp npm-check electron eslint tldr serve create-react-app pm2 jsdoc electron-icon-builder ngrok yarn yarn-check eslint-plugin-jsdoc vsce typescript @svgr/cli expo-cli ngrok ts-node dotenv-vault npkill"
 
+#install postman
+curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
+
 #install global npm modules for node lts
 npm i -g $NPM_PACKAGES
 
