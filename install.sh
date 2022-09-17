@@ -26,10 +26,10 @@ echo "...done"
 
 # move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
 for file in $files; do
-	echo "Moving any existing dotfiles from ~ to $olddir"
-	mv "~/$file" "$olddir"
+	echo "Moving existing $file from ~ to $olddir"
+	mv "$HOME/$file" "$olddir"
 	echo "Creating symlink to $file in home directory."
-	ln -s "$dir/$file" "~/$file"
+	ln -s "$dir/$file" "$HOME/$file"
 done
 
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
