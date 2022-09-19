@@ -74,6 +74,7 @@ alias l='ls -CF --color=auto'
 alias ls='ls --color=auto'
 alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'"
 alias apti="apt list --installed"
+alias pn='pnpm'
 
 ##############################################################################
 # 03. Functions                                                              #
@@ -95,18 +96,23 @@ wordle() {
 }
 
 # Get all local ips
-local_ip() {
+local-ip() {
 	ifconfig | grep "inet" | grep -Fv 127.0.0.1 | awk '{print $2}'
 }
 
 # Get public ip
-public_ip() {
+public-ip() {
 	curl ipinfo.io/ip
 }
 
 # alias for git log --oneline -n $1
 gimme() {
 	git log --oneline -n "$1"
+}
+
+# update nvm version
+nvm-update() {
+	nvm install "$1" --reinstall-packages-from="$1"
 }
 
 ##############################################################################
