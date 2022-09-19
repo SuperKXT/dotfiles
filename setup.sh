@@ -12,27 +12,31 @@ sudo apt install direnv httpie bat tilix gcc make libssl-dev libreadline-dev zli
 # Install nvm and node 16
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
-source ~/.bashrc
-
-# Install node lts
-nvm install lts/*
-
 NPM_PACKAGES="nodemon node-gyp npm-check electron eslint tldr serve create-react-app pm2 jsdoc electron-icon-builder ngrok yarn yarn-check eslint-plugin-jsdoc vsce typescript @svgr/cli expo-cli ngrok ts-node dotenv-vault npkill"
 
 #install postman
 curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
+source ~/.bashrc
+
+# Install node lts
+nvm install lts/*
+source ~/.bashrc
 
 #install global npm modules for node lts
 npm i -g $NPM_PACKAGES
+corepack enable yarn
+corepack prepare pnpm@latest --activate
 
 # Install node latest
 nvm install node
+source ~/.bashrc
 
 #install global npm modules for node lts
 npm i -g $NPM_PACKAGES
+corepack enable yarn
+corepack prepare pnpm@latest --activate
 
 nvm alias lts/* default
 nvm use default
 
 source ~/.bashrc
-corepack enable yarn
