@@ -11,7 +11,7 @@ excludesfile = ~/.gitignore
 [commit]
 template = ~/.gitmessage
 [user]
-email = saadkhankxt@hotmail.com
+email = superkxt@outlook.com
 name = SuperKXT
 [pull]
 rebase = false
