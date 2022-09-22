@@ -1,0 +1,21 @@
+{
+	"name": "dotfiles",
+	"version": "1.0.0",
+	"description": "Dotfiles repository for bash and git configuration.",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SuperKXT/dotfiles.git"
+	},
+	"author": "SuperKXT",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SuperKXT/dotfiles/issues"
+	},
+	"homepage": "https://github.com/SuperKXT/dotfiles#readme",
+	"devDependencies": {
+		"stylelint": "^14.12.1"
+	}
+}
