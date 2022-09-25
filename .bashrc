@@ -66,7 +66,7 @@ export EDITOR="code -w"
 
 # simple update alias
 alias setup-postman='curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
-alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && nvm use lts/* && npm-check -gu && nvm use node && npm-check -gu && nvm use default && curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh && nvm-update-lts && nvm-update-latest'
+alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && nvm use lts/* && npm-check -gu && nvm use node && npm-check -gu && nvm use default && curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
 # some more ls aliases
 alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
@@ -110,14 +110,9 @@ gimme() {
 	git log --oneline -n "$1"
 }
 
-# update nvm lts version
-nvm-update-lts() {
-	nvm install --lts --latest-npm --reinstall-packages-from='lts/*'
-}
-
-#udpate nvm node version
-nvm-update-latest() {
-	nvm install node --latest-npm --reinstall-packages-from=node
+#udpate nvm version
+nvm-update() {
+	nvm install "$1" --latest-npm --reinstall-packages-from="$1"
 }
 
 ##############################################################################
