@@ -114,6 +114,7 @@ gimme() {
 nvm-update() {
 	nvm install "$1" --latest-npm --reinstall-packages-from="$2"
 	nvm uninstall "$2"
+	nvm use default
 }
 
 ##############################################################################
