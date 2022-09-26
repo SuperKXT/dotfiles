@@ -25,6 +25,7 @@ source ~/.bashrc
 #install global npm modules for node lts
 npm i -g $NPM_PACKAGES
 corepack enable
+corepack prepare yarn@latest --activate
 corepack prepare pnpm@latest --activate
 
 # Install node latest
@@ -34,6 +35,7 @@ source ~/.bashrc
 #install global npm modules for node lts
 npm i -g $NPM_PACKAGES
 corepack enable
+corepack prepare yarn@latest --activate
 corepack prepare pnpm@latest --activate
 
 nvm alias lts/* default
