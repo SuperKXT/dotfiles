@@ -74,6 +74,7 @@ alias la='ls -A --color=auto'
 alias l='ls -CF --color=auto'
 alias ls='ls --color=auto'
 alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'"
+alias git open="gh repo view --web"
 alias apti="apt list --installed | grep"
 alias pn='pnpm'
 
