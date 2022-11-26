@@ -93,12 +93,12 @@ killport() {
 
 # Find wordle solution words
 wordle() {
-	cd ~/repos/personal/code-challenges/ && pn wordle "$@" && cd - || return
+	cd ~/repos/personal/code-challenges/ && pn wordle "$@" && cd - >/dev/null || return
 }
 
 # recursively rename the given path and all its contents to kebab case
 kebab-rename() {
-	cd ~/repos/personal/code-challenges/ && pn kebab-rename "$@" && cd - || return
+	cd ~/repos/personal/code-challenges/ && pn kebab-rename "$@" && cd - >/dev/null || return
 }
 
 # Get all local ips
