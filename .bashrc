@@ -83,17 +83,22 @@ alias pn='pnpm'
 
 # Make a directory and move into it
 mkcdir() {
-	mkdir -p -- "$1" && cd -P -- "$1" || exit
+	mkdir -p -- "$1" && cd -P -- "$1" || return
 }
 
 # Kill a process that is holding the port number supplied
 killport() {
-	sudo kill -9 $(sudo fuser -n tcp $1 2>/dev/null)
+	sudo kill -9 "$(sudo fuser -n tcp "$1" 2>/dev/null)"
 }
 
-# Kill a process that is holding the port number supplied
+# Find wordle solution words
 wordle() {
-	cd ~/repos/personal/code-challenges/ && pn wordle "$@" && cd -
+	cd ~/repos/personal/code-challenges/ && pn wordle "$@" && cd - || return
+}
+
+# recursively rename the given path and all its contents to kebab case
+kebab-rename() {
+	cd ~/repos/personal/code-challenges/ && pn kebab-rename "$@" && cd - || return
 }
 
 # Get all local ips
@@ -139,7 +144,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 cdnvm() {
-	command cd "$@"
+	command cd "$@" || return
 	nvm_path=$(nvm_find_up .nvmrc | tr -d '\n')
 
 	# If there are no .nvmrc file, use the default nvm version
@@ -181,4 +186,4 @@ cdnvm() {
 	fi
 }
 alias cd='cdnvm'
-cd "$PWD"
+cd "$PWD" || return
