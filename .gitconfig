@@ -19,3 +19,16 @@ rebase = false
 defaultBranch = main
 [url "git@github.com:"]
 insteadOf = https://github.com/
+[safe]
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
+	directory = /home/superkxt/test/actions/actions-runner/_work/SooperwizerFrontend/SooperwizerFrontend
