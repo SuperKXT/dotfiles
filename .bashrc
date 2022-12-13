@@ -77,6 +77,7 @@ alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'
 alias git-open="gh repo view --web"
 alias apti="apt list --installed | grep"
 alias pn='pnpm'
+alias open='xdg-open'
 
 ##############################################################################
 # 03. Functions                                                              #
