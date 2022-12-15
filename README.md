@@ -3,7 +3,8 @@
 Dotfiles repository for bash and git configuration.
 
 ---
-❗️Largely copied over from https://github.com/mbm1607
+
+❗️Largely copied over from <https://github.com/mbm1607>
 
 ---
 
@@ -17,6 +18,7 @@ Then run the install script, it will take care of making symlinks of your dotfil
 
 ``` ./install.sh ```
 
-### For Windows:
+### For Windows
+
 - Clone the repo at C:/Users/{{Username}}.
 - Copy all dotfiles to parent folder
