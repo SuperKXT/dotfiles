@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# shellcheck source=/dev/null
 ############################
 # This scripts installs applications and sets up development environment
 ############################
@@ -7,7 +8,9 @@
 sudo apt install build-essential direnv httpie bat tilix gcc make libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev gnome-tweaks
 
 # Install nvm
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+if ! command -v nvm &>/dev/null; then
+	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+fi
 
 # Install git completion script
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
@@ -42,3 +45,11 @@ nvm alias lts/* default
 nvm use default
 
 source ~/.bashrc
+
+# Install Deno
+if ! command -v deno &>/dev/null; then
+	curl -fsSL https://deno.land/install.sh | sh
+fi
+
+deno completions bash >/usr/local/etc/bash_completion.d/deno.bash
+source /usr/local/etc/bash_completion.d/deno.bash
