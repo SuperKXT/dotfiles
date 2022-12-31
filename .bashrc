@@ -78,6 +78,7 @@ alias git-open="gh repo view --web"
 alias apti="apt list --installed | grep"
 alias pn='pnpm'
 alias open='xdg-open'
+alias proton='protonvpn-cli'
 
 ##############################################################################
 # 03. Functions                                                              #
