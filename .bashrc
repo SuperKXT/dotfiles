@@ -79,6 +79,7 @@ alias apti="apt list --installed | grep"
 alias pn='pnpm'
 alias open='xdg-open'
 alias proton='protonvpn-cli'
+alias cat='catbat --paging=never'
 
 ##############################################################################
 # 03. Functions                                                              #
