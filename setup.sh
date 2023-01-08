@@ -74,10 +74,15 @@ if ! command -v gh &>/dev/null; then
 fi
 
 # install anydesk
-wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add - &&
-	echo "deb http://deb.anydesk.com/ all main" >/etc/apt/sources.list.d/anydesk-stable.list &&
-	sudo apt update &&
-	sudo apt install anydesk
+read -p "Do you want to install AnyDesk (y/n)? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add - &&
+		echo "deb http://deb.anydesk.com/ all main" >/etc/apt/sources.list.d/anydesk-stable.list &&
+		sudo apt update &&
+		sudo apt install anydesk
+
+fi
 
 # install azure data studio
 wget https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
