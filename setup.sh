@@ -121,6 +121,11 @@ fi
 xdg-open https://www.dropbox.com/install?os=lnx
 
 # setup theme
+git clone https://github.com/vinceliuice/Orchis-theme orchis &&
+	cd orchis &&
+	source ./install.sh -t red -c light -s compact -l --round 0px --tweaks compact primary
 
 # setup dotfiles
 source ./install.sh
+
+# setup os fonts and icons and themes and shit
