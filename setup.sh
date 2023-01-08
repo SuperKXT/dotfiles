@@ -69,6 +69,18 @@ if ! command -v gh &>/dev/null; then
 		gh extension install mislav/gh-license
 fi
 
+# install vs code
+if ! command -v code &>/dev/null; then
+	sudo apt-get install wget gpg &&
+		wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg &&
+		sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg &&
+		sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' &&
+		rm -f packages.microsoft.gpg &&
+		sudo apt install apt-transport-https &&
+		sudo apt update &&
+		sudo apt install code
+fi
+
 #install postman
 if ! command -v postman &>/dev/null; then
 	curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh &&
@@ -83,9 +95,11 @@ if ! command -v insomnia &>/dev/null; then
 fi
 
 # install azure data studio
-wget https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
-	sudo apt install ./azure-data-studio.deb &&
-	rm ./azure-data-studio.deb
+if ! command -v azuredatastudio &>/dev/null; then
+	wget https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
+		sudo apt install ./azure-data-studio.deb &&
+		rm ./azure-data-studio.deb
+fi
 
 # install anydesk
 read -p "Do you want to install AnyDesk (y/n)? " -n 1 -r
