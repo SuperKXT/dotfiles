@@ -33,20 +33,20 @@ source ~/.bashrc
 NPM_PACKAGES="$(list_from_file ./npm-packages.txt)"
 
 # Install node lts
-nvm install lts/*
-source ~/.bashrc
-npm i -g "$NPM_PACKAGES"
-corepack enable
-corepack prepare yarn@latest --activate
-corepack prepare pnpm@latest --activate
+nvm install lts/* &&
+	source ~/.bashrc &&
+	npm i -g "$NPM_PACKAGES" &&
+	corepack enable &&
+	corepack prepare yarn@latest --activate &&
+	corepack prepare pnpm@latest --activate
 
 # Install node latest
-nvm install node
-source ~/.bashrc
-npm i -g "$NPM_PACKAGES"
-corepack enable
-corepack prepare yarn@latest --activate
-corepack prepare pnpm@latest --activate
+nvm install node &&
+	source ~/.bashrc &&
+	npm i -g "$NPM_PACKAGES" &&
+	corepack enable &&
+	corepack prepare yarn@latest --activate &&
+	corepack prepare pnpm@latest --activate
 
 nvm alias lts/* default
 nvm use default
@@ -69,3 +69,6 @@ curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo 
 	sudo apt update &&
 	sudo apt install gh -y
 gh extension install mislav/gh-license
+
+# install dropbox
+xdg-open https://www.dropbox.com/install?os=lnx
