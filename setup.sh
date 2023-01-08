@@ -120,10 +120,18 @@ fi
 # install dropbox
 xdg-open https://www.dropbox.com/install?os=lnx
 
-# setup theme
+# install orchis theme
 git clone https://github.com/vinceliuice/Orchis-theme orchis &&
 	cd orchis &&
-	source ./install.sh -t red -c light -s compact -l --round 0px --tweaks compact primary
+	source ./install.sh -t red -c light -s compact -l --round 0px --tweaks compact primary &&
+	cd .. &&
+	rm -rf orchis
+
+# install tela icon theme
+git clone https://github.com/vinceliuice/Tela-icon-theme tela &&
+	source ./install.sh &&
+	cd .. &&
+	rm -rf tela red
 
 # setup dotfiles
 source ./install.sh
