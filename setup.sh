@@ -112,5 +112,12 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
 fi
 
+# install mongodb compass
+if ! command -v mongodb-compass &>/dev/null; then
+	wgeet https://downloads.mongodb.com/compass/mongodb-compass_1.34.2_amd64.deb -O compass.deb &&
+		sudo apt install ./compass.deb &&
+		rm ./compass.deb
+fi
+
 # install dropbox
 xdg-open https://www.dropbox.com/install?os=lnx
