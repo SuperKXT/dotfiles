@@ -120,10 +120,13 @@ gimme() {
 	git log --oneline -n "$1"
 }
 
-#udpate nvm version
+# udpate nvm version
 nvm-update() {
 	nvm install "$1" --latest-npm --reinstall-packages-from="$2"
 	nvm uninstall "$2"
+	corepack enable yarn
+	corepack enable pnpm
+	corepack prepare pnpm@latest --activate
 	nvm use default
 }
 
