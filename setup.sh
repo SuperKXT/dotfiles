@@ -32,7 +32,6 @@ NPM_PACKAGES="$(list_from_file ./npm-packages.txt)"
 
 # Install node lts
 nvm install lts/* &&
-	source ~/.bashrc &&
 	npm i -g "$NPM_PACKAGES" &&
 	corepack enable &&
 	corepack prepare yarn@latest --activate &&
@@ -40,7 +39,6 @@ nvm install lts/* &&
 
 # Install node latest
 nvm install node &&
-	source ~/.bashrc &&
 	npm i -g "$NPM_PACKAGES" &&
 	corepack enable &&
 	corepack prepare yarn@latest --activate &&
@@ -121,3 +119,8 @@ fi
 
 # install dropbox
 xdg-open https://www.dropbox.com/install?os=lnx
+
+# setup theme
+
+# setup dotfiles
+source ./install.sh
