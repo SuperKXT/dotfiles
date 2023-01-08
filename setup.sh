@@ -72,3 +72,9 @@ gh extension install mislav/gh-license
 
 # install dropbox
 xdg-open https://www.dropbox.com/install?os=lnx
+
+# install anydesk
+wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add - &&
+	echo "deb http://deb.anydesk.com/ all main" >/etc/apt/sources.list.d/anydesk-stable.list &&
+	sudo apt update &&
+	sudo apt install anydesk
