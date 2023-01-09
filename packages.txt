@@ -1,0 +1,13 @@
+build-essential
+direnv
+httpie
+bat
+tilix
+gcc
+make
+libssl-dev
+libreadline-dev
+zlib1g-dev
+libsqlite3-dev
+gnome-tweaks
+bat

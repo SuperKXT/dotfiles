@@ -78,6 +78,8 @@ alias git-open="gh repo view --web"
 alias apti="apt list --installed | grep"
 alias pn='pnpm'
 alias open='xdg-open'
+alias proton='protonvpn-cli'
+alias cat='batcat --paging=never'
 
 ##############################################################################
 # 03. Functions                                                              #
@@ -118,11 +120,15 @@ gimme() {
 	git log --oneline -n "$1"
 }
 
-#udpate nvm version
+# udpate nvm version
 nvm-update() {
-	nvm install "$1" --latest-npm --reinstall-packages-from="$2"
-	nvm uninstall "$2"
-	nvm use default
+	nvm install "$1" --latest-npm --reinstall-packages-from="$2" &&
+		nvm uninstall "$2" &&
+		corepack enable yarn &&
+		corepack enable pnpm &&
+		corepack prepare yarn@latest --activate &&
+		corepack prepare pnpm@latest --activate &&
+		nvm use default
 }
 
 ##############################################################################
