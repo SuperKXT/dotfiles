@@ -3,6 +3,13 @@
 # This scripts installs applications and sets up development environment
 ############################
 
+# Usage `get-latest-release "action/runner"`
+get-latest-release() {
+	curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
+		grep '"tag_name":' |                                             # Get tag line
+		sed -E 's/.*"([^"]+)".*/\1/'                                     # Pluck JSON value
+}
+
 # Install apt packages
 sudo apt install build-essential direnv httpie bat tilix gcc make libssl-dev libreadline-dev zlib1g-dev libsqlite3-dev gnome-tweaks
 
