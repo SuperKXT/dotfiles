@@ -139,6 +139,12 @@ git clone https://github.com/vinceliuice/Tela-icon-theme tela &&
 	cd .. &&
 	rm -rf tela red
 
+# install iosevka fonts
+iosveka_repo="be5invis/Iosevka"
+iosevka_version=get-latest-release $iosveka_repo &&
+	wget "https://github.com/$iosveka_repo/releases/download/v$iosevka_version/super-ttc-iosevka-fixed-slab-$iosevka_version.zip" -O slab.zip &&
+	wget "https://github.com/$iosveka_repo/releases/download/v$iosevka_version/super-ttc-iosevka-term-slab-$iosevka_version.zip" -O slab.zip
+
 # setup dotfiles
 source ./install.sh
 
