@@ -1,14 +1,12 @@
 #!/usr/bin/env bash
-
-get_latest_release() {
-	curl --progress-bar "https://api.github.com/repos/$1/releases/latest" |
-		grep '"tag_name":' |
-		sed -E 's/.*"([^"]+)".*/\1/'
-}
+# shellcheck source=latest-git-release.sh
+source latest-git-release.sh
 
 folder="$HOME/.local/share/fonts"
+
+# install iosevka
 repo="be5invis/iosevka"
-tag="$(get_latest_release $repo)"
+tag="$(latest_git_release $repo)"
 version="${tag:1}"
 url_prefix="https://github.com/$repo/releases/download"
 name_prefix="super-ttc-sgr-iosevka"
@@ -20,8 +18,9 @@ if [ -n "$version" ]; then
 		rm slab.zip term.zip
 fi
 
-# wget -q https://www.dropbox.com/sh/w465f79zweowwug/AADBkyI1xyG4meCdGE2Oogkoa?dl=1 -O fonts.zip &&
-# 	tar xvf fonts.zip --directory $font_folder --wildcards "*.[otf|ttf]" &&
-# 	rm fonts.zip
+# download and install fonts from dropbox
+wget -q https://www.dropbox.com/sh/w465f79zweowwug/AADBkyI1xyG4meCdGE2Oogkoa?dl=1 -O fonts.zip &&
+	tar xvf fonts.zip --directory "$folder" --wildcards "*.[otf|ttf]" &&
+	rm fonts.zip
 
-# sudo fc-cache -f
+sudo fc-cache -f
