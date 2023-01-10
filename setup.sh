@@ -1,24 +1,12 @@
 #!/usr/bin/env bash
 # shellcheck source=/dev/null
+
 ############################
 # This scripts installs applications and sets up development environment
 ############################
 
-# Usage `get-latest-release "action/runner"`
-get_latest_release() {
-	curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
-		grep '"tag_name":' |                                             # Get tag line
-		sed -E 's/.*"([^"]+)".*/\1/'                                     # Pluck JSON value
-
-}
-
-list_from_file() {
-	local packages=''
-	while IFS= read -r line; do
-		packages+=" $line"
-	done <"$1"
-	echo "$packages"
-}
+# shellcheck source=scripts/list-from-file.sh
+source scripts/list-from-file.sh
 
 type -p curl >/dev/null || sudo apt install curl -y
 
