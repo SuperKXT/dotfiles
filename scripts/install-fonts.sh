@@ -20,7 +20,7 @@ fi
 
 # download and install fonts from dropbox
 wget -q https://www.dropbox.com/sh/w465f79zweowwug/AADBkyI1xyG4meCdGE2Oogkoa?dl=1 -O fonts.zip &&
-	tar xvf fonts.zip --directory "$folder" --wildcards "*.[otf|ttf]" &&
+	tar xvf fonts.zip --directory "$folder" --wildcards "*.{otf,ttf}" &&
 	rm fonts.zip
 
 sudo fc-cache -f
