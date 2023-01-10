@@ -133,4 +133,17 @@ source ./install-fonts.sh
 # setup dotfiles
 source ./install.sh
 
+#################
+#  Theme Setup  #
+#################
+
+# For Gedit
+wget https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
+mkdir -p "$HOME"/.local/share/gedit/styles/ && mv dracula.xml "$HOME"/.local/share/gedit/styles/
+
+# For Tilix
+git clone https://github.com/dracula/tilix
+mkdir -p ~/.config/tilix/schemes && mv tilix/Dracula.json ~/.config/tilix/schemes
+rm -rf tilix
+
 # setup os fonts and icons and themes and shit
