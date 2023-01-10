@@ -5,10 +5,11 @@
 ############################
 
 # Usage `get-latest-release "action/runner"`
-get-latest-release() {
+get_latest_release() {
 	curl --silent "https://api.github.com/repos/$1/releases/latest" | # Get latest release from GitHub api
 		grep '"tag_name":' |                                             # Get tag line
 		sed -E 's/.*"([^"]+)".*/\1/'                                     # Pluck JSON value
+
 }
 
 list_from_file() {
@@ -118,7 +119,7 @@ fi
 
 # install mongodb compass
 if ! command -v mongodb-compass &>/dev/null; then
-	wgeet https://downloads.mongodb.com/compass/mongodb-compass_1.34.2_amd64.deb -O compass.deb &&
+	wget https://downloads.mongodb.com/compass/mongodb-compass_1.34.2_amd64.deb -O compass.deb &&
 		sudo apt install ./compass.deb &&
 		rm ./compass.deb
 fi
@@ -135,15 +136,13 @@ git clone https://github.com/vinceliuice/Orchis-theme orchis &&
 
 # install tela icon theme
 git clone https://github.com/vinceliuice/Tela-icon-theme tela &&
-	source ./install.sh &&
+	cd tela &&
+	source ./install.sh red &&
 	cd .. &&
-	rm -rf tela red
+	rm -rf tela
 
-# install iosevka fonts
-iosveka_repo="be5invis/Iosevka"
-iosevka_version=get-latest-release $iosveka_repo &&
-	wget "https://github.com/$iosveka_repo/releases/download/v$iosevka_version/super-ttc-iosevka-fixed-slab-$iosevka_version.zip" -O slab.zip &&
-	wget "https://github.com/$iosveka_repo/releases/download/v$iosevka_version/super-ttc-iosevka-term-slab-$iosevka_version.zip" -O slab.zip
+# install fonts
+source ./install-fonts.sh
 
 # setup dotfiles
 source ./install.sh
