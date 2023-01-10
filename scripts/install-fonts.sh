@@ -3,6 +3,7 @@
 source latest-git-release.sh
 
 folder="$HOME/.local/share/fonts"
+mkdir -p "$folder"
 
 # install iosevka
 repo="be5invis/iosevka"
