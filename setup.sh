@@ -27,24 +27,16 @@ curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-com
 # get npm packages to install
 NPM_PACKAGES="$(list_from_file lists/npm-packages.txt)"
 
-# Install node lts
-nvm install lts/* &&
-	for package in $NPM_PACKAGES; do
-		sudo apt install -y "$package"
-	done &&
-	corepack enable &&
-	corepack prepare yarn@latest --activate &&
-	corepack prepare pnpm@latest --activate
-
-# Install node latest
-nvm install node &&
-	for package in $NPM_PACKAGES; do
-		sudo apt install -y "$package"
-	done &&
-	corepack enable &&
-	corepack prepare yarn@latest --activate &&
-	corepack prepare pnpm@latest --activate
-
+# Install nvm node versions
+for version in lts/* node; do
+	nvm install "$version" &&
+		for package in $NPM_PACKAGES; do
+			sudo apt install -y "$package"
+		done &&
+		corepack enable &&
+		corepack prepare yarn@latest --activate &&
+		corepack prepare pnpm@latest --activate
+done
 nvm alias lts/* default
 nvm use default
 
