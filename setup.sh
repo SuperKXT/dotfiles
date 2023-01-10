@@ -11,7 +11,7 @@ source scripts/list-from-file.sh
 type -p curl >/dev/null || sudo apt install curl -y
 
 # Install apt packages
-PACKAGES="$(list_from_file ./packages.txt)"
+PACKAGES="$(list_from_file lists/packages.txt)"
 sudo apt install "$PACKAGES"
 
 # Install nvm
@@ -23,7 +23,7 @@ fi
 curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
 
 # get npm packages to install
-NPM_PACKAGES="$(list_from_file ./npm-packages.txt)"
+NPM_PACKAGES="$(list_from_file lists/npm-packages.txt)"
 
 # Install node lts
 nvm install lts/* &&
