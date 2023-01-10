@@ -11,8 +11,10 @@ source scripts/list-from-file.sh
 type -p curl >/dev/null || sudo apt install curl -y
 
 # Install apt packages
-PACKAGES="$(list_from_file lists/packages.txt)"
-sudo apt install "$PACKAGES"
+APT_PACKAGES="$(list_from_file lists/apt-packages.txt)"
+for package in $APT_PACKAGES; do
+	sudo apt install -y "$package"
+done
 
 # Install nvm
 if ! command -v nvm &>/dev/null; then
@@ -27,14 +29,18 @@ NPM_PACKAGES="$(list_from_file lists/npm-packages.txt)"
 
 # Install node lts
 nvm install lts/* &&
-	npm i -g "$NPM_PACKAGES" &&
+	for package in $NPM_PACKAGES; do
+		sudo apt install -y "$package"
+	done &&
 	corepack enable &&
 	corepack prepare yarn@latest --activate &&
 	corepack prepare pnpm@latest --activate
 
 # Install node latest
 nvm install node &&
-	npm i -g "$NPM_PACKAGES" &&
+	for package in $NPM_PACKAGES; do
+		sudo apt install -y "$package"
+	done &&
 	corepack enable &&
 	corepack prepare yarn@latest --activate &&
 	corepack prepare pnpm@latest --activate
