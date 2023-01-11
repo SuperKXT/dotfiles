@@ -146,4 +146,7 @@ git clone https://github.com/dracula/tilix
 mkdir -p ~/.config/tilix/schemes && mv tilix/Dracula.json ~/.config/tilix/schemes
 rm -rf tilix
 
+# add gtk terminal style config
+ln -s "$HOME/dotfiles/config/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
+
 # setup os fonts and icons and themes and shit
