@@ -147,6 +147,7 @@ mkdir -p ~/.config/tilix/schemes && mv tilix/Dracula.json ~/.config/tilix/scheme
 rm -rf tilix
 
 # add gtk terminal style config
-ln -s "$HOME/dotfiles/config/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
+rm "$HOME/.config/gtk-3.0/gtk.css" &&
+	ln -s "$HOME/dotfiles/config/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
 
 # setup os fonts and icons and themes and shit
