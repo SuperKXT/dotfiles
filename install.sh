@@ -12,7 +12,7 @@ dir=~/dotfiles
 olddir=~/dotfiles_old
 
 # list of files/folders to symlink in homedir
-files=".bashrc .gitconfig .gitmessage .gitignore .bash.profile .ssh-completion.bash .stylelintrc.js"
+files=".bashrc .gitconfig .gitmessage .gitignore .bash.profile .stylelintrc.js"
 
 # create dotfiles_old in homedir
 echo "Creating $olddir for backup of any existing dotfiles in ~"
@@ -32,4 +32,4 @@ for file in $files; do
 	ln -s "$dir/$file" "$HOME/$file"
 done
 
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+./scripts/install-completions
