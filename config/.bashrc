@@ -127,7 +127,7 @@ nvm-update() {
 		nvm uninstall "$2" &&
 		corepack enable yarn &&
 		corepack enable pnpm &&
-		corepack prepare yarn@latest --activate &&
+		corepack prepare yarn@stable --activate &&
 		corepack prepare pnpm@latest --activate &&
 		nvm use default
 }
@@ -136,10 +136,13 @@ nvm-update() {
 # 04. Setup Environments                                                     #
 ##############################################################################
 
-for file in ~/.config/bash-completion/completions/*; do
-	# shellcheck source=/dev/null
-	source "$file"
-done
+dir="$HOME/.config/bash-completion/completions"
+if [[ -d "$dir" && -r "$dir" && -x "$dir" ]]; then
+	for file in "$dir"/*; do
+		# shellcheck source=/dev/null
+		[[ -f "$file" && -r "$file" ]] && source "$file"
+	done
+fi
 
 if [ -f "$HOME"/.bash.profile ]; then
 	# shellcheck source=/dev/null
@@ -150,6 +153,10 @@ eval "$(direnv hook bash)"
 
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
