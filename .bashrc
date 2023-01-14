@@ -67,7 +67,7 @@ export EDITOR="code -w"
 # simple update alias
 alias setup-postman='curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
 alias pn-update='corepack prepare pnpm@latest --activate'
-alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
+alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && setup-postman'
 # some more ls aliases
 alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
@@ -135,21 +135,28 @@ nvm-update() {
 # 04. Setup Environments                                                     #
 ##############################################################################
 
-if [ -f ~/.git-completion.bash ]; then
-	. ~/.git-completion.bash
+for file in ~/.config/bash-completion/completions/*; do
+	# shellcheck source=/dev/null
+	source "$file"
+done
+
+if [ -f "$HOME"/.bash.profile ]; then
+	# shellcheck source=/dev/null
+	source "$HOME"/.bash.profile
 fi
 
-if [ -f ~/.ssh-completion.bash ]; then
-	. ~/.ssh-completion.bash
-fi
+eval "$(direnv hook bash)"
 
-if [ -f ~/.bash.profile ]; then
-	. ~/.bash.profile
-fi
+export DENO_INSTALL="$HOME/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+
+# pnpm
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+# pnpm end
 
 cdnvm() {
 	command cd "$@" || return
@@ -195,3 +202,4 @@ cdnvm() {
 }
 alias cd='cdnvm'
 cd "$PWD" || return
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
