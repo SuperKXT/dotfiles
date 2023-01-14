@@ -3,33 +3,8 @@
 # This script creates symlinks from the home directory to any desired dotfiles in ~/dotfiles
 ############################
 
-########## Variables
-
-# dotfiles directory
-dir=~/dotfiles
-
-# old dotfiles backup directory
-olddir=~/dotfiles_old
-
-# list of files/folders to symlink in homedir
-files=".bashrc .gitconfig .gitmessage .gitignore .bash.profile .stylelintrc.js"
-
-# create dotfiles_old in homedir
-echo "Creating $olddir for backup of any existing dotfiles in ~"
-mkdir -p $olddir
-echo "...done"
-
-# change to the dotfiles directory
-echo "Changing to the $dir directory"
-cd $dir || return
-echo "...done"
-
-# move any existing dotfiles in homedir to dotfiles_old directory, then create symlinks
-for file in $files; do
-	echo "Moving existing $file from ~ to $olddir"
-	mv "$HOME/$file" "$olddir"
-	echo "Creating symlink to $file in home directory."
-	ln -s "$dir/$file" "$HOME/$file"
-done
+# Create symlinks for the completions in the completions folder
+echo "Creating symlink for dotfiles in home directory."
+cp -rsTvf ~/dotfiles/config ~/
 
 ./scripts/install-completions
