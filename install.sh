@@ -20,8 +20,10 @@ done
 
 # Install or update nvm
 echo
-echo "Setting Up NVM..."
-./scripts/install-nvm.sh
+echo "Setting Up NVM"
+version="$(latest_git_release "nvm-sh/nvm")" &&
+	curl --progress-bar -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$version/install.sh" | bash &&
+	source ~/.bashrc
 
 # get npm packages to install
 NPM_PACKAGES="$(list_from_file lists/npm-packages.txt)"
@@ -29,7 +31,7 @@ NPM_PACKAGES="$(list_from_file lists/npm-packages.txt)"
 # Install nvm node versions
 for version in lts/* node; do
 	echo
-	echo "Setupging Up Node Version: $version..."
+	echo "Setting Up Node Version: $version..."
 	nvm install "$version" &&
 		for package in $NPM_PACKAGES; do
 			sudo apt install -y "$package"
