@@ -25,6 +25,9 @@ curl https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-comp
 # Add npm completion to bash-completion user directory
 npm completion >~/.config/bash-completion/completions/npm
 
+# Add deno completions to bash-completion user directory
+deno completions bash >~/.config/bash-completion/completions/deno
+
 # Add pnpm completion
 pnpm install-completion bash &&
 	mv .bashrc .bashrc-old && head -n -4 .bashrc-old >.bashrc &&
