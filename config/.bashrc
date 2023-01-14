@@ -66,7 +66,6 @@ export EDITOR="code -w"
 
 # simple update alias
 alias setup-postman='curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
-sudo chmod u+x ~/dotfiles/scripts/install-nvm.sh
 alias setup-nvm='~/dotfiles/scripts/install-nvm.sh'
 alias pn-update='corepack prepare pnpm@latest --activate'
 alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && setup-nvm && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && setup-postman && deno upgrade'
@@ -152,9 +151,6 @@ eval "$(direnv hook bash)"
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME:$PATH"
@@ -204,4 +200,3 @@ cdnvm() {
 }
 alias cd='cdnvm'
 cd "$PWD" || return
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion

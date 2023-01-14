@@ -21,6 +21,7 @@ done
 # Install or update nvm
 echo
 echo "Setting Up NVM..."
+sudo chmod u+x ~/dotfiles/scripts/install-nvm.sh
 ./scripts/install-nvm.sh
 
 # get npm packages to install
