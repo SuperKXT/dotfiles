@@ -4,43 +4,46 @@
 # Completeions #
 ################
 
-echo
-echo "Setting up completions..."
+GREEN='\e[32m'
+NC='\e[0m'
+
+echo -e "\n${GREEN}Setting Up Completions...${NC}\n"
 
 # Create bash-completion user directory
 mkdir -p ~/.config/bash-completion/completions
 
-# Create symlinks for the completions in the completions folder
-cp -rsTvf ~/dotfiles/completions ~/.config/bash-completions
+echo -e "\n${GREEN}Copying from completions folder...${NC}"
+cp -rsTvf ~/dotfiles/completions ~/.config/bash-completion
 
-# Add docker completions to bash-completion user directory
-curl https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o ~/.config/bash-completion/completions/docker
+echo -e "\n${GREEN}Add Docker Completions...${NC}"
+curl --progress-bar https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o ~/.config/bash-completion/completions/docker
 
-# Add docker-compose completions to bash-completion user directory
-curl https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o ~/.config/bash-completion/completions/docker-compose
+echo -e "\n${GREEN}Add Docker-Compose Completions...${NC}"
+curl --progress-bar https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o ~/.config/bash-completion/completions/docker-compose
 
-# Add git completions to bash-completion user directory
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.config/bash-completion/completions/git
+echo -e "\n${GREEN}Add Git Completions...${NC}"
+curl --progress-bar https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.config/bash-completion/completions/git
 
-# Add yarn completions to bash-completion user directory
-curl https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash -o ~/.config/bash-completion/completions/yarn
+echo -e "\n${GREEN}Add Yarn Completions...${NC}"
+curl --progress-bar https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash -o ~/.config/bash-completion/completions/yarn
 
-# Add npm completion to bash-completion user directory
+echo -e "\n${GREEN}Adding NVM Completions...${NC}"
+curl --progress-bar https://raw.githubusercontent.com/nvm-sh/nvm/master/bash_completion -o ~/.config/bash-completion/completions/nvm
+
+echo -e "\n${GREEN}Adding NPM Completions...${NC}"
 npm completion >~/.config/bash-completion/completions/npm
 
-# Add deno completions to bash-completion user directory
+echo -e "\n${GREEN}Adding Deno Completions...${NC}"
 deno completions bash >~/.config/bash-completion/completions/deno
 
-# Add pnpm completion
+echo -e "\n${GREEN}Adding PNPM Completions...${NC}"
 pnpm install-completion bash &&
-	mv .bashrc .bashrc-old && head -n -4 .bashrc-old >.bashrc &&
+	mv config/.bashrc .bashrc-old &&
+	head -n -4 .bashrc-old >config/.bashrc &&
 	if grep -q '[ -f  ] && . ~/.config/tabtab/bash/__tabtab.bash || true' .bash.profile; then
 		echo 'pnpm completion is already added'
 	else
 		echo 'Added pnpm completion to .bash.profile'
-		tail -n -4 .bashrc-old >>.bash.profile
+		tail -n -4 .bashrc-old >>~/.config/bash-completion/completions/pnpm
 	fi &&
 	rm .bashrc-old
-
-# Add nvm completion to bash-completion user directory
-curl https://raw.githubusercontent.com/nvm-sh/nvm/master/bash_completion -o ~/.config/bash-completion/completions/nvm
