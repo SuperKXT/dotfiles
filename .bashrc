@@ -69,7 +69,7 @@ alias setup-postman='curl https://gist.githubusercontent.com/SanderTheDragon/133
 sudo chmod u+x ~/dotfiles/scripts/install-nvm.sh
 alias setup-nvm='~/dotfiles/scripts/install-nvm.sh'
 alias pn-update='corepack prepare pnpm@latest --activate'
-alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && setup-nvm && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && setup-postman'
+alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && setup-nvm && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && setup-postman && deno upgrade'
 # some more ls aliases
 alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
