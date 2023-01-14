@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# shellcheck source=/dev/null
-
 ############################
 # This scripts installs applications and sets up development environment
 ############################
@@ -8,6 +6,7 @@
 # shellcheck source=scripts/list-from-file.sh
 source scripts/list-from-file.sh
 
+# Check if curl is installed, if not install it
 type -p curl >/dev/null || sudo apt install curl -y
 
 # Install apt packages
@@ -16,13 +15,8 @@ for package in $APT_PACKAGES; do
 	sudo apt install -y "$package"
 done
 
-# Install nvm
-if ! command -v nvm &>/dev/null; then
-	curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-fi
-
-# Install git completion script
-curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+# Install or update nvm
+./scripts/install-nvm.sh
 
 # get npm packages to install
 NPM_PACKAGES="$(list_from_file lists/npm-packages.txt)"
@@ -39,16 +33,12 @@ for version in lts/* node; do
 done
 nvm alias lts/* default
 nvm use default
-
 source ~/.bashrc
 
 # Install Deno
 if ! command -v deno &>/dev/null; then
 	curl -fsSL https://deno.land/install.sh | sh
 fi
-
-deno completions bash >/usr/local/etc/bash_completion.d/deno.bash &&
-	source /usr/local/etc/bash_completion.d/deno.bash
 
 # install gh cli
 if ! command -v gh &>/dev/null; then
@@ -110,44 +100,17 @@ if ! command -v mongodb-compass &>/dev/null; then
 		rm ./compass.deb
 fi
 
-# install dropbox
+# Install Dropbox
 xdg-open https://www.dropbox.com/install?os=lnx
 
-# install orchis theme
-git clone https://github.com/vinceliuice/Orchis-theme orchis &&
-	cd orchis &&
-	source ./install.sh -t red -c light -s compact -l --round 0px --tweaks compact primary &&
-	cd .. &&
-	rm -rf orchis
+# Setup Themes
+scripts/install-themes.sh
 
-# install tela icon theme
-git clone https://github.com/vinceliuice/Tela-icon-theme tela &&
-	cd tela &&
-	source ./install.sh red &&
-	cd .. &&
-	rm -rf tela
+# Setup Fonts
+scripts/install-fonts.sh
 
-# install fonts
-source ./install-fonts.sh
+# Setup Dotfiles
+./install.sh
 
-# setup dotfiles
-source ./install.sh
-
-#################
-#  Theme Setup  #
-#################
-
-# For Gedit
-wget https://raw.githubusercontent.com/dracula/gedit/master/dracula.xml
-mkdir -p "$HOME"/.local/share/gedit/styles/ && mv dracula.xml "$HOME"/.local/share/gedit/styles/
-
-# For Tilix
-git clone https://github.com/dracula/tilix
-mkdir -p ~/.config/tilix/schemes && mv tilix/Dracula.json ~/.config/tilix/schemes
-rm -rf tilix
-
-# add gtk terminal style config
-rm "$HOME/.config/gtk-3.0/gtk.css" &&
-	ln -s "$HOME/dotfiles/config/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
-
-# setup os fonts and icons and themes and shit
+# Install Completions
+scripts/install-completions.sh
