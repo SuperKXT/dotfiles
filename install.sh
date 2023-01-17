@@ -42,7 +42,9 @@ source ~/.bashrc
 # Install Deno
 if ! command -v deno &>/dev/null; then
 	echo -e "\n${GREEN}Installing Deno...${NC}"
-	curl -fsSL https://deno.land/install.sh | sh
+	curl -fsSL https://deno.land/install.sh | sh &&
+		export DENO_INSTALL="$HOME/.deno" &&
+		export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
 # install gh cli
