@@ -133,6 +133,18 @@ nvm-update() {
 		nvm use default
 }
 
+morning() {
+	xdg-open https://outlook.com &&
+		xdg-open https://twitter.com &&
+		xdg-open https://nytimes.com/games/wordle &&
+		xdg-open https://merriam-webster.com/games/quordle &&
+		xdg-open https://playcladder.com &&
+		xdg-open https://worldle.teuteuf.fr/ &&
+		xdg-open https://en.wikipedia.org/wiki/Template:Clickable_world_map &&
+		xdg-open https://statele.teuteuf.fr/ &&
+		xdg-open https://ontheworldmap.com/usa/usa-states-map.html
+}
+
 ##############################################################################
 # 04. Setup Environments                                                     #
 ##############################################################################
