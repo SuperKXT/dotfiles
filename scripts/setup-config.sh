@@ -51,4 +51,8 @@ dconf load /org/gnome/weather/ <./theme/weather.dconf
 
 # TODO setup gnome shell extensions status bar placement
 
+# TODO
+
+# TODO Add ssh alias for github -> gh
+
 killall -3 gnome-shell

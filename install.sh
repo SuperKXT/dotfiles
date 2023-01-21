@@ -143,8 +143,8 @@ fi
 xdg-open https://www.dropbox.com/install?os=lnx
 
 # Setup Themes
-sudo chmod u+x scripts/install-themes.sh
-scripts/install-themes.sh
+sudo chmod u+x scripts/setup-config.sh
+scripts/setup-config.sh
 
 # Setup Fonts
 sudo chmod u+x scripts/install-fonts.sh
