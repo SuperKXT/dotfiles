@@ -81,7 +81,7 @@ fi
 # install insomnia
 if ! command -v insomnia &>/dev/null; then
 	echo -e "\n${GREEN}Installing Insomnia...${NC}"
-	wget "https://updates.insomnia.rest/downloads/ubuntu/latest?app=com.insomnia.app&source=website" -O ./insomnia.deb &&
+	wget -q --show-progress "https://updates.insomnia.rest/downloads/ubuntu/latest?app=com.insomnia.app&source=website" -O ./insomnia.deb &&
 		sudo apt install ./insomnia.deb &&
 		rm ./insomnia.deb
 fi
@@ -89,9 +89,19 @@ fi
 # install azure data studio
 if ! command -v azuredatastudio &>/dev/null; then
 	echo -e "\n${GREEN}Installing Azure Data Studio...${NC}"
-	wget https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
+	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
 		sudo apt install ./azure-data-studio.deb &&
 		rm ./azure-data-studio.deb
+fi
+
+# install vivaldi
+if ! command -v vivaldi &>/dev/null; then
+	echo -e "\n${GREEN}Installing Vivaldi...${NC}"
+	curl --silent https://vivaldi.com/download/archive/?platform=linux --stderr - |
+		grep -o -m 1 https://downloads.vivaldi.com/stable/vivaldi-stable_[0-9.-]*_amd64.deb |
+		xargs wget -q --show-progress -O ./vivaldi.deb &&
+		sudo apt install ./vivaldi.deb &&
+		rm ./vivaldi.deb
 fi
 
 # install anydesk
@@ -112,7 +122,7 @@ fi
 # install mongodb compass
 if ! command -v mongodb-compass &>/dev/null; then
 	echo -e "\n${GREEN}Installing MongoDB Compass...${NC}"
-	wget https://downloads.mongodb.com/compass/mongodb-compass_1.34.2_amd64.deb -O compass.deb &&
+	wget -q --show-progress https://downloads.mongodb.com/compass/mongodb-compass_1.34.2_amd64.deb -O compass.deb &&
 		sudo apt install ./compass.deb &&
 		rm ./compass.deb
 fi
