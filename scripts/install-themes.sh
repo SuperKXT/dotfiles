@@ -7,6 +7,14 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
+echo -e "\n${GREEN}Installing Gnome Shell Extensions...${NC}"
+rm -f ./install-gnome-extensions.sh &&
+	wget -N -q "https://raw.githubusercontent.com/cyfrost/install-gnome-extensions/master/install-gnome-extensions.sh" -O ./install-gnome-extensions.sh &&
+	chmod +x install-gnome-extensions.sh &&
+	./install-gnome-extensions.sh --enable --file ~/dotfiles/lists/shell-extensions.txt &&
+	rm ./install-gnome-extensions.sh &&
+	killall -3 gnome-shell
+
 echo -e "\n${GREEN}Setting Up Orchis Theme...${NC}"
 git clone https://github.com/vinceliuice/Orchis-theme orchis &&
 	cd orchis &&
@@ -40,3 +48,5 @@ dconf load /org/gnome/nautilus/ <./theme/nautilus.dconf
 dconf load /org/gnome/system/ <./theme/system.dconf
 dconf load /com/gexperts/Tilix/ <./theme/tilix.dconf
 dconf load /org/gnome/weather/ <./theme/weather.dconf
+
+killall -3 gnome-shell
