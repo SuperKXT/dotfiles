@@ -10,4 +10,5 @@ libreadline-dev
 zlib1g-dev
 libsqlite3-dev
 gnome-tweaks
+gnome-shell-extension-tool
 bat
