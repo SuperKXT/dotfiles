@@ -78,6 +78,14 @@ if ! command -v postman &>/dev/null; then
 		source ~/.bashrc
 fi
 
+# install peek gif recorder
+if ! command -v peek &>/dev/null; then
+	echo -e "\n${GREEN}Installing Peek...${NC}"
+	sudo add-apt-repository ppa:peek-developers/stable &&
+		sudo apt -qq update &&
+		sudo apt -qq install -y peek
+fi
+
 # install insomnia
 if ! command -v insomnia &>/dev/null; then
 	echo -e "\n${GREEN}Installing Insomnia...${NC}"
