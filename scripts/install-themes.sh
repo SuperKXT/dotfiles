@@ -49,4 +49,6 @@ dconf load /org/gnome/system/ <./theme/system.dconf
 dconf load /com/gexperts/Tilix/ <./theme/tilix.dconf
 dconf load /org/gnome/weather/ <./theme/weather.dconf
 
+# TODO setup gnome shell extensions status bar placement
+
 killall -3 gnome-shell
