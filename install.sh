@@ -19,7 +19,7 @@ type -p xargs >/dev/null || sudo apt install xargs -y
 
 # Install apt packages
 echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
-xargs sudo apt install -y <lists/apt-packages.txt
+xargs sudo apt -qq install -y <lists/apt-packages.txt
 
 # Install or update nvm
 sudo chmod u+x ~/dotfiles/scripts/install-nvm.sh
@@ -53,8 +53,8 @@ if ! command -v gh &>/dev/null; then
 	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg &&
 		sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg &&
 		echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null &&
-		sudo apt update &&
-		sudo apt install gh -y &&
+		sudo apt -qq update &&
+		sudo apt -qq install -y gh &&
 		gh extension install mislav/gh-license
 fi
 
@@ -66,9 +66,9 @@ if ! command -v code &>/dev/null; then
 		sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg &&
 		sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' &&
 		rm -f packages.microsoft.gpg &&
-		sudo apt install apt-transport-https &&
-		sudo apt update &&
-		sudo apt install code
+		sudo apt -qq install -y apt-transport-https &&
+		sudo apt -qq update &&
+		sudo apt -qq install -y code
 fi
 
 #install postman
@@ -90,7 +90,7 @@ fi
 if ! command -v azuredatastudio &>/dev/null; then
 	echo -e "\n${GREEN}Installing Azure Data Studio...${NC}"
 	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
-		sudo apt install ./azure-data-studio.deb &&
+		sudo apt -qq install -y ./azure-data-studio.deb &&
 		rm ./azure-data-studio.deb
 fi
 
@@ -100,7 +100,7 @@ if ! command -v vivaldi &>/dev/null; then
 	curl --silent https://vivaldi.com/download/archive/?platform=linux --stderr - |
 		grep -o -m 1 https://downloads.vivaldi.com/stable/vivaldi-stable_[0-9.-]*_amd64.deb |
 		xargs wget -q --show-progress -O ./vivaldi.deb &&
-		sudo apt install ./vivaldi.deb &&
+		sudo apt -qq install -y ./vivaldi.deb &&
 		rm ./vivaldi.deb
 fi
 
@@ -113,8 +113,8 @@ if ! command -v anydesk &>/dev/null; then
 		echo -e "\n${GREEN}Installing AnyDesk...${NC}"
 		wget -qO - https://keys.anydesk.com/repos/DEB-GPG-KEY | apt-key add - &&
 			echo "deb http://deb.anydesk.com/ all main" >/etc/apt/sources.list.d/anydesk-stable.list &&
-			sudo apt update &&
-			sudo apt install anydesk
+			sudo -qq apt update &&
+			sudo apt -qq install -y anydesk
 
 	fi
 fi
@@ -126,7 +126,7 @@ if ! command -v mongodb-compass &>/dev/null; then
 		tag="$(latest_git_release "$repo")" &&
 		version="${tag:1}" &&
 		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/mongodb-compass_${version}_amd64.deb" -O compass.deb &&
-		sudo apt install -y -qq ./compass.deb &&
+		sudo apt -qq install -y ./compass.deb &&
 		rm ./compass.deb
 fi
 
