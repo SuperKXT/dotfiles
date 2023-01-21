@@ -122,8 +122,11 @@ fi
 # install mongodb compass
 if ! command -v mongodb-compass &>/dev/null; then
 	echo -e "\n${GREEN}Installing MongoDB Compass...${NC}"
-	wget -q --show-progress https://downloads.mongodb.com/compass/mongodb-compass_1.34.2_amd64.deb -O compass.deb &&
-		sudo apt install ./compass.deb &&
+	repo="mongodb-js/compass" &&
+		tag="$(latest_git_release "$repo")" &&
+		version="${tag:1}" &&
+		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/mongodb-compass_${version}_amd64.deb" -O compass.deb &&
+		sudo apt install -y -qq ./compass.deb &&
 		rm ./compass.deb
 fi
 
