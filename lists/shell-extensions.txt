@@ -1,0 +1,12 @@
+lockkeys@vaina.lt
+horizontal-workspace-indicator@tty2.io
+clipboard-indicator@tudmotu.com
+drive-menu@gnome-shell-extensions.gcampax.github.com
+color-picker@tuberry
+IP-Finder@linxgem33.com
+user-theme@gnome-shell-extensions.gcampax.github.com
+ssm-gnome@lgiki.net
+lan-ip-address@mrhuber.com
+caffeine@patapon.info
+multi-monitors-add-on@spin83
+blur-my-shell@aunetx
