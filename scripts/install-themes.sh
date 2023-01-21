@@ -29,6 +29,9 @@ rm -f "$HOME/.config/gtk-3.0/gtk.css" &&
 
 # TODO Gedit theme
 
-# TODO Tilix theme
+echo -e "\n${GREEN}Setting Up Tilix Config...${NC}"
+# Update tilix.dconfig file:
+# dconf dump /com/gexperts/Tilix/ > ./theme/tilix.dconf
+dconf load /com/gexperts/Tilix/ <./theme/tilix.dconf
 
 # TODO Set theme, icons, and fonts
