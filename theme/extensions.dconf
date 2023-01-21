@@ -20,29 +20,16 @@ move-item-first=true
 strip-text=true
 
 [color-picker]
-colors-history='#eff2fd|#f2f2f2|#e6d1ff|#242424|#242424|#242424|#ae8a8e|#b89a9d'
+color-picker-shortcut=['<Super>c']
+enable-shortcut=true
+notify-style=uint32 1
 persistent-mode=false
-
-[dash-to-dock]
-extend-height=false
-manualhide=true
-
-[extension-list]
-hide-disabled=false
-prefs-button=true
-unpin-button=false
 
 [horizontal-workspace-indicator]
 widget-position='left'
 
-[just-perfection]
-hot-corner=false
-panel-button-padding-size=0
-panel-size=0
-theme=false
-
 [multi-monitors-add-on]
-available-indicators=['pop-shell', 'cosmic_workspaces', 'cosmic_applications', 'lockkeys', 'clipboardIndicator', 'extension-list@tu.berry', 'drive-menu', 'ssm-gnome@lgiki.net', 'places-menu', 'horizontal-workspace-indicator@tty2.io', 'color-picker@tuberry', 'ip-menu', 'lan-ip-address-indicator', 'Caffeine']
+available-indicators=['pop-shell', 'cosmic_workspaces', 'cosmic_applications', 'lockkeys', 'clipboardIndicator', 'drive-menu', 'ssm-gnome@lgiki.net', 'horizontal-workspace-indicator@tty2.io', 'color-picker@tuberry', 'ip-menu', 'lan-ip-address-indicator', 'Caffeine']
 
 [notification-center]
 application-list=@as []
