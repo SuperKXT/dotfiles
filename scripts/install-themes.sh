@@ -27,11 +27,16 @@ echo -e "\n${GREEN}Setting Up Gtk Terminal Styles...${NC}"
 rm -f "$HOME/.config/gtk-3.0/gtk.css" &&
 	ln -s "$HOME/dotfiles/theme/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
 
-# TODO Gedit theme
+echo -e "\n${GREEN}Setting Up Gedit Config...${NC}"
+# dconf dump /org/gnome/gedit/ >./theme/gedit.dconf
+dconf load /org/gnome./gedit <./theme/gedit.dconf
+
+echo -e "\n${GREEN}Setting Up Elevated Gedit Config...${NC}"
+# sudo dconf dump /org/gnome/gedit/ >./theme/gedit.sudo.dconf
+sudo dconf load /org/gnome./gedit <./theme/gedit.sudo.dconf
 
 echo -e "\n${GREEN}Setting Up Tilix Config...${NC}"
-# Update tilix.dconfig file:
-# dconf dump /com/gexperts/Tilix/ > ./theme/tilix.dconf
+# dconf dump /com/gexperts/Tilix/ >./theme/tilix.dconf
 dconf load /com/gexperts/Tilix/ <./theme/tilix.dconf
 
 # TODO Set theme, icons, and fonts

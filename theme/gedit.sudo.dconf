@@ -1,0 +1,24 @@
+[plugins]
+active-plugins=['filebrowser', 'sort', 'docinfo', 'modelines', 'spell']
+
+[plugins/filebrowser]
+root='file:///'
+tree-view=true
+virtual-root='file:///home/superkxt/.local/share/gnome-shell/extensions/lan-ip-address@mrhuber.com'
+
+[preferences/editor]
+editor-font='Noto Naskh Arabic UI Medium 12'
+scheme='cobalt'
+tabs-size=uint32 4
+use-default-font=false
+wrap-last-split-mode='word'
+
+[preferences/ui]
+show-tabs-mode='auto'
+
+[state/window]
+bottom-panel-size=140
+side-panel-active-page='GeditWindowDocumentsPanel'
+side-panel-size=200
+size=(794, 815)
+state=87168
