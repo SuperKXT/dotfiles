@@ -27,16 +27,18 @@ echo -e "\n${GREEN}Setting Up Gtk Terminal Styles...${NC}"
 rm -f "$HOME/.config/gtk-3.0/gtk.css" &&
 	ln -s "$HOME/dotfiles/theme/gtk.css" "$HOME/.config/gtk-3.0/gtk.css"
 
-echo -e "\n${GREEN}Setting Up Gedit Config...${NC}"
-# dconf dump /org/gnome/gedit/ >./theme/gedit.dconf
-dconf load /org/gnome./gedit <./theme/gedit.dconf
+echo -e "\n${GREEN}Setting Up Config With Dconf...${NC}"
+# Update settings with:
+# dconf dump {{name}} >./theme/{{file}}.dconf
 
-echo -e "\n${GREEN}Setting Up Elevated Gedit Config...${NC}"
-# sudo dconf dump /org/gnome/gedit/ >./theme/gedit.sudo.dconf
-sudo dconf load /org/gnome./gedit <./theme/gedit.sudo.dconf
-
-echo -e "\n${GREEN}Setting Up Tilix Config...${NC}"
-# dconf dump /com/gexperts/Tilix/ >./theme/tilix.dconf
+dconf load /org/gnome/desktop/ <./theme/desktop.dconf
+dconf load /org/gnome/eog/ <./theme/eog.dconf
+dconf load /org/gnome/shell/extensions/ <./theme/extensions.dconf
+dconf load /org/gnome/gedit. <./theme/gedit.dconf
+sudo dconf load /org/gnome/gedit/ <./theme/gedit.sudo.dconf
+dconf load /org/gnome/nautilus/ <./theme/nautilus.dconf
+dconf load /org/gnome/system/ <./theme/system.dconf
 dconf load /com/gexperts/Tilix/ <./theme/tilix.dconf
+dconf load /org/gnome/weather/ <./theme/weather.dconf
 
 # TODO Set theme, icons, and fonts

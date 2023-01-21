@@ -1,0 +1,51 @@
+[applications/terminal]
+exec='tilix'
+
+[background]
+color-shading-type='solid'
+picture-options='zoom'
+picture-uri='file:///home/superkxt/Dropbox/wallpapers/wavey-rainbow.jpg'
+picture-uri-dark='file:///home/superkxt/Dropbox/wallpapers/wavey-rainbow.jpg'
+primary-color='#000000000000'
+secondary-color='#000000'
+
+[calendar]
+show-weekdate=true
+
+[interface]
+clock-show-seconds=true
+clock-show-weekday=true
+color-scheme='prefer-light'
+document-font-name='Roboto Slab 11'
+enable-animations=true
+enable-hot-corners=false
+font-antialiasing='grayscale'
+font-hinting='slight'
+font-name='Kelson weight=255 10'
+gtk-theme='Orchis-Red-Light-Compact'
+icon-theme='Tela-red'
+locate-pointer=false
+monospace-font-name='Iosevka Fixed Slab Medium 12'
+show-battery-percentage=true
+toolkit-accessibility=false
+
+[peripherals/mouse]
+accel-profile='adaptive'
+speed=-0.058394160583941646
+
+[peripherals/touchpad]
+click-method='areas'
+disable-while-typing=true
+send-events='enabled'
+speed=0.14598540145985406
+two-finger-scrolling-enabled=false
+
+[privacy]
+disable-microphone=false
+remember-recent-files=true
+report-technical-problems=false
+
+[wm/preferences]
+button-layout='appmenu:minimize,maximize,close'
+titlebar-font='Kelson 10'
+visual-bell=false

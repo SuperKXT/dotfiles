@@ -1,11 +1,6 @@
 [plugins]
 active-plugins=['filebrowser', 'time', 'sort', 'docinfo', 'modelines', 'spell', 'quickhighlight', 'shellcheck']
 
-[plugins/filebrowser]
-root='file:///'
-tree-view=true
-virtual-root='file:///home/superkxt/repos/personal/deployments/frontend'
-
 [preferences/editor]
 background-pattern='none'
 display-line-numbers=true
@@ -21,13 +16,3 @@ wrap-last-split-mode='word'
 bottom-panel-visible=false
 show-tabs-mode='auto'
 statusbar-visible=true
-
-[state/file-chooser]
-open-recent=false
-
-[state/window]
-bottom-panel-size=300
-side-panel-active-page='GeditWindowDocumentsPanel'
-side-panel-size=200
-size=(794, 822)
-state=87168
