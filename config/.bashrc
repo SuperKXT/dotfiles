@@ -68,6 +68,7 @@ export EDITOR="code -w"
 alias setup-postman='curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
 alias setup-nvm='~/dotfiles/scripts/install-nvm.sh'
 alias pn-update='corepack prepare pnpm@latest --activate'
+# TODO fix vscode and azuredatastudio not updating automatically
 alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && setup-nvm && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && setup-postman && deno upgrade'
 # some more ls aliases
 alias ll='ls -alF --color=auto'
