@@ -51,7 +51,14 @@ dconf load /org/gnome/weather/ <./theme/weather.dconf
 
 # TODO setup gnome shell extensions status bar placement
 
-# TODO
+sudo ufw enable
+sudo ufw allow ssh
+sudo ufw allow 3000-3050/tcp
+sudo ufw allow 3000-3050/udp
+sudo ufw allow 5000-5050/tcp
+sudo ufw allow 5000-5050/udp
+sudo ufw allow 8000-8999/tcp
+sudo ufw allow 8000-8999/udp
 
 # TODO Add ssh alias for github -> gh
 
