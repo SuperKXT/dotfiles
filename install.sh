@@ -71,6 +71,15 @@ if ! command -v code &>/dev/null; then
 		sudo apt -qq install -y code
 fi
 
+# install remmina
+if ! command -v remmina &>/dev/null; then
+	echo -e "\n${GREEN}Installing Remmina...${NC}"
+	sudo apt-add-repository ppa:remmina-ppa-team/remmina-next &&
+		sudo apt update &&
+		sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret
+
+fi
+
 #install postman
 if ! command -v postman &>/dev/null; then
 	echo -e "\n${GREEN}Installing Postman...${NC}"
