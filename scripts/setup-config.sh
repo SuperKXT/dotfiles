@@ -51,6 +51,7 @@ dconf load /org/gnome/weather/ <./theme/weather.dconf
 
 # TODO setup gnome shell extensions status bar placement
 
+echo -e "\n${GREEN}Setting Up UFW firewall...${NC}"
 sudo ufw enable
 sudo ufw allow ssh
 sudo ufw allow 3000-3050/tcp
@@ -60,6 +61,13 @@ sudo ufw allow 5000-5050/udp
 sudo ufw allow 8000-8999/tcp
 sudo ufw allow 8000-8999/udp
 
-# TODO Add ssh alias for github -> gh
+echo -e "\n${GREEN}Setting Up SSH config...${NC}"
+ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
+	eval "$(ssh-agent -s)" &&
+	ssh-add ~/.ssh/id_ed25519 &&
+	cp ~/dotfiles/theme/.ssh/* ~/.ssh/ &&
+	echo -e -n "${GREY}Enter a title for your new github ssh key:${NC} " &&
+	read -r ssh_key_title &&
+	gh ssh-key add ~/.ssh/id_ed25519.pub -t "${ssh_key_title}"
 
 killall -3 gnome-shell
