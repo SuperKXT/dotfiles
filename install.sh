@@ -168,7 +168,14 @@ if ! command -v protonvpn-cli &>/dev/null; then
 fi
 
 # Install Dropbox
-# TODO setup dropbox installation
+# TODO install latest dropbox
+if ! command -v dropbox &>/dev/null; then
+	echo -e "\n${GREEN}Installing Dropbox...${NC}"
+	wget -q --show-progress https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb -O dropbox.deb &&
+		sudo apt -qq install -y ./dropbox.deb &&
+		rm ./dropbox.deb
+fi
+
 xdg-open https://www.dropbox.com/install?os=lnx
 
 # Setup Themes
