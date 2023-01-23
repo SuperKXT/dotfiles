@@ -64,12 +64,6 @@ export EDITOR="code -w"
 # 02. Aliases                                                                #
 ##############################################################################
 
-# simple update alias
-alias setup-postman='curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh'
-alias setup-nvm='~/dotfiles/scripts/install-nvm.sh'
-alias pn-update='corepack prepare pnpm@latest --activate'
-# TODO fix vscode and azuredatastudio not updating automatically
-alias update='sudo apt update && sudo apt full-upgrade -y --allow-downgrades --fix-missing && sudo apt autoremove && snap refresh && flatpak update && setup-nvm && nvm use lts/* && npm-check -gu && pn-update  && nvm use node && npm-check -gu && pn-update && nvm use default && setup-postman && deno upgrade'
 # some more ls aliases
 alias ll='ls -alF --color=auto'
 alias la='ls -A --color=auto'
@@ -86,6 +80,26 @@ alias cat='batcat --paging=never'
 ##############################################################################
 # 03. Functions                                                              #
 ##############################################################################
+
+# update the environment
+# TODO fix vscode and azuredatastudio not updating automatically
+update() {
+	sudo apt update &&
+		sudo apt full-upgrade -y --allow-downgrades --fix-missing &&
+		sudo apt autoremove &&
+		~/dotfiles/scripts/install-nvm.sh &&
+		nvm use lts/* &&
+		npm-check -gu &&
+		corepack prepare pnpm@latest --activate &&
+		corepack prepare yarn@stable --activate &&
+		nvm use node &&
+		npm-check -gu &&
+		corepack prepare pnpm@latest --activate &&
+		corepack prepare yarn@stable --activate &&
+		nvm use default &&
+		curl --pogress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh &&
+		deno upgrade
+}
 
 # Make a directory and move into it
 mkcdir() {
