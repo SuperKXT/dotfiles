@@ -148,16 +148,13 @@ if ! command -v mongodb-compass &>/dev/null; then
 		rm ./compass.deb
 fi
 
-# TODO Add Tilix installation
-# install Tilix
-if ! command -v tilix &>/dev/null; then
-	echo -e "\n${GREEN}Installing Tilix...${NC}"
-fi
-
-# TODO Add Slack installation
 # install slack
 if ! command -v slack &>/dev/null; then
 	echo -e "\n${GREEN}Installing Slack...${NC}"
+	version="$(curl --silent https://slack.com/downloads/linux --stderr - | grep -Po -m 1 "(?<=Version )[0-9.]*")" &&
+		wget -q --show-progress "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb" -O slack.deb &&
+		sudo apt -qq install -y ./slack.deb &&
+		rm ./slack.deb
 fi
 
 # TODO Add proton vpn installation
