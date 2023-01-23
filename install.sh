@@ -148,6 +148,24 @@ if ! command -v mongodb-compass &>/dev/null; then
 		rm ./compass.deb
 fi
 
+# TODO Add Tilix installation
+# install Tilix
+if ! command -v tilix &>/dev/null; then
+	echo -e "\n${GREEN}Installing Tilix...${NC}"
+fi
+
+# TODO Add Slack installation
+# install slack
+if ! command -v slack &>/dev/null; then
+	echo -e "\n${GREEN}Installing Slack...${NC}"
+fi
+
+# TODO Add proton vpn installation
+# install proton vpn cli
+if ! command -v protonvpn-cli &>/dev/null; then
+	echo -e "\n${GREEN}Installing Proton VPN CLI...${NC}"
+fi
+
 # Install Dropbox
 # TODO setup dropbox installation
 xdg-open https://www.dropbox.com/install?os=lnx
@@ -162,7 +180,7 @@ scripts/install-fonts.sh
 
 # Setup Dotfiles
 echo -e "\n${GREEN}Creating symlinks for dotfiles...${NC}"
-cp -rsTvf ~/dotfiles/config ~/
+cp -rsTvf ~/dotfiles/dot ~/
 
 # Install Completions
 sudo chmod u+x scripts/install-completions.sh
