@@ -157,10 +157,14 @@ if ! command -v slack &>/dev/null; then
 		rm ./slack.deb
 fi
 
-# TODO Add proton vpn installation
 # install proton vpn cli
 if ! command -v protonvpn-cli &>/dev/null; then
 	echo -e "\n${GREEN}Installing Proton VPN CLI...${NC}"
+	wget -q --show-progress https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3_all.deb -O proton_repo.deb &&
+		sudo apt install ./proton_repo.deb &&
+		rm ./proton_repo.deb &&
+		sudo apt update &&
+		sudo apt install protonvpn-cli
 fi
 
 # Install Dropbox
