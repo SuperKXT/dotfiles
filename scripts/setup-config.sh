@@ -63,6 +63,9 @@ sudo ufw allow 5000-5050/udp
 sudo ufw allow 8000-8999/tcp
 sudo ufw allow 8000-8999/udp
 
+echo -e "\n${GREEN}Setting Tilix as the default...${NC}"
+sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper
+
 echo -e "\n${GREEN}Setting Up SSH config...${NC}"
 ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
 	eval "$(ssh-agent -s)" &&
