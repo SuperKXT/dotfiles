@@ -88,12 +88,12 @@ if ! command -v postman &>/dev/null; then
 		source ~/.bashrc
 fi
 
-# install peek gif recorder
-if ! command -v peek &>/dev/null; then
-	echo -e "\n${GREEN}Installing Peek...${NC}"
-	sudo add-apt-repository ppa:peek-developers/stable &&
-		sudo apt -qq update &&
-		sudo apt -qq install -y peek
+# install obs studio
+if ! command -v obs &>/dev/null; then
+	echo -e "\n${GREEN}Installing OBS Studio...${NC}"
+	sudo add-apt-repository ppa:obsproject/obs-studio
+	sudo apt update
+	sudo apt install ffmpeg obs-studio
 fi
 
 # install insomnia
