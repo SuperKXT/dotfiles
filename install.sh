@@ -9,7 +9,8 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
-sudo chmod u+x scripts/list-git-release.sh
+# shellcheck source=scripts/latest-git-release.sh
+source ~/dotfiles/scripts/latest-git-release.sh
 
 # Check if curl is installed, if not install it
 type -p curl >/dev/null || sudo apt install curl -y
@@ -174,6 +175,17 @@ if ! command -v dropbox &>/dev/null; then
 	wget -q --show-progress https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb -O dropbox.deb &&
 		sudo apt -qq install -y ./dropbox.deb &&
 		rm ./dropbox.deb
+fi
+
+# install foliate
+if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
+	echo -e "\n${GREEN}Installing Foliate...${NC}"
+	repo="johnfactotum/foliate" &&
+		tag="$(latest_git_release "$repo")" &&
+		version="${tag:1}" &&
+		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/com.github.johnfactotum.foliate_${version}_all.deb" -O foliate.deb &&
+		sudo apt -qq install -y ./foliate.deb &&
+		rm ./foliate.deb
 fi
 
 xdg-open https://www.dropbox.com/install?os=lnx
