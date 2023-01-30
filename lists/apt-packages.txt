@@ -11,3 +11,4 @@ zlib1g-dev
 libsqlite3-dev
 gnome-tweaks
 bat
+jq
