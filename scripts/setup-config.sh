@@ -71,8 +71,9 @@ sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
 	glib-compile-schemas ~/.local/share/glib-2.0/schemas/ &&
 	gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal tilix
 
-echo -e "\n${GREEN}Setting Up SSH config...${NC}"
-ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
+[ ! -f "$HOME/.ssh/config" ] &&
+	echo -e "\n${GREEN}Setting Up SSH config...${NC}" &&
+	ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
 	eval "$(ssh-agent -s)" &&
 	ssh-add ~/.ssh/id_ed25519 &&
 	cp ~/dotfiles/config/.ssh/* ~/.ssh/ &&
