@@ -25,7 +25,6 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 # Install or update nvm
 sudo chmod u+x ~/dotfiles/scripts/install-nvm.sh
 ./scripts/install-nvm.sh
-source ~/.bashrc
 
 # Install nvm node versions
 for version in lts/* node; do
@@ -38,7 +37,6 @@ for version in lts/* node; do
 done
 nvm alias lts/* default
 nvm use default
-source ~/.bashrc
 
 # Install Deno
 if ! command -v deno &>/dev/null; then
@@ -85,16 +83,15 @@ fi
 #install postman
 if ! command -v postman &>/dev/null; then
 	echo -e "\n${GREEN}Installing Postman...${NC}"
-	curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh &&
-		source ~/.bashrc
+	curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
 fi
 
-# install peek gif recorder
-if ! command -v peek &>/dev/null; then
-	echo -e "\n${GREEN}Installing Peek...${NC}"
-	sudo add-apt-repository ppa:peek-developers/stable &&
-		sudo apt -qq update &&
-		sudo apt -qq install -y peek
+# install obs studio
+if ! command -v obs &>/dev/null; then
+	echo -e "\n${GREEN}Installing OBS Studio...${NC}"
+	sudo add-apt-repository ppa:obsproject/obs-studio
+	sudo apt update
+	sudo apt install ffmpeg obs-studio
 fi
 
 # install insomnia

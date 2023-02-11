@@ -44,7 +44,7 @@ echo -e "\n${GREEN}Setting Up Config With Dconf...${NC}"
 dconf load /org/gnome/desktop/ <"$config_folder"/desktop.dconf
 dconf load /org/gnome/eog/ <"$config_folder"/eog.dconf
 dconf load /org/gnome/shell/extensions/ <"$config_folder"/extensions.dconf
-dconf load /org/gnome/gedit. <"$config_folder"/gedit.dconf
+dconf load /org/gnome/gedit/ <"$config_folder"/gedit.dconf
 sudo dconf load /org/gnome/gedit/ <"$config_folder"/gedit.sudo.dconf
 dconf load /org/gnome/nautilus/ <"$config_folder"/nautilus.dconf
 dconf load /org/gnome/system/ <"$config_folder"/system.dconf
@@ -56,12 +56,12 @@ dconf load /org/gnome/weather/ <"$config_folder"/weather.dconf
 echo -e "\n${GREEN}Setting Up UFW firewall...${NC}"
 sudo ufw enable
 sudo ufw allow ssh
-sudo ufw allow 3000-3050/tcp
-sudo ufw allow 3000-3050/udp
-sudo ufw allow 5000-5050/tcp
-sudo ufw allow 5000-5050/udp
-sudo ufw allow 8000-8999/tcp
-sudo ufw allow 8000-8999/udp
+sudo ufw allow 3000:3050/tcp
+sudo ufw allow 3000:3050/udp
+sudo ufw allow 5000:5050/tcp
+sudo ufw allow 5000:5050/udp
+sudo ufw allow 8000:8999/tcp
+sudo ufw allow 8000:8999/udp
 
 echo -e "\n${GREEN}Setting Tilix as the default...${NC}"
 sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
@@ -71,8 +71,9 @@ sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
 	glib-compile-schemas ~/.local/share/glib-2.0/schemas/ &&
 	gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal tilix
 
-echo -e "\n${GREEN}Setting Up SSH config...${NC}"
-ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
+[ ! -f "$HOME/.ssh/config" ] &&
+	echo -e "\n${GREEN}Setting Up SSH config...${NC}" &&
+	ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
 	eval "$(ssh-agent -s)" &&
 	ssh-add ~/.ssh/id_ed25519 &&
 	cp ~/dotfiles/config/.ssh/* ~/.ssh/ &&
