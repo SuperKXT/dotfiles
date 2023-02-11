@@ -88,14 +88,12 @@ update() {
 		sudo apt full-upgrade -y --allow-downgrades --fix-missing &&
 		sudo apt autoremove &&
 		~/dotfiles/scripts/install-nvm.sh &&
+		nvm-update lts/* &&
 		nvm use lts/* &&
 		npm-check -gu &&
-		corepack prepare pnpm@latest --activate &&
-		corepack prepare yarn@stable --activate &&
+		nvm-update node &&
 		nvm use node &&
 		npm-check -gu &&
-		corepack prepare pnpm@latest --activate &&
-		corepack prepare yarn@stable --activate &&
 		nvm use default &&
 		curl --pogress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh &&
 		deno upgrade
