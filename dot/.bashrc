@@ -137,10 +137,40 @@ gimme() {
 }
 
 # udpate nvm version
-# TODO make nvm update automated
 nvm-update() {
-	nvm install "$1" --latest-npm --reinstall-packages-from="$2" &&
-		nvm uninstall "$2" &&
+	echo
+	echo "Updating Node Version $1"
+	echo
+	local current
+	local remote
+	current="$(nvm version "$1")"
+	if [ "$current" = "N/A" ]; then
+		echo "Version $1 Not Found!"
+		versions="$(nvm ls --no-alias --no-colors | xargs)"
+		versions=${versions//->/}
+		versions=${versions// v/v}
+		versions=${versions//\*/}
+		versions=($versions)
+		PS3="Select A Version To Use As $1: "
+		select current in "${versions[@]}"; do
+			if [ -n "$current" ]; then
+				break
+			fi
+		done
+		echo
+	fi
+	remote="$(nvm version-remote "$1")"
+	if [ "$remote" = "N/A" ]; then
+		echo "Version $1 Not Found On Remote"
+		return 1
+	fi
+	if [ "$current" = "$remote" ]; then
+		echo "Version $1 Is Up To Date"
+		return 1
+	fi
+	echo "Updating $1 From $current To $remote"
+	nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
+		nvm uninstall "$current" &&
 		corepack enable yarn &&
 		corepack enable pnpm &&
 		corepack prepare yarn@stable --activate &&
