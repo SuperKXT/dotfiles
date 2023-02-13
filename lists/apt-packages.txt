@@ -12,3 +12,4 @@ libsqlite3-dev
 gnome-tweaks
 bat
 jq
+blueman
