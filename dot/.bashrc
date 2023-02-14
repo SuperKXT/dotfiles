@@ -157,23 +157,22 @@ nvm-update() {
 		done
 		echo
 	fi
+
 	remote="$(nvm version-remote "$1")"
 	if [ "$remote" = "N/A" ]; then
 		echo "Version $1 Not Found On Remote"
-		return 1
-	fi
-	if [ "$current" = "$remote" ]; then
+	elif [ "$current" = "$remote" ]; then
 		echo "Version $1 Is Up To Date"
-		return 1
+	else
+		echo "Updating $1 From $current To $remote"
+		nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
+			nvm uninstall "$current" &&
+			corepack enable yarn &&
+			corepack enable pnpm &&
+			corepack prepare yarn@stable --activate &&
+			corepack prepare pnpm@latest --activate &&
+			nvm use default
 	fi
-	echo "Updating $1 From $current To $remote"
-	nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
-		nvm uninstall "$current" &&
-		corepack enable yarn &&
-		corepack enable pnpm &&
-		corepack prepare yarn@stable --activate &&
-		corepack prepare pnpm@latest --activate &&
-		nvm use default
 }
 
 ##############################################################################
