@@ -50,7 +50,7 @@ nvm use default
 # Install Deno
 if ! command -v deno &>/dev/null; then
 	echo -e "\n${GREEN}Installing Deno...${NC}"
-	curl -fsSL curl -fsSL https://deno.land/x/install/install.sh | sh
+	curl -fsSL https://deno.land/x/install/install.sh | sh
 	export DENO_INSTALL="/home/superkxt/.deno"
   	export PATH="$DENO_INSTALL/bin:$PATH"
 fi
