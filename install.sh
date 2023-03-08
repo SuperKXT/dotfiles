@@ -110,7 +110,7 @@ fi
 # install azure data studio
 if ! command -v azuredatastudio &>/dev/null; then
 	echo -e "\n${GREEN}Installing Azure Data Studio...${NC}"
-	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./aszure-data-studio.deb &&
+	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./azure-data-studio.deb &&
 		sudo apt -qq install -y ./azure-data-studio.deb &&
 		rm ./azure-data-studio.deb
 fi
@@ -189,8 +189,6 @@ if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
 		sudo apt -qq install -y ./foliate.deb &&
 		rm ./foliate.deb
 fi
-
-xdg-open https://www.dropbox.com/install?os=lnx
 
 # Setup Themes
 sudo chmod u+x scripts/setup-config.sh
