@@ -63,6 +63,19 @@ sudo ufw allow 5000:5050/udp
 sudo ufw allow 8000:8999/tcp
 sudo ufw allow 8000:8999/udp
 
+#!/usr/bin/env bash
+
+#####################
+#  Wallpaper Setup  #
+#####################
+
+GREEN='\e[32m'
+NC='\e[0m'
+
+echo -e "\n${GREEN}Setting Up Wallpaper...${NC}"
+cp -rTvf ~/dotfiles/wallpapers ~/Pictures/Wallpapers
+gsettings set org.gnome.desktop.background picture-uri file:///home/"$(whoami)"/Pictures/Wallpapers/wavy-rainbow.jpg
+
 echo -e "\n${GREEN}Setting Tilix as the default...${NC}"
 sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
 	sudo apt install python3-pip python3-nautilus &&
