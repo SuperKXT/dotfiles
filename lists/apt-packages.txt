@@ -13,3 +13,4 @@ gnome-tweaks
 bat
 jq
 blueman
+neofetch
