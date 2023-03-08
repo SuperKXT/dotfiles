@@ -10,7 +10,13 @@ libreadline-dev
 zlib1g-dev
 libsqlite3-dev
 gnome-tweaks
-bat
+python-is-python3
+ffmpeg
+libmagickwand-dev
+gnome-shell-extension-appindicator
+gir1.2-appindicator3-0.1
 jq
-blueman
+libyaml-dev
+xclip
 neofetch
+blueman
