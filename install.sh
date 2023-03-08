@@ -50,9 +50,9 @@ nvm use default
 # Install Deno
 if ! command -v deno &>/dev/null; then
 	echo -e "\n${GREEN}Installing Deno...${NC}"
-	curl -fsSL https://deno.land/install.sh | sh &&
-		export DENO_INSTALL="$HOME/.deno" &&
-		export PATH="$DENO_INSTALL/bin:$PATH"
+	curl -fsSL curl -fsSL https://deno.land/x/install/install.sh | sh
+	export DENO_INSTALL="/home/superkxt/.deno"
+  	export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
 # install gh cli
@@ -178,7 +178,7 @@ fi
 # TODO install latest dropbox
 if ! command -v dropbox &>/dev/null; then
 	echo -e "\n${GREEN}Installing Dropbox...${NC}"
-	wget -q --show-progress https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb -O dropbox.deb &&
+	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb" -O dropbox.deb &&
 		sudo apt -qq install -y ./dropbox.deb &&
 		rm ./dropbox.deb
 fi
@@ -190,7 +190,7 @@ if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
 		tag="$(latest_git_release "$repo")" &&
 		version="${tag:1}" &&
 		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/com.github.johnfactotum.foliate_${version}_all.deb" -O foliate.deb &&
-	sudo apt -qq install -y ./foliate.deb &&
+		sudo apt -qq install -y ./foliate.deb &&
 		rm ./foliate.deb
 fi
 
