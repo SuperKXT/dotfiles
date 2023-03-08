@@ -9,8 +9,8 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
-if [ "$EUID" -ne 0 ]
-  then echo "Please run as root"
+if [ "$EUID" -e 0 ]
+  then echo "Don't run this script as root"
   exit
 fi
 
@@ -189,7 +189,7 @@ if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
 		tag="$(latest_git_release "$repo")" &&
 		version="${tag:1}" &&
 		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/com.github.johnfactotum.foliate_${version}_all.deb" -O foliate.deb &&
-		sudo apt -qq install -y ./foliate.deb &&
+	sudo apt -qq install -y ./foliate.deb &&
 		rm ./foliate.deb
 fi
 
