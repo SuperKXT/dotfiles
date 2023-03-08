@@ -194,6 +194,8 @@ if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
 		rm ./foliate.deb
 fi
 
+# TODO add docker and docker-compose setup
+
 # Setup Themes
 sudo chmod u+x scripts/setup-config.sh
 scripts/setup-config.sh
