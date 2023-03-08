@@ -25,9 +25,11 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 # Install or update nvm
 sudo chmod u+x ~/dotfiles/scripts/install-nvm.sh
 ./scripts/install-nvm.sh
-export NVM_DIR="$HOME/.nvm" &&
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&                # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
+echo -e "\n${GREEN}Setting Up NVM...${NC}"
+version="$(latest_git_release "nvm-sh/nvm")" &&
+	curl --progress-bar -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$version/install.sh" | bash &&
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" &&                # This loads nvm
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Install nvm node versions
 for version in lts/* node; do
