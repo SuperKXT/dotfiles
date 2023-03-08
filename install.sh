@@ -9,7 +9,7 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
-if [ "$EUID" -e 0 ]
+if [ "$EUID" -eq 0 ]
   then echo "Don't run this script as root"
   exit
 fi
