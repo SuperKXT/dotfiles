@@ -65,7 +65,7 @@ sudo ufw allow 8000:8999/udp
 
 echo -e "\n${GREEN}Setting Up Wallpaper...${NC}"
 cp -rTvf ~/dotfiles/wallpapers ~/Pictures/Wallpapers
-gsettings set org.gnome.desktop.background picture-uri file:///home/"$(whoami)"/Pictures/Wallpapers/wavy-rainbow.jpg
+gsettings set org.gnome.desktop.background picture-uri file:///home/"$(whoami)"/Pictures/Wallpapers/wavey-rainbow.jpg
 
 echo -e "\n${GREEN}Setting Tilix as the default...${NC}"
 sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
