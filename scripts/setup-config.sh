@@ -19,20 +19,20 @@ rm -f ./install-gnome-extensions.sh &&
 	killall -3 gnome-shell
 
 echo -e "\n${GREEN}Setting Up Orchis Theme...${NC}"
-git clone https://github.com/vinceliuice/Orchis-theme orchis &&
-	cd orchis &&
+git clone https://github.com/vinceliuice/Orchis-theme ~/orchis &&
+	cd ~/orchis &&
 	./install.sh -t red -c light -s compact -l --round 0px --tweaks compact primary &&
 	cp -rvf ./src/firefox/chrome ~/.mozilla/firefox/*.default/ &&
 	cp -vf ./src/firefox/configuration/user.js ~/.mozilla/firefox/*.default/ &&
 	cd .. &&
-	rm -rf orchis
+	rm -rf ~/orchis
 
 echo -e "\n${GREEN}Setting Up Tela Icon Theme...${NC}"
-git clone https://github.com/vinceliuice/Tela-icon-theme tela &&
-	cd tela &&
+git clone https://github.com/vinceliuice/Tela-icon-theme ~/tela &&
+	cd ~/tela &&
 	./install.sh red &&
 	cd .. &&
-	rm -rf tela
+	rm -rf ~/tela
 
 echo -e "\n${GREEN}Setting Up Gtk Terminal Styles...${NC}"
 rm -f "$HOME/.config/gtk-3.0/gtk.css" &&
