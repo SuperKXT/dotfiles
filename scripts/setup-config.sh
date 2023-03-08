@@ -14,6 +14,7 @@ rm -f ./install-gnome-extensions.sh &&
 	wget -N -q "https://raw.githubusercontent.com/cyfrost/install-gnome-extensions/master/install-gnome-extensions.sh" -O ./install-gnome-extensions.sh &&
 	chmod +x install-gnome-extensions.sh &&
 	./install-gnome-extensions.sh --enable --file ~/dotfiles/lists/shell-extensions.txt &&
+	# TODO enable extensions after install
 	rm ./install-gnome-extensions.sh &&
 	killall -3 gnome-shell
 
@@ -86,5 +87,4 @@ sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
 	# TODO automatically add the ssh-key as a signing key once gh cli adds support
 	# echo -e "\n${GREEN}Adding SSH signing key...${NC}" &&
 	# gh ssh-key add ~/.ssh/id_ed25519.pub
-
-killall -3 gnome-shell
+	killall -3 gnome-shell
