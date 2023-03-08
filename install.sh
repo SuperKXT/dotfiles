@@ -9,6 +9,11 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
 # shellcheck source=scripts/latest-git-release.sh
 source ~/dotfiles/scripts/latest-git-release.sh
 
