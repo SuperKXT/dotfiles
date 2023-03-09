@@ -12,9 +12,9 @@ NC='\e[0m'
 # shellcheck source=scripts/latest-git-release.sh
 source ~/dotfiles/scripts/latest-git-release.sh
 
-if [ "$EUID" -eq 0 ]
-  then echo "Don't run this script as root"
-  exit
+if [ "$EUID" -eq 0 ]; then
+	echo "Don't run this script as root"
+	exit
 fi
 
 # Check if curl is installed, if not install it
@@ -28,12 +28,8 @@ echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
 xargs sudo apt -qq install -y <lists/apt-packages.txt
 
 # Install or update nvm
-echo -e "\n${GREEN}Setting Up NVM...${NC}"
-version="$(latest_git_release "nvm-sh/nvm")" &&
-	curl --progress-bar -o- "https://raw.githubusercontent.com/nvm-sh/nvm/$version/install.sh" | bash &&
-	export NVM_DIR="$HOME/.nvm"
-	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+./scripts/install-nvm.sh
+source ~/.bashrc
 
 # Install nvm node versions
 for version in lts/* node; do
@@ -52,7 +48,7 @@ if ! command -v deno &>/dev/null; then
 	echo -e "\n${GREEN}Installing Deno...${NC}"
 	curl -fsSL https://deno.land/x/install/install.sh | sh
 	export DENO_INSTALL="/home/superkxt/.deno"
-  	export PATH="$DENO_INSTALL/bin:$PATH"
+	export PATH="$DENO_INSTALL/bin:$PATH"
 fi
 
 # install gh cli
@@ -136,7 +132,7 @@ if ! command -v anydesk &>/dev/null; then
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		echo -e "\n${GREEN}Installing AnyDesk...${NC}"
-		curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY|sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
+		curl -fsSL https://keys.anydesk.com/repos/DEB-GPG-KEY | sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/anydesk.gpg
 		echo "deb http://deb.anydesk.com/ all main" | sudo tee /etc/apt/sources.list.d/anydesk-stable.list
 		sudo apt -qq update
 		sudo apt -qq install -y anydesk
