@@ -41,6 +41,9 @@ deno completions bash >$DIR/deno
 echo -e "\n${GREEN}Adding Gitub CLI Completions...${NC}"
 gh completion -s bash >$DIR/gh
 
+echo -e "\n${GREEN}Adding ngrok Completions...${NC}"
+ngrok completion >$DIR/npm
+
 echo -e "\n${GREEN}Adding PNPM Completions...${NC}"
 pnpm install-completion bash &&
 	mv dot/.bashrc .bashrc-old &&
