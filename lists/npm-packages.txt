@@ -18,4 +18,3 @@ stylelint
 stylelint-config-standard
 stylelint-config-standard-scss
 pm2
-ngrok

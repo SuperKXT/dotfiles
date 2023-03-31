@@ -189,6 +189,12 @@ if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
 		rm ./foliate.deb
 fi
 
+# intall ngrok
+if ! command -v ngrok &>/dev/nulll; then
+	echo -e "\n${GREEN}Installing ngrok...${NC}"
+	curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+fi
+
 # TODO add docker and docker-compose setup
 
 # Setup Themes
