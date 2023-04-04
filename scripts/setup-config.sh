@@ -82,7 +82,7 @@ sudo update-alternatives --set x-terminal-emulator /usr/bin/tilix.wrapper &&
 	eval "$(ssh-agent -s)" &&
 	ssh-add ~/.ssh/id_ed25519 &&
 	cp ~/dotfiles/config/.ssh/* ~/.ssh/ &&
-	echo -e "\n${GREEN}Authenticatin gh cli with ssh key...${NC}" &&
+	echo -e "\n${GREEN}Authenticating gh cli with ssh key...${NC}" &&
 	gh auth login -p ssh -w &&
 	# TODO automatically add the ssh-key as a signing key once gh cli adds support
 	# echo -e "\n${GREEN}Adding SSH signing key...${NC}" &&
