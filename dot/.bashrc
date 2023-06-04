@@ -73,6 +73,7 @@ alias ssh-hosts="grep -P \"^Host ([^*]+)$\" \$HOME/.ssh/config | sed 's/Host //'
 alias git-open="gh repo view --web"
 alias apti="apt list --installed | grep"
 alias pn='pnpm'
+alias pnx='pnpm dlx'
 alias open='xdg-open'
 alias proton='protonvpn-cli'
 alias cat='batcat --paging=never'
