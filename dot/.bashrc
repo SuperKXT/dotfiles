@@ -172,7 +172,7 @@ nvm-update() {
 			nvm uninstall "$current" &&
 			corepack enable yarn &&
 			corepack enable pnpm &&
-			corepack prepare yarn@stable --activate &&
+			corepack prepare yarn@@1.22.1 --activate &&
 			corepack prepare pnpm@latest --activate &&
 			nvm use default
 	fi
