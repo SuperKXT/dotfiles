@@ -151,6 +151,7 @@ nvm-update() {
 		versions=${versions//->/}
 		versions=${versions// v/v}
 		versions=${versions//\*/}
+		# ! Don't fix this [shellcheck] warning!
 		versions=($versions)
 		PS3="Select A Version To Use As $1: "
 		select current in "${versions[@]}"; do
@@ -170,8 +171,7 @@ nvm-update() {
 		echo "Updating $1 From $current To $remote"
 		nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
 			nvm uninstall "$current" &&
-			corepack enable yarn &&
-			corepack enable pnpm &&
+			corepack enable &&
 			corepack prepare yarn@@1.22.1 --activate &&
 			corepack prepare pnpm@latest --activate &&
 			nvm use default
