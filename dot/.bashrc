@@ -171,9 +171,6 @@ nvm-update() {
 		echo "Updating $1 From $current To $remote"
 		nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
 			nvm uninstall "$current" &&
-			corepack enable &&
-			corepack prepare yarn@@1.22.1 --activate &&
-			corepack prepare pnpm@latest --activate &&
 			nvm use default
 	fi
 }
