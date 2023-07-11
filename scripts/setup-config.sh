@@ -21,7 +21,7 @@ rm -f ./install-gnome-extensions.sh &&
 echo -e "\n${GREEN}Setting Up Orchis Theme...${NC}"
 git clone https://github.com/vinceliuice/Orchis-theme ~/orchis &&
 	cd ~/orchis &&
-	./install.sh -t red -c light -s compact -l --round 0px --tweaks compact primary &&
+	./install.sh -t purple -c light -s compact -l --round 0px --tweaks compact primary &&
 	cp -rvf ./src/firefox/chrome ~/.mozilla/firefox/*.default/ &&
 	cp -vf ./src/firefox/configuration/user.js ~/.mozilla/firefox/*.default/ &&
 	cd .. &&
@@ -30,7 +30,7 @@ git clone https://github.com/vinceliuice/Orchis-theme ~/orchis &&
 echo -e "\n${GREEN}Setting Up Tela Icon Theme...${NC}"
 git clone https://github.com/vinceliuice/Tela-icon-theme ~/tela &&
 	cd ~/tela &&
-	./install.sh red &&
+	./install.sh purple &&
 	cd .. &&
 	rm -rf ~/tela
 
