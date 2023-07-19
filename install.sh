@@ -38,8 +38,7 @@ for version in lts/* node; do
 		xargs npm install -g <lists/npm-packages.txt &&
 		corepack enable &&
 		corepack prepare yarn@stable --activate &&
-		corepack prepare pnpm@latest --activate &&
-		yarn plugin import interactive-tools
+		corepack prepare pnpm@latest --activate
 done
 nvm alias lts/* default
 nvm use default
