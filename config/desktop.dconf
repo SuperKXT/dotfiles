@@ -22,8 +22,8 @@ enable-hot-corners=false
 font-antialiasing='grayscale'
 font-hinting='slight'
 font-name='Kelson weight=255 10'
-gtk-theme='Orchis-Red-Light-Compact'
-icon-theme='Tela-red'
+gtk-theme='Orchis-Purple-Light-Compact'
+icon-theme='Tela-purple-light'
 locate-pointer=false
 monospace-font-name='Iosevka Fixed Slab Medium 12'
 show-battery-percentage=true
