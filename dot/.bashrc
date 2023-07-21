@@ -172,6 +172,7 @@ nvm-update() {
 	else
 		echo "Updating $1 From $current To $remote"
 		nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
+			npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm &&
 			nvm uninstall "$current" &&
 			nvm use default
 	fi
