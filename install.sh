@@ -206,6 +206,13 @@ if ! command -v ngrok &>/dev/nulll; then
 	curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
 fi
 
+# intall qBitTorrent
+if ! command -v qbittorrent &>/dev/nulll; then
+	echo -e "\n${GREEN}Installing qBitTorrent...${NC}"
+	sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable &&
+		sudo apt-get update && sudo apt-get install qbittorrent
+fi
+
 # TODO add docker and docker-compose setup
 
 # Setup Themes
