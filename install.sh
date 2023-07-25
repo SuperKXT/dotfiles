@@ -225,6 +225,19 @@ if ! command -v qbittorrent &>/dev/nulll; then
 	sudo apt -qq install -y qbittorrent
 fi
 
+# install rEFInd
+if ! command -v refind-install &>/dev/null; then
+	echo
+	read -p "Do you want to install rEFInd to manage boot devices? (y/n)? " -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		echo -e "\n${GREEN}Installing rEFInd...${NC}"
+		sudo apt-add-repository -y ppa:rodsmith/refind
+		sudo apt-get -qq update
+		sudo apt-get -qq install -y refind
+	fi
+fi
+
 # TODO add docker and docker-compose setup
 
 # Setup Themes
