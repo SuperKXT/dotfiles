@@ -235,6 +235,12 @@ if ! command -v refind-install &>/dev/null; then
 		sudo apt-add-repository -y ppa:rodsmith/refind
 		sudo apt-get -qq update
 		sudo apt-get -qq install -y refind
+		git clone https://github.com/munlik/refind-theme-regular.git
+		sudo rm -rf /boot/efi/EFI/refind/{regular-theme,refind-theme-regular}
+		sudo cp -r refind-theme-regular /boot/efi/EFI/refind/
+		sudo rm -rf /boot/efi/EFI/refind/refind-theme-regular/{src,.git}
+		echo 'include refind-theme-regular/theme.conf' | sudo tee -a /boot/efi/EFI/refind/refind.conf >/dev/null
+		rm -rf ./refind-theme-regular
 	fi
 fi
 
