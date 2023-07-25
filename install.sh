@@ -9,6 +9,9 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
+# Fix date & time if incorrect
+sudo hwclock -s
+
 # shellcheck source=scripts/latest-git-release.sh
 source ~/dotfiles/scripts/latest-git-release.sh
 
@@ -29,16 +32,19 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 
 # Install or update nvm
 ./scripts/install-nvm.sh
-source ~/.bashrc
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Install nvm node versions
 for version in lts/* node; do
 	echo -e "\n${GREEN}Setting Up Node Version: $version...${NC}"
-	nvm install "$version" &&
-		xargs npm install -g <lists/npm-packages.txt &&
-		corepack enable &&
-		corepack prepare yarn@stable --activate &&
-		corepack prepare pnpm@latest --activate
+	nvm install "$version"
+	xargs npm install -g <lists/npm-packages.txt
+	corepack enable
+	corepack prepare yarn@stable --activate
+	corepack prepare pnpm@latest --activate
 done
 nvm alias lts/* default
 nvm use default
@@ -54,34 +60,34 @@ fi
 # install gh cli
 if ! command -v gh &>/dev/null; then
 	echo -e "\n${GREEN}Installing GitHub CLI...${NC}"
-	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg &&
-		sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg &&
-		echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null &&
-		sudo apt -qq update &&
-		sudo apt -qq install -y gh &&
-		gh extension install mislav/gh-license &&
-		gh auth login -w -s admin:public_key
+	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+	sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
+	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
+	sudo apt -qq update
+	sudo apt -qq install -y gh
+	gh extension install mislav/gh-license
+	gh auth login -w -s admin:public_key
 fi
 
 # install vs code
 if ! command -v code &>/dev/null; then
 	echo -e "\n${GREEN}Installing VS Code...${NC}"
-	sudo apt-get install wget gpg &&
-		wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg &&
-		sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg &&
-		sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list' &&
-		rm -f packages.microsoft.gpg &&
-		sudo apt -qq install -y apt-transport-https &&
-		sudo apt -qq update &&
-		sudo apt -qq install -y code
+	sudo apt -qq install -y wget gpg
+	wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor >packages.microsoft.gpg
+	sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+	sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
+	rm -f packages.microsoft.gpg
+	sudo apt -qq install -y apt-transport-https
+	sudo apt -qq update
+	sudo apt -qq install -y code
 fi
 
 # install remmina
 if ! command -v remmina &>/dev/null; then
 	echo -e "\n${GREEN}Installing Remmina...${NC}"
-	sudo apt-add-repository ppa:remmina-ppa-team/remmina-next &&
-		sudo apt update &&
-		sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret
+	sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
+	sudo apt update
+	sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret
 
 fi
 
@@ -94,7 +100,7 @@ fi
 # install obs studio
 if ! command -v obs &>/dev/null; then
 	echo -e "\n${GREEN}Installing OBS Studio...${NC}"
-	sudo add-apt-repository ppa:obsproject/obs-studio
+	sudo add-apt-repository -y ppa:obsproject/obs-studio
 	sudo apt update
 	sudo apt install ffmpeg obs-studio
 fi
@@ -102,17 +108,17 @@ fi
 # install insomnia
 if ! command -v insomnia &>/dev/null; then
 	echo -e "\n${GREEN}Installing Insomnia...${NC}"
-	wget -q --show-progress "https://updates.insomnia.rest/downloads/ubuntu/latest?app=com.insomnia.app&source=website" -O ./insomnia.deb &&
-		sudo apt install ./insomnia.deb &&
-		rm ./insomnia.deb
+	wget -q --show-progress "https://updates.insomnia.rest/downloads/ubuntu/latest?app=com.insomnia.app&source=website" -O ./insomnia.deb
+	sudo apt install ./insomnia.deb
+	rm ./insomnia.deb
 fi
 
 # install azure data studio
 if ! command -v azuredatastudio &>/dev/null; then
 	echo -e "\n${GREEN}Installing Azure Data Studio...${NC}"
-	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./azure-data-studio.deb &&
-		sudo apt -qq install -y ./azure-data-studio.deb &&
-		rm ./azure-data-studio.deb
+	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./azure-data-studio.deb
+	sudo apt -qq install -y ./azure-data-studio.deb
+	rm ./azure-data-studio.deb
 fi
 
 # install vivaldi
@@ -120,9 +126,9 @@ if ! command -v vivaldi &>/dev/null; then
 	echo -e "\n${GREEN}Installing Vivaldi...${NC}"
 	curl --silent https://vivaldi.com/download/archive/?platform=linux --stderr - |
 		grep -o -m 1 https://downloads.vivaldi.com/stable/vivaldi-stable_[0-9.-]*_amd64.deb |
-		xargs wget -q --show-progress -O ./vivaldi.deb &&
-		sudo apt -qq install -y ./vivaldi.deb &&
-		rm ./vivaldi.deb
+		xargs wget -q --show-progress -O ./vivaldi.deb
+	sudo apt -qq install -y ./vivaldi.deb
+	rm ./vivaldi.deb
 fi
 
 # install anydesk
@@ -142,75 +148,81 @@ fi
 # install mongodb server
 if ! command -v mongod &>/dev/null; then
 	echo -e "\n${GREEN}Installing MongoDB Server...${NC}"
-	wget -qO - https://www.mongodb.org/static/pgp/server-6.0.asc | sudo apt-key add - &&
-		echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list &&
-		sudo apt -qq update &&
-		sudo apt -qq install -y mongodb-org &&
-		sudo systemctl daemon-reload &&
-		sudo systemctl start mongod
+	sudo apt -qq install -y gnupg curl
+	curl -fsSL https://pgp.mongodb.com/server-6.0.asc |
+		sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
+			--dearmor
+	echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
+	sudo apt -qq update
+	sudo apt -qq install -y mongodb-org
+	sudo systemctl daemon-reload
+	sudo systemctl start mongod
 fi
 
 # install mongodb compass
 if ! command -v mongodb-compass &>/dev/null; then
 	echo -e "\n${GREEN}Installing MongoDB Compass...${NC}"
-	repo="mongodb-js/compass" &&
-		tag="$(latest_git_release "$repo")" &&
-		version="${tag:1}" &&
-		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/mongodb-compass_${version}_amd64.deb" -O compass.deb &&
-		sudo apt -qq install -y ./compass.deb &&
-		rm ./compass.deb
+	repo="mongodb-js/compass"
+	tag="$(latest_git_release "$repo")"
+	version="${tag:1}"
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/mongodb-compass_${version}_amd64.deb" -O compass.deb
+	sudo apt -qq install -y ./compass.deb
+	rm ./compass.deb
 fi
 
 # install slack
 if ! command -v slack &>/dev/null; then
 	echo -e "\n${GREEN}Installing Slack...${NC}"
-	version="$(curl --silent https://slack.com/downloads/linux --stderr - | grep -Po -m 1 "(?<=Version )[0-9.]*")" &&
-		wget -q --show-progress "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb" -O slack.deb &&
-		sudo apt -qq install -y ./slack.deb &&
-		rm ./slack.deb
+	version="$(curl --silent https://slack.com/downloads/linux --stderr - | grep -Po -m 1 "(?<=Version )[0-9.]*")"
+	wget -q --show-progress "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb" -O slack.deb
+	sudo apt -qq install -y ./slack.deb
+	rm ./slack.deb
 fi
 
 # install proton vpn cli
 if ! command -v protonvpn-cli &>/dev/null; then
 	echo -e "\n${GREEN}Installing Proton VPN CLI...${NC}"
-	wget -q --show-progress https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3_all.deb -O proton_repo.deb &&
-		sudo apt install ./proton_repo.deb &&
-		rm ./proton_repo.deb &&
-		sudo apt update &&
-		sudo apt install protonvpn-cli
+	wget -q --show-progress https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3_all.deb -O proton_repo.deb
+	sudo apt -qq install -y ./proton_repo.deb
+	rm ./proton_repo.deb
+	sudo apt update
+	sudo apt -qq install -p protonvpn-cli
 fi
 
 # Install Dropbox
 # TODO install latest dropbox
 if ! command -v dropbox &>/dev/null; then
 	echo -e "\n${GREEN}Installing Dropbox...${NC}"
-	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb" -O dropbox.deb &&
-		sudo apt -qq install -y ./dropbox.deb &&
-		rm ./dropbox.deb
+	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb" -O dropbox.deb
+	sudo apt -qq install -y ./dropbox.deb
+	rm ./dropbox.deb
 fi
 
 # install foliate
 if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
 	echo -e "\n${GREEN}Installing Foliate...${NC}"
-	repo="johnfactotum/foliate" &&
-		tag="$(latest_git_release "$repo")" &&
-		version="${tag:1}" &&
-		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/com.github.johnfactotum.foliate_${version}_all.deb" -O foliate.deb &&
-		sudo apt -qq install -y ./foliate.deb &&
-		rm ./foliate.deb
+	repo="johnfactotum/foliate"
+	tag="$(latest_git_release "$repo")"
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/com.github.johnfactotum.foliate_${tag}_all.deb" -O foliate.deb
+	sudo apt -qq install -y ./foliate.deb
+	rm ./foliate.deb
 fi
 
 # intall ngrok
 if ! command -v ngrok &>/dev/nulll; then
 	echo -e "\n${GREEN}Installing ngrok...${NC}"
-	curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list && sudo apt update && sudo apt install ngrok
+	curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
+	echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list
+	sudo apt -qq update
+	sudo apt -qq install -y ngrok
 fi
 
 # intall qBitTorrent
 if ! command -v qbittorrent &>/dev/nulll; then
 	echo -e "\n${GREEN}Installing qBitTorrent...${NC}"
-	sudo add-apt-repository ppa:qbittorrent-team/qbittorrent-stable &&
-		sudo apt-get update && sudo apt-get install qbittorrent
+	sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable
+	sudo apt -qq update
+	sudo apt -qq install -y qbittorrent
 fi
 
 # TODO add docker and docker-compose setup
