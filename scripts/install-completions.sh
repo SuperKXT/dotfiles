@@ -55,3 +55,5 @@ pnpm install-completion bash &&
 		tail -n -4 .bashrc-old >>$DIR/pnpm
 	fi &&
 	rm .bashrc-old
+
+pm2 completion install
