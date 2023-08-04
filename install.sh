@@ -244,7 +244,9 @@ if ! command -v refind-install &>/dev/null; then
 	fi
 fi
 
-# TODO add docker and docker-compose setup
+# Setup Docker
+sudo chmod u+x scripts/install-docker.sh
+scripts/install-docker.sh
 
 # Setup Themes
 sudo chmod u+x scripts/setup-config.sh
