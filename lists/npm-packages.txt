@@ -2,3 +2,4 @@ npm-check
 tldr
 npkill
 pm2
+eas-cli
