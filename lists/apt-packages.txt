@@ -21,4 +21,8 @@ xclip
 neofetch
 blueman
 traceroute
+gitmoji-cli
+openjdk-11-jdk
 vlc
+gnupg
+adb
