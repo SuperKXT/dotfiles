@@ -87,21 +87,21 @@ alias cat='batcat --paging=never'
 update() {
 	sudo apt update &&
 		sudo apt full-upgrade -y --allow-downgrades --fix-missing &&
-		sudo apt autoremove &&
-		~/dotfiles/scripts/install-nvm.sh &&
-		nvm-update lts/* &&
-		nvm use lts/* &&
-		corepack prepare yarn@stable --activate &&
-		corepack prepare pnpm@latest --activate &&
-		npm-check -gu &&
-		nvm-update node &&
-		nvm use node &&
-		corepack prepare yarn@stable --activate &&
-		corepack prepare pnpm@latest --activate &&
-		npm-check -gu &&
-		nvm use default &&
-		curl --pogress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh &&
-		deno upgrade
+		sudo apt autoremove
+	~/dotfiles/scripts/install-nvm.sh
+	nvm-update lts/*
+	nvm use lts/*
+	corepack prepare yarn@stable --activate
+	corepack prepare pnpm@latest --activate
+	npm-check -gu
+	nvm-update node
+	nvm use node
+	corepack prepare yarn@stable --activate
+	corepack prepare pnpm@latest --activate
+	npm-check -gu
+	nvm use default
+	curl --pogress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
+	deno upgrade
 }
 
 # Make a directory and move into it
@@ -171,10 +171,11 @@ nvm-update() {
 		echo "Version $1 Is Up To Date"
 	else
 		echo "Updating $1 From $current To $remote"
-		nvm install "$1" --latest-npm --reinstall-packages-from="$current" &&
-			npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm &&
-			nvm uninstall "$current" &&
-			nvm use default
+		nvm install "$1" --latest-npm --reinstall-packages-from="$current"
+		nvm use "$current"
+		npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm
+		nvm use "$1"
+		nvm uninstall "$current"
 	fi
 }
 
