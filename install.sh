@@ -244,6 +244,16 @@ if ! command -v refind-install &>/dev/null; then
 	fi
 fi
 
+# install Spotify
+if ! command -v spotify-client &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Spotify...${NC}"
+	curl -sS https://download.spotify.com/debian/pubkey_7A3A762FAFD4A51F.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+	sudo apt -qq update
+	sudo apt -qq install -y spotify-client
+fi
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
