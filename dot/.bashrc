@@ -105,7 +105,7 @@ update() {
 }
 
 # Make a directory and move into it
-mkcdir() {
+mkcd() {
 	mkdir -p -- "$1" && cd -P -- "$1" || return
 }
 
