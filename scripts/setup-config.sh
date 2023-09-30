@@ -72,7 +72,7 @@ sudo ufw allow 5000:5050/tcp
 sudo ufw allow 5000:5050/udp
 sudo ufw allow 8000:8999/tcp
 sudo ufw allow 8000:8999/udp
-sudo ufw allow 19000
+sudo ufw allow 8081/tcp
 
 echo -e "\n${GREEN}Setting Up Wallpaper...${NC}"
 cp -rTvf ~/dotfiles/wallpapers ~/Pictures/Wallpapers
