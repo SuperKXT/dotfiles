@@ -105,14 +105,6 @@ if ! command -v obs &>/dev/null; then
 	sudo apt install ffmpeg obs-studio
 fi
 
-# install insomnia
-if ! command -v insomnia &>/dev/null; then
-	echo -e "\n${GREEN}Installing Insomnia...${NC}"
-	wget -q --show-progress "https://updates.insomnia.rest/downloads/ubuntu/latest?app=com.insomnia.app&source=website" -O ./insomnia.deb
-	sudo apt install ./insomnia.deb
-	rm ./insomnia.deb
-fi
-
 # install azure data studio
 if ! command -v azuredatastudio &>/dev/null; then
 	echo -e "\n${GREEN}Installing Azure Data Studio...${NC}"
