@@ -258,6 +258,17 @@ if ! command -v wine &>/dev/null; then
 	sudo apt -qq install --install-recommends winehq-stable
 fi
 
+# install mono
+if ! command -v mono &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Mono...${NC}"
+	sudo apt install ca-certificates gnupg
+	sudo gpg --homedir /tmp --no-default-keyring --keyring /usr/share/keyrings/mono-official-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+	echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+	sudo apt -qq update
+	sudo apt -qq install mono-devel
+fi
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
