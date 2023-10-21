@@ -246,6 +246,18 @@ if ! command -v spotify-client &>/dev/null; then
 	sudo apt -qq install -y spotify-client
 fi
 
+# install wine
+if ! command -v wine &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Wine...${NC}"
+	sudo dpkg --add-architecture i386
+	sudo mkdir -pm755 /etc/apt/keyrings
+	sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+	sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
+	sudo apt -qq update
+	sudo apt -qq install --install-recommends winehq-stable
+fi
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
