@@ -246,6 +246,16 @@ if ! command -v spotify-client &>/dev/null; then
 	sudo apt -qq install -y spotify-client
 fi
 
+# install onefetch
+if ! command -v onefetch &>/dev/null; then
+	echo -e "\n${GREEN}Installing onefetch...${NC}"
+	repo="o2sh/onefetch"
+	tag="$(latest_git_release "$repo")"
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/onefetch_${tag}_amd64.deb" -O onefetch.deb
+	sudo apt -qq install -y ./onefetch.deb
+	rm ./onefetch.deb
+fi
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
