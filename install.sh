@@ -256,6 +256,29 @@ if ! command -v onefetch &>/dev/null; then
 	rm ./onefetch.deb
 fi
 
+# install wine
+if ! command -v wine &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Wine...${NC}"
+	sudo dpkg --add-architecture i386
+	sudo mkdir -pm755 /etc/apt/keyrings
+	sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+	sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
+	sudo apt -qq update
+	sudo apt -qq install --install-recommends winehq-stable
+fi
+
+# install mono
+if ! command -v mono &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Mono...${NC}"
+	sudo apt install ca-certificates gnupg
+	sudo gpg --homedir /tmp --no-default-keyring --keyring /usr/share/keyrings/mono-official-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+	echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
+	sudo apt -qq update
+	sudo apt -qq install mono-devel
+fi
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
