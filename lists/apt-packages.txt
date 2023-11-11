@@ -26,3 +26,4 @@ openjdk-11-jdk
 vlc
 gnupg
 adb
+openssh-server
