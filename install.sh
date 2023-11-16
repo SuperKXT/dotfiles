@@ -151,6 +151,14 @@ if ! command -v mongod &>/dev/null; then
 	sudo systemctl start mongod
 fi
 
+# install thunderbird
+if ! command -v thunderbird &>/dev/null; then
+	echo -e "\n${GREEN}Installing Thunderbird...${NC}"
+	sudo add-apt-repository -y ppa:mozillateam/thunderbird-next
+	sudo apt -qq update
+	sudo apt -qq install -y thunderbird
+fi
+
 # install mongodb compass
 if ! command -v mongodb-compass &>/dev/null; then
 	echo -e "\n${GREEN}Installing MongoDB Compass...${NC}"
