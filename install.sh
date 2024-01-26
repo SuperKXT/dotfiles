@@ -287,6 +287,18 @@ if ! command -v mono &>/dev/null; then
 	sudo apt -qq install mono-devel
 fi
 
+# install script kit
+if ! command -v kit &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Script Kit...${NC}"
+	repo="johnlindquist/kitapp"
+	tag="$(latest_git_release "$repo")"
+	version="${tag:1}"
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/Kit-Linux-${version}-amd64.deb" -O kit.deb
+	sudo apt -qq install -y ./kit.deb
+	rm ./kit.deb
+fi
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
