@@ -370,3 +370,4 @@ fi
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/bash/__tabtab.bash ] && . ~/.config/tabtab/bash/__tabtab.bash || true
 
+export PATH="$PATH:/home/superkxt/.kit/bin"
