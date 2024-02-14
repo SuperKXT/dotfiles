@@ -193,7 +193,7 @@ fi
 # TODO install latest dropbox
 if ! command -v dropbox &>/dev/null; then
 	echo -e "\n${GREEN}Installing Dropbox...${NC}"
-	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2022.12.05_amd64.deb" -O dropbox.deb
+	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2024.01.22_amd64.deb" -O dropbox.deb
 	sudo apt -qq install -y ./dropbox.deb
 	rm ./dropbox.deb
 fi
