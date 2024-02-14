@@ -16,12 +16,9 @@ mkdir -p $DIR
 echo -e "\n${GREEN}Copying from completions folder...${NC}"
 cp -rsTvf ~/dotfiles/completions $DIR
 
-# TODO uncomment docker and docker-compose completions after setting up docker installation
-# echo -e "\n${GREEN}Add Docker Completions...${NC}"
-# curl --progress-bar https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o $DIR/docker
-
-# echo -e "\n${GREEN}Add Docker-Compose Completions...${NC}"
-# curl --progress-bar https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o $DIR/docker-compose
+echo -e "\n${GREEN}Add Docker Completions...${NC}"
+curl --progress-bar https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o $DIR/docker
+curl --progress-bar https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o $DIR/docker-compose
 
 echo -e "\n${GREEN}Add Git Completions...${NC}"
 curl --progress-bar https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $DIR/git
