@@ -27,3 +27,4 @@ vlc
 gnupg
 adb
 openssh-server
+gtkterm
