@@ -18,9 +18,6 @@ BLUE='\[\e[0;36m\]'
 PURPLE='\[\e[1;34m\]'
 COLOR_RESET='\[\e[0m\]'
 NODE='\[\e[1;32m'
-#RUBY_VERSION='\[\e[1;31m\]'
-#PYTHON='\[\e[1;32m\]'
-#PYTHON='\[\e[1;36m\]'
 
 function git_prompt() {
 	# GIT PROMPT
@@ -360,11 +357,7 @@ elif type compctl &>/dev/null; then
 			IFS="$si"
 			return $ret
 		fi
-		IFS="$si"
-	}
-	compctl -K _npm_completion npm
-fi
-###-end-npm-completion-###
+		IFS="$si">
 
 # pnpm tabtab source for packages
 # uninstall by removing these lines
