@@ -357,7 +357,11 @@ elif type compctl &>/dev/null; then
 			IFS="$si"
 			return $ret
 		fi
-		IFS="$si">
+		IFS="$si"
+	}
+	compctl -K _npm_completion npm
+fi
+###-end-npm-completion-###
 
 # pnpm tabtab source for packages
 # uninstall by removing these lines
