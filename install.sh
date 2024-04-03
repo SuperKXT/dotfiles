@@ -197,14 +197,16 @@ if ! command -v dropbox &>/dev/null; then
 	rm ./dropbox.deb
 fi
 
-# install foliate
-if ! command -v com.github.johnfactotum.Foliate &>/dev/null; then
-	echo -e "\n${GREEN}Installing Foliate...${NC}"
-	repo="johnfactotum/foliate"
+# install koodo
+if ! command -v koodo-reader &>/dev/null; then
+	echo -e "\n${GREEN}Installing Koodo Reader...${NC}"
+	repo="koodo-reader/koodo-reader"
 	tag="$(latest_git_release "$repo")"
-	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/com.github.johnfactotum.foliate_${tag}_all.deb" -O foliate.deb
-	sudo apt -qq install -y ./foliate.deb
-	rm ./foliate.deb
+	echo "Latest tag: ${tag}"
+	version="${tag:1}"
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/Koodo.Reader-${version}-amd64.deb" -O koodo.deb
+	sudo apt -qq install -y ./koodo.deb
+	rm ./koodo.deb
 fi
 
 # intall ngrok
