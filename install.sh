@@ -258,11 +258,9 @@ fi
 # install onefetch
 if ! command -v onefetch &>/dev/null; then
 	echo -e "\n${GREEN}Installing onefetch...${NC}"
-	repo="o2sh/onefetch"
-	tag="$(latest_git_release "$repo")"
-	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/onefetch_${tag}_amd64.deb" -O onefetch.deb
-	sudo apt -qq install -y ./onefetch.deb
-	rm ./onefetch.deb
+	sudo add-apt-repository -y ppa:o2sh/onefetch
+	sudo apt -qq update
+	sudo apt -qq install -y onefetch
 fi
 
 # install wine
