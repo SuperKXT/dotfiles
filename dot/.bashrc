@@ -88,13 +88,13 @@ update() {
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	nvm use lts/*
-	corepack prepare yarn@stable --activate
-	corepack prepare pnpm@latest --activate
+	corepack use yarn
+	corepack use pnpm
 	npm-check -gu
 	nvm-update node
 	nvm use node
-	corepack prepare yarn@stable --activate
-	corepack prepare pnpm@latest --activate
+	corepack use yarn
+	corepack use pnpm
 	npm-check -gu
 	nvm use default
 	curl --pogress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
@@ -368,4 +368,3 @@ fi
 [ -f ~/.config/tabtab/bash/__tabtab.bash ] && . ~/.config/tabtab/bash/__tabtab.bash || true
 
 export PATH="$PATH:/home/superkxt/.kit/bin"
-
