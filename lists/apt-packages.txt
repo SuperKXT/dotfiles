@@ -22,7 +22,7 @@ neofetch
 blueman
 traceroute
 gitmoji-cli
-openjdk-11-jdk
+openjdk-17-jdk
 vlc
 gnupg
 adb
