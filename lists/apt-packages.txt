@@ -24,12 +24,14 @@ traceroute
 gitmoji-cli
 vlc
 gnupg
-adb
 openssh-server
 gtkterm
+cpu-checker
+adb
 openjdk-17-jdk
 libc6:i386
 libncurses5:i386
 libstdc++6:i386
 lib32z1
 libbz2-1.0:i386
+android-tools-adb
