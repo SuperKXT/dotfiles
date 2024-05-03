@@ -123,6 +123,14 @@ if ! command -v vivaldi &>/dev/null; then
 	rm ./vivaldi.deb
 fi
 
+# install Chrome
+if ! command -v google-chrome &>/dev/null; then
+	echo -e "\n${GREEN}Installing Google Chrome...${NC}"
+	wget -q --show-progress https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O ./chrome.deb
+	sudo apt -qq install -y ./chrome.deb
+	rm ./chrome.deb
+fi
+
 # install anydesk
 if ! command -v anydesk &>/dev/null; then
 	echo
