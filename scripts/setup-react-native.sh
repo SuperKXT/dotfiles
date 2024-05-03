@@ -31,9 +31,18 @@ sudo apt -qq install -y virt-manager
 udo adduser $(id-un) libvirt
 sudo adduser $(id-un) kvm
 virsh list --all
+
+echo
 echo -e "\n${GREEN}Login again to enable KVM${NC}"
 
 echo
-echo -e "\n${GREEN}Install The Following From Android Studio SDK Manager:${NC}"
-echo -e "\n${GREEN}Android SDK Platform 34${NC}"
-echo -e "\n${GREEN}Intel x86 Atom_64 System Image${NC}"
+echo -e "\n${GREEN}Complete the setup by following: https://reactnative.dev/docs/environment-setup?guide=native${NC}"
+
+echo
+echo -e "\n${GREEN}Installing Watchman...${NC}"
+git clone https://github.com/facebook/watchman
+cd watchman || exit
+sudo ./install-system-packages.sh
+./autogen.sh
+cd ..
+rm -rf ./watchman
