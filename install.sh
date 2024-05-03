@@ -247,6 +247,10 @@ if ! command -v mono &>/dev/null; then
 	sudo apt -qq install mono-devel
 fi
 
+# Setup React Native Dev Environment
+sudo chmod u+x scripts/setup-react-native.sh
+scripts/setup-react-native.sh
+
 # Setup Docker
 sudo chmod u+x scripts/install-docker.sh
 scripts/install-docker.sh
