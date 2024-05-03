@@ -14,9 +14,6 @@ if ! command -v android-studio &>/dev/null; then
 	sudo add-apt-repository -y ppa:maarten-fonville/android-studio
 	sudo apt -qq update
 	sudo apt -qq install android-studio
-
-	echo -e "\n${GREEN}Starting Android Studio Setup...${NC}"
-	~/Applications/android-studio/bin/studio.sh
 fi
 
 # Setting up KVM
@@ -31,6 +28,7 @@ sudo apt -qq install -y virt-manager
 udo adduser $(id-un) libvirt
 sudo adduser $(id-un) kvm
 virsh list --all
+sudo apt -qq install -y virt-manager
 
 echo
 echo -e "\n${GREEN}Login again to enable KVM${NC}"
@@ -38,11 +36,14 @@ echo -e "\n${GREEN}Login again to enable KVM${NC}"
 echo
 echo -e "\n${GREEN}Complete the setup by following: https://reactnative.dev/docs/environment-setup?guide=native${NC}"
 
-echo
-echo -e "\n${GREEN}Installing Watchman...${NC}"
-git clone https://github.com/facebook/watchman
-cd watchman || exit
-sudo ./install-system-packages.sh
-./autogen.sh
-cd ..
-rm -rf ./watchman
+# Installing Watchman
+if ! command -v watchman &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing Watchman...${NC}"
+	git clone https://github.com/facebook/watchman
+	cd watchman || exit
+	sudo ./install-system-packages.sh
+	./autogen.sh
+	cd ..
+	rm -rf ./watchman
+fi
