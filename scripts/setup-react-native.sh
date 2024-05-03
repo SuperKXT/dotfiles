@@ -39,11 +39,11 @@ echo -e "\n${GREEN}Complete the setup by following: https://reactnative.dev/docs
 # Installing Watchman
 if ! command -v watchman &>/dev/null; then
 	echo
-	echo -e "\n${GREEN}Installing Watchman...${NC}"
+	ca echo -e "\n${GREEN}Installing Watchman...${NC}"
 	git clone https://github.com/facebook/watchman
 	cd watchman || exit
 	sudo ./install-system-packages.sh
 	./autogen.sh
 	cd ..
-	rm -rf ./watchman
+	sudo rm -rf ./watchman
 fi
