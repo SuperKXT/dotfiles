@@ -137,46 +137,18 @@ if ! command -v anydesk &>/dev/null; then
 	fi
 fi
 
-# install mongodb server
-if ! command -v mongod &>/dev/null; then
-	echo -e "\n${GREEN}Installing MongoDB Server...${NC}"
-	sudo apt -qq install -y gnupg curl
-	curl -fsSL https://pgp.mongodb.com/server-6.0.asc |
-		sudo gpg -o /usr/share/keyrings/mongodb-server-6.0.gpg \
-			--dearmor
-	echo "deb [ arch=amd64,arm64 signed-by=/usr/share/keyrings/mongodb-server-6.0.gpg ] https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/6.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-6.0.list
-	sudo apt -qq update
-	sudo apt -qq install -y mongodb-org
-	sudo systemctl daemon-reload
-	sudo systemctl start mongod
-fi
-
-# install thunderbird
-if ! command -v thunderbird &>/dev/null; then
-	echo -e "\n${GREEN}Installing Thunderbird...${NC}"
-	sudo add-apt-repository -y ppa:mozillateam/thunderbird-next
-	sudo apt -qq update
-	sudo apt -qq install -y thunderbird
-fi
-
-# install mongodb compass
-if ! command -v mongodb-compass &>/dev/null; then
-	echo -e "\n${GREEN}Installing MongoDB Compass...${NC}"
-	repo="mongodb-js/compass"
-	tag="$(latest_git_release "$repo")"
-	version="${tag:1}"
-	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/mongodb-compass_${version}_amd64.deb" -O compass.deb
-	sudo apt -qq install -y ./compass.deb
-	rm ./compass.deb
-fi
-
 # install slack
 if ! command -v slack &>/dev/null; then
-	echo -e "\n${GREEN}Installing Slack...${NC}"
-	version="$(curl --silent https://slack.com/downloads/linux --stderr - | grep -Po -m 1 "(?<=Version )[0-9.]*")"
-	wget -q --show-progress "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb" -O slack.deb
-	sudo apt -qq install -y ./slack.deb
-	rm ./slack.deb
+	echo
+	read -p "Do you want to install Slack (y/n)? " -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		echo -e "\n${GREEN}Installing Slack...${NC}"
+		version="$(curl --silent https://slack.com/downloads/linux --stderr - | grep -Po -m 1 "(?<=Version )[0-9.]*")"
+		wget -q --show-progress "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb" -O slack.deb
+		sudo apt -qq install -y ./slack.deb
+		rm ./slack.deb
+	fi
 fi
 
 # install proton vpn cli
@@ -226,25 +198,6 @@ if ! command -v qbittorrent &>/dev/nulll; then
 	sudo apt -qq install -y qbittorrent
 fi
 
-# install rEFInd
-if ! command -v refind-install &>/dev/null; then
-	echo
-	read -p "Do you want to install rEFInd to manage boot devices? (y/n)? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		echo -e "\n${GREEN}Installing rEFInd...${NC}"
-		sudo apt-add-repository -y ppa:rodsmith/refind
-		sudo apt-get -qq update
-		sudo apt-get -qq install -y refind
-		git clone https://github.com/munlik/refind-theme-regular.git
-		sudo rm -rf /boot/efi/EFI/refind/{regular-theme,refind-theme-regular}
-		sudo cp -r refind-theme-regular /boot/efi/EFI/refind/
-		sudo rm -rf /boot/efi/EFI/refind/refind-theme-regular/{src,.git}
-		echo 'include refind-theme-regular/theme.conf' | sudo tee -a /boot/efi/EFI/refind/refind.conf >/dev/null
-		rm -rf ./refind-theme-regular
-	fi
-fi
-
 # install Spotify
 if ! command -v spotify-client &>/dev/null; then
 	echo
@@ -284,18 +237,6 @@ if ! command -v mono &>/dev/null; then
 	echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
 	sudo apt -qq update
 	sudo apt -qq install mono-devel
-fi
-
-# install script kit
-if ! command -v kit &>/dev/null; then
-	echo
-	echo -e "\n${GREEN}Installing Script Kit...${NC}"
-	repo="johnlindquist/kitapp"
-	tag="$(latest_git_release "$repo")"
-	version="${tag:1}"
-	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/Kit-Linux-${version}-amd64.deb" -O kit.deb
-	sudo apt -qq install -y ./kit.deb
-	rm ./kit.deb
 fi
 
 # Setup Docker
