@@ -97,7 +97,7 @@ update() {
 	corepack prepare pnpm@latest --activate
 	npm-check -gu
 	nvm use default
-	curl --pogress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
+	curl --progress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
 	deno upgrade
 }
 
