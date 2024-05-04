@@ -39,11 +39,8 @@ echo -e "\n${GREEN}Complete the setup by following: https://reactnative.dev/docs
 # Installing Watchman
 if ! command -v watchman &>/dev/null; then
 	echo
-	ca echo -e "\n${GREEN}Installing Watchman...${NC}"
-	git clone https://github.com/facebook/watchman
-	cd watchman || exit
-	sudo ./install-system-packages.sh
-	./autogen.sh
-	cd ..
-	sudo rm -rf ./watchman
+	echo -e "\n${GREEN}Installing Watchman...${NC}"
+	wget -q --show-progress https://github.com/facebook/watchman/releases/download/v2023.10.09.00/watchman_ubuntu22.04_v2023.10.09.00.deb -O ./watchman.deb
+	sudo apt -qq install -y ./watchman.deb
+	rm ./watchman.deb
 fi
