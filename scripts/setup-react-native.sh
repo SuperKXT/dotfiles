@@ -43,4 +43,5 @@ if ! command -v watchman &>/dev/null; then
 	wget -q --show-progress https://github.com/facebook/watchman/releases/download/v2023.10.09.00/watchman_ubuntu22.04_v2023.10.09.00.deb -O ./watchman.deb
 	sudo apt -qq install -y ./watchman.deb
 	rm ./watchman.deb
+	sudo bash -c 'echo { \"min_acceptable_nice_value\": 8 } > /etc/watchman.json'
 fi
