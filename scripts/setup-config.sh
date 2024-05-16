@@ -9,6 +9,11 @@ NC='\e[0m'
 
 config_folder=~/dotfiles/config
 
+echo -e "\n${GREEN}Setting Up Pop Launcher to open website...${NC}"
+mkdir -p ~/.local/share/pop-launcher/plugins/web
+echo '( rules: [ ( matches: ["www"], queries: [(name: "Open Website", query: "http://")] ), ] )' >~/.local/share/pop-launcher/plugins/web/config.ron
+gsettings set org.gnome.desktop.background picture-uri file:///home/"$(whoami)"/Pictures/Wallpapers/wavey-rainbow.jpg
+
 echo -e "\n${GREEN}Installing Gnome Shell Extensions...${NC}"
 rm -f ./install-gnome-extensions.sh
 wget -N -q "https://raw.githubusercontent.com/ToasterUwU/install-gnome-extensions/master/install-gnome-extensions.sh" -O ./install-gnome-extensions.sh
