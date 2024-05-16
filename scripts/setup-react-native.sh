@@ -8,7 +8,7 @@ GREEN='\e[32m'
 NC='\e[0m'
 
 # Install Android Studio
-if ! command -v android-studio &>/dev/null; then
+if ! command -v /opt/android-studio-2023.3.1/android-studio/bin/studio.sh &>/dev/null; then
 	echo
 	echo -e "\n${GREEN}Downloading Android Studio...${NC}"
 	sudo add-apt-repository -y ppa:maarten-fonville/android-studio
