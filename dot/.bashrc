@@ -367,8 +367,7 @@ fi
 export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 
-export ANDROID_STUDIO_INSTALL=$HOME/Applications/android-studio/bin
-export PATH="$ANDROID_STUDIO_INSTALL/bin:$PATH"
 export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.1.8937393
