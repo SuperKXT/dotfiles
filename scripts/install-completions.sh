@@ -18,6 +18,8 @@ cp -rsTvf ~/dotfiles/completions $DIR
 
 echo -e "\n${GREEN}Add Docker Completions...${NC}"
 curl --progress-bar https://raw.githubusercontent.com/docker/cli/master/contrib/completion/bash/docker -o $DIR/docker
+
+echo -e "\n${GREEN}Add Docker-Compose Completions...${NC}"
 curl --progress-bar https://raw.githubusercontent.com/docker/compose/master/contrib/completion/bash/docker-compose -o $DIR/docker-compose
 
 echo -e "\n${GREEN}Add Git Completions...${NC}"
@@ -42,15 +44,6 @@ echo -e "\n${GREEN}Adding ngrok Completions...${NC}"
 ngrok completion >$DIR/npm
 
 echo -e "\n${GREEN}Adding PNPM Completions...${NC}"
-pnpm install-completion bash &&
-	mv dot/.bashrc .bashrc-old &&
-	head -n -4 .bashrc-old >dot/.bashrc &&
-	if grep -q '[ -f  ] && . ~/.config/tabtab/bash/__tabtab.bash || true' $DIR/pnpm; then
-		echo 'pnpm completion is already added'
-	else
-		echo 'Added pnpm completions'
-		tail -n -4 .bashrc-old >>$DIR/pnpm
-	fi &&
-	rm .bashrc-old
+pnpm completion bash >$DIR/pnpm
 
 pm2 completion install
