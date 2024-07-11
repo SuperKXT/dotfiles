@@ -247,6 +247,19 @@ if ! command -v mono &>/dev/null; then
 	sudo apt -qq install mono-devel
 fi
 
+# install MS Teams
+if ! command -v teams-for-linux &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing MS Teams...${NC}"
+	repo="IsmaelMartinez/teams-for-linux"
+	tag="$(latest_git_release "$repo")"
+	echo "Latest tag: ${tag}"
+	version="${tag:1}"
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/teams-for-linux_${version}_amd64.deb" -O teams.deb
+	sudo apt -qq install -y ./teams.deb
+	rm ./teams.deb
+fi
+
 # Setup React Native Dev Environment
 sudo chmod u+x scripts/setup-react-native.sh
 scripts/setup-react-native.sh
