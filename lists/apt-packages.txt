@@ -22,7 +22,6 @@ xclip
 neofetch
 blueman
 traceroute
-gitmoji-cli
 vlc
 gnupg
 openssh-server
