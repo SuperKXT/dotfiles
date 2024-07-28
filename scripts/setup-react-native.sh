@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # shellcheck source=/dev/null
 
-# https://reactnative.dev/docs/environment-setup?guide=native
+# https://reactnative.dev/docs/set-up-your-environment
 # https://waldon.blog/2017/11/07/installing-android-studio-on-pop_os-or-ubuntu/
 
 GREEN='\e[32m'
@@ -34,7 +34,7 @@ echo
 echo -e "\n${GREEN}Login again to enable KVM${NC}"
 
 echo
-echo -e "\n${GREEN}Complete the setup by following: https://reactnative.dev/docs/environment-setup?guide=native${NC}"
+echo -e "\n${GREEN}Complete the setup by following: https://reactnative.dev/docs/set-up-you-environment${NC}"
 
 # Installing Watchman
 if ! command -v watchman &>/dev/null; then
