@@ -166,7 +166,7 @@ if ! command -v protonvpn-app &>/dev/null; then
 	sudo dpkg -i ./proton_repo.deb
 	rm ./proton_repo.deb
 	sudo apt -qq update
-	sudo apt -qq install -p proton-vpn-gnome-desktop
+	sudo apt -qq install proton-vpn-gnome-desktop
 fi
 
 # Install Dropbox
