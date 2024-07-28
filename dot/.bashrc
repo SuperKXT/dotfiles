@@ -112,7 +112,7 @@ killport() {
 
 # Find wordle solution words
 wordle() {
-	cd ~/repos/personal/playground/ && pn wordle "$@" && cd - >/dev/null || return
+	cd ~/repos/playground/ && pn wordle "$@" && cd - >/dev/null || return
 }
 
 # recursively rename the given path and all its contents to kebab case
