@@ -23,12 +23,12 @@ rm ./install-gnome-extensions.sh
 killall -3 gnome-shell
 # Multi monitor addon not compatiable
 # https://extensions.gnome.org/extension/921/multi-monitors-add-on/
-git clone https://github.com/realh/multi-monitors-add-on.git
-(
-	cd multi-monitors-add-on || exit
-	cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
-)
-rm -rf multi-monitors-add-on
+# git clone https://github.com/realh/multi-monitors-add-on.git
+# (
+# 	cd multi-monitors-add-on || exit
+# 	cp -r multi-monitors-add-on@spin83 ~/.local/share/gnome-shell/extensions/
+# )
+# rm -rf multi-monitors-add-on
 
 echo -e "\n${GREEN}Setting Up Orchis Theme...${NC}"
 git clone https://github.com/vinceliuice/Orchis-theme ~/orchis
