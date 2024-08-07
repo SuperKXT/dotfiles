@@ -9,6 +9,9 @@ NC='\e[0m'
 
 config_folder=~/dotfiles/config
 
+echo -e "\n${GREEN}Allowing superkxt to use the serial port (restart required)...${NC}"
+sudo usermod -a -G dialout "$USER"
+
 echo -e "\n${GREEN}Setting Up Pop Launcher to open website...${NC}"
 mkdir -p ~/.local/share/pop-launcher/plugins/web
 echo '( rules: [ ( matches: ["www"], queries: [(name: "Open Website", query: "http://")] ), ] )' >~/.local/share/pop-launcher/plugins/web/config.ron
