@@ -1,25 +1,25 @@
 # global setting
 [alias]
-graph = log --all --graph --decorate --oneline
-assume-unchanged = update-index --assume-unchanged
-no-assume-unchanged = update-index --no-assume-unchanged
+	graph = log --all --graph --decorate --oneline
+	assume-unchanged = update-index --assume-unchanged
+	no-assume-unchanged = update-index --no-assume-unchanged
 [branch]
-autosetupmerge = always
+	autosetupmerge = always
 [core]
-editor = code -w
-excludesfile = ~/.gitignore
+	editor = code -w
+	excludesfile = ~/.gitignore
 [commit]
-template = ~/.gitmessage
-gpgsign = true
+	template = ~/.gitmessage
+	gpgsign = true
 [user]
-email = superkxt@outlook.com
-name = SuperKXT
-signingKey = /home/superkxt/.ssh/id_ed25519.pub
+	email = superkxt@outlook.com
+	name = SuperKXT
+	signingKey = /home/superkxt/.ssh/id_github.pub
 [pull]
-rebase = false
+	rebase = false
 [init]
-defaultBranch = main
+	defaultBranch = main
 [url "git@github.com:"]
-insteadOf = https://github.com/
+	insteadOf = https://github.com/
 [gpg]
-format = ssh
+	format = ssh

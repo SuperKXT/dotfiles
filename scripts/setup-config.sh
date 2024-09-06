@@ -95,12 +95,12 @@ gsettings set com.github.stunkymonkey.nautilus-open-any-terminal terminal tilix
 
 [ ! -f "$HOME/.ssh/config" ] &&
 	echo -e "\n${GREEN}Setting Up SSH config...${NC}" &&
-	ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_ed25519 -N "" &&
+	ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_github -N "" &&
 	eval "$(ssh-agent -s)" &&
-	ssh-add ~/.ssh/id_ed25519 &&
+	ssh-add ~/.ssh/id_github &&
 	cp ~/dotfiles/config/.ssh/* ~/.ssh/ &&
 	echo -e "\n${GREEN}Authenticating gh cli with ssh key...${NC}" &&
 	gh auth login -p ssh -s admin:ssh_signing_key -w &&
 	echo -e "\n${GREEN}Adding SSH signing key...${NC}" &&
-	gh ssh-key add ~/.ssh/id_ed25519.pub --type signing &&
+	gh ssh-key add ~/.ssh/id_github.pub --type signing &&
 	killall -3 gnome-shell
