@@ -81,6 +81,10 @@ sudo ufw allow 8000:8010/tcp
 # Expo Go
 sudo ufw allow 8081/tcp
 
+# Update max number of allowed file watchers
+echo -e "\n${GREEN}Configuring SysCTL...${NC}"
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
 echo -e "\n${GREEN}Setting Up Wallpaper...${NC}"
 cp -rTvf ~/dotfiles/wallpapers ~/Pictures/Wallpapers
 gsettings set org.gnome.desktop.background picture-uri file:///home/"$(whoami)"/Pictures/Wallpapers/wavey-rainbow.jpg
