@@ -38,7 +38,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
 # Install nvm node versions
-for version in lts/* node; do
+for version in lts/*; do
 	echo -e "\n${GREEN}Setting Up Node Version: $version...${NC}"
 	nvm install "$version"
 	xargs npm install -g <lists/npm-packages.txt
