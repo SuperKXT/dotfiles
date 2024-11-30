@@ -90,11 +90,6 @@ update() {
 	corepack prepare yarn@stable --activate
 	corepack prepare pnpm@latest --activate
 	npm-check -gu
-	nvm-update node
-	nvm use node
-	corepack prepare yarn@stable --activate
-	corepack prepare pnpm@latest --activate
-	npm-check -gu
 	nvm use default
 	curl --progress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
 	deno upgrade
@@ -370,4 +365,3 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.1.8937393
-
