@@ -30,6 +30,14 @@ type -p xargs >/dev/null || sudo apt install xargs -y
 echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
 xargs sudo apt -qq install -y <lists/apt-packages.txt
 
+# Install AppImageLauncher
+if ! command -v appimagelauncher &>/dev/null; then
+	echo -e "\n${GREEN}Installing AppImageLauncher...${NC}"
+	sudo add-apt-repository -y ppa:appimagelauncher-team/stable
+	sudo apt -qq update
+	sudo apt -qq install -y appimagelauncher
+fi
+
 # Install or update nvm
 ./scripts/install-nvm.sh
 
