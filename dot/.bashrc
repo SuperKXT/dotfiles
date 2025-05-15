@@ -79,7 +79,6 @@ alias cat='batcat --paging=never'
 ##############################################################################
 
 # update the environment
-# TODO fix vscode and azuredatastudio not updating automatically
 update() {
 	sudo apt update &&
 		sudo apt full-upgrade -y --allow-downgrades --fix-missing &&
@@ -87,8 +86,8 @@ update() {
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	nvm use lts/*
-	corepack prepare yarn@stable --activate
 	corepack prepare pnpm@latest --activate
+	corepack enable pnpm
 	npm-check -gu
 	nvm use default
 	curl --progress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
