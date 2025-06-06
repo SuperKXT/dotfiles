@@ -364,3 +364,6 @@ export ANDROID_HOME=$HOME/Android/Sdk
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.1.8937393
+
+# Turso
+export PATH="$PATH:/home/superkxt/.turso"

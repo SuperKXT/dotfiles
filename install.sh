@@ -268,6 +268,9 @@ if ! command -v teams-for-linux &>/dev/null; then
 	rm ./teams.deb
 fi
 
+# Install Turso CLI
+curl -sSfL https://get.tur.so/install.sh | bash
+
 # Setup React Native Dev Environment
 sudo chmod u+x scripts/setup-react-native.sh
 scripts/setup-react-native.sh
