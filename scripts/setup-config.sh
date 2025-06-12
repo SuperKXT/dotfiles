@@ -75,8 +75,8 @@ echo -e "\n${GREEN}Setting Up UFW firewall...${NC}"
 sudo ufw enable
 sudo ufw allow ssh
 sudo ufw allow 3000:3050/tcp
-sudo ufw allow 4000:4010/tcp
-sudo ufw allow 5000:5010/tcp
+sudo ufw allow 4000:4020/tcp
+sudo ufw allow 5000:5020/tcp
 sudo ufw allow 8000:8010/tcp
 # Expo Go
 sudo ufw allow 8081/tcp
