@@ -4,19 +4,21 @@
 	assume-unchanged = update-index --assume-unchanged
 	no-assume-unchanged = update-index --no-assume-unchanged
 [branch]
-	autosetupmerge = always
+	autoSetupMerge = always
 [core]
 	editor = code -w
-	excludesfile = ~/.gitignore
+	excludesFile = ~/.gitignore
 [commit]
 	template = ~/.gitmessage
-	gpgsign = true
+	gpgSign = true
 [user]
 	email = superkxt@outlook.com
 	name = SuperKXT
 	signingKey = /home/superkxt/.ssh/id_github.pub
 [pull]
 	rebase = false
+[push]
+	autoSetupRemote = true
 [init]
 	defaultBranch = main
 [url "git@github.com:"]
