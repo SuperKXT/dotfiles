@@ -90,8 +90,6 @@ update() {
 	corepack enable pnpm
 	npm-check -gu
 	nvm use default
-	curl --progress-bar https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
-	deno upgrade
 }
 
 # Make a directory and move into it
