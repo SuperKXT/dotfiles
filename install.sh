@@ -145,20 +145,6 @@ if ! command -v anydesk &>/dev/null; then
 	fi
 fi
 
-# install slack
-if ! command -v slack &>/dev/null; then
-	echo
-	read -p "Do you want to install Slack (y/n)? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		echo -e "\n${GREEN}Installing Slack...${NC}"
-		version="$(curl --silent https://slack.com/downloads/linux --stderr - | grep -Po -m 1 "(?<=Version )[0-9.]*")"
-		wget -q --show-progress "https://downloads.slack-edge.com/releases/linux/${version}/prod/x64/slack-desktop-${version}-amd64.deb" -O slack.deb
-		sudo apt -qq install -y ./slack.deb
-		rm ./slack.deb
-	fi
-fi
-
 # install proton vpn
 if ! command -v protonvpn-app &>/dev/null; then
 	echo -e "\n${GREEN}Installing Proton VPN...${NC}"
