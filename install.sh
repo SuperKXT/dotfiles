@@ -170,7 +170,7 @@ if ! command -v koodo-reader &>/dev/null; then
 	tag="$(latest_git_release "$repo")"
 	echo "Latest tag: ${tag}"
 	version="${tag:1}"
-	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/Koodo.Reader-${version}-amd64.deb" -O koodo.deb
+	wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/Koodo-Reader-${version}-amd64.deb" -O koodo.deb
 	sudo apt -qq install -y ./koodo.deb
 	rm ./koodo.deb
 fi
