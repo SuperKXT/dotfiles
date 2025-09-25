@@ -113,14 +113,6 @@ if ! command -v obs &>/dev/null; then
 	sudo apt install ffmpeg obs-studio
 fi
 
-# install azure data studio
-if ! command -v azuredatastudio &>/dev/null; then
-	echo -e "\n${GREEN}Installing Azure Data Studio...${NC}"
-	wget -q --show-progress https://go.microsoft.com/fwlink/?linkid=2215528 -O ./azure-data-studio.deb
-	sudo apt -qq install -y ./azure-data-studio.deb
-	rm ./azure-data-studio.deb
-fi
-
 # install vivaldi
 if ! command -v vivaldi &>/dev/null; then
 	echo -e "\n${GREEN}Installing Vivaldi...${NC}"
