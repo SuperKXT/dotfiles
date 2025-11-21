@@ -50,3 +50,4 @@ libstdc++6
 libunwind8
 zlib1g
 software-properties-common
+gnome-boxes
