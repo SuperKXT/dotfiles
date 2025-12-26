@@ -45,3 +45,13 @@ if ! command -v watchman &>/dev/null; then
 	rm ./watchman.deb
 	sudo bash -c 'echo { \"min_acceptable_nice_value\": 8 } > /etc/watchman.json'
 fi
+
+# Installing scrcpy
+if ! command -v scrcpy &>/dev/null; then
+	echo
+	echo -e "\n${GREEN}Installing scrcpy...${NC}"
+	git clone https://github.com/Genymobile/scrcpy
+	cd scrcpy
+	./install_release.sh
+	rm -rf ./scrcpy
+fi
