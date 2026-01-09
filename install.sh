@@ -99,12 +99,6 @@ if ! command -v remmina &>/dev/null; then
 
 fi
 
-#install postman
-if ! command -v postman &>/dev/null; then
-	echo -e "\n${GREEN}Installing Postman...${NC}"
-	curl https://gist.githubusercontent.com/SanderTheDragon/1331397932abaa1d6fbbf63baed5f043/raw/postman-deb.sh | sh
-fi
-
 # install obs studio
 if ! command -v obs &>/dev/null; then
 	echo -e "\n${GREEN}Installing OBS Studio...${NC}"
