@@ -139,6 +139,23 @@ if ! command -v anydesk &>/dev/null; then
 	fi
 fi
 
+# install RustDesk
+if ! command -v rustdesk &>/dev/null; then
+	echo
+	read -p "Do you want to install RustDesk (y/n)? " -n 1 -r
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		echo -e "\n${GREEN}Installing RustDesk...${NC}"
+		repo="rustdesk/rustdesk"
+		tag="$(latest_git_release "$repo")"
+		echo "Latest tag: ${tag}"
+		version="${tag:1}"
+		wget -q --show-progress "https://github.com/${repo}/releases/download/${tag}/rustdesk-${tag}-x86_64.deb" -O rustdesk.deb
+		sudo apt -qq install -y ./rustdesk.deb
+		rm ./rustdesk.deb
+	fi
+fi
+
 # install proton vpn
 if ! command -v protonvpn-app &>/dev/null; then
 	echo -e "\n${GREEN}Installing Proton VPN...${NC}"
