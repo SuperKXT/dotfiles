@@ -1,7 +1,5 @@
 build-essential
 direnv
-flameshot
-httpie
 bat
 tilix
 gcc
@@ -10,17 +8,14 @@ libssl-dev
 libreadline-dev
 zlib1g-dev
 libsqlite3-dev
-gnome-tweaks
 python-is-python3
 ffmpeg
 libmagickwand-dev
-gnome-shell-extension-appindicator
 gir1.2-appindicator3-0.1
 jq
 libyaml-dev
 xclip
 neofetch
-blueman
 traceroute
 vlc
 gnupg
@@ -31,7 +26,7 @@ adb
 openjdk-17-jdk
 libsdl2-2.0-0
 libc6:i386
-libncurses5:i386
+libncurses6
 libstdc++6:i386
 lib32z1
 libbz2-1.0:i386
@@ -53,7 +48,6 @@ ca-certificates
 libc6
 libgcc-s1
 libgssapi-krb5-2
-libicu70
 liblttng-ust1
 libssl3
 libstdc++6
@@ -61,3 +55,5 @@ libunwind8
 zlib1g
 software-properties-common
 gnome-boxes
+gnome-keyring
+libsecret-1-0

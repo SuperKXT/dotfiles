@@ -30,12 +30,10 @@ type -p xargs >/dev/null || sudo apt install xargs -y
 echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
 xargs sudo apt -qq install -y <lists/apt-packages.txt
 
-# Install AppImageLauncher
-if ! command -v appimagelauncher &>/dev/null; then
-	echo -e "\n${GREEN}Installing AppImageLauncher...${NC}"
-	sudo add-apt-repository -y ppa:appimagelauncher-team/stable
-	sudo apt -qq update
-	sudo apt -qq install -y appimagelauncher
+# Install gear-lever (AppImage manager)
+if ! flatpak info it.mijorus.gearlever &>/dev/null 2>&1; then
+	echo -e "\n${GREEN}Installing gear-lever...${NC}"
+	flatpak install -y flathub it.mijorus.gearlever
 fi
 
 # Install or update nvm
@@ -96,7 +94,6 @@ if ! command -v remmina &>/dev/null; then
 	sudo apt-add-repository ppa:remmina-ppa-team/remmina-next
 	sudo apt update
 	sudo apt install remmina remmina-plugin-rdp remmina-plugin-secret
-
 fi
 
 # install obs studio
@@ -169,7 +166,7 @@ fi
 # Install Dropbox
 if ! command -v dropbox &>/dev/null; then
 	echo -e "\n${GREEN}Installing Dropbox...${NC}"
-	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb" -O dropbox.deb
+	wget -q --show-progress "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2026.01.15_amd64.deb" -O dropbox.deb
 	sudo apt -qq install -y ./dropbox.deb
 	rm ./dropbox.deb
 fi
@@ -207,11 +204,12 @@ fi
 if ! command -v spotify-client &>/dev/null; then
 	echo
 	echo -e "\n${GREEN}Installing Spotify...${NC}"
-	curl -sS https://download.spotify.com/debian/pubkey_C85668DF69375001.gpg | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
-	echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+	curl -sS https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+	echo "deb https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
 	sudo apt -qq update
 	sudo apt -qq install -y spotify-client
 fi
+
 
 # install onefetch
 if ! command -v onefetch &>/dev/null; then
@@ -231,17 +229,6 @@ if ! command -v wine &>/dev/null; then
 	sudo wget -NP /etc/apt/sources.list.d/ https://dl.winehq.org/wine-builds/ubuntu/dists/jammy/winehq-jammy.sources
 	sudo apt -qq update
 	sudo apt -qq install --install-recommends winehq-stable
-fi
-
-# install mono
-if ! command -v mono &>/dev/null; then
-	echo
-	echo -e "\n${GREEN}Installing Mono...${NC}"
-	sudo apt install ca-certificates gnupg
-	sudo gpg --homedir /tmp --no-default-keyring --keyring /usr/share/keyrings/mono-official-archive-keyring.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
-	echo "deb [signed-by=/usr/share/keyrings/mono-official-archive-keyring.gpg] https://download.mono-project.com/repo/ubuntu stable-focal main" | sudo tee /etc/apt/sources.list.d/mono-official-stable.list
-	sudo apt -qq update
-	sudo apt -qq install mono-devel
 fi
 
 # install MS Teams
