@@ -1,0 +1,34 @@
+{
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "F7",
+    ): System(VolumeLower),
+    (
+        modifiers: [],
+        key: "XF86AudioRaiseVolume",
+    ): Disable,
+    (
+        modifiers: [],
+        key: "XF86AudioLowerVolume",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "F8",
+    ): System(VolumeRaise),
+    (
+        modifiers: [
+            Ctrl,
+        ],
+        key: "c",
+    ): Disable,
+    (
+        modifiers: [
+            Ctrl,
+        ],
+        key: "F7",
+    ): Disable,
+}
