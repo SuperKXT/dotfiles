@@ -16,9 +16,9 @@ version="${tag:1}"
 url_prefix="https://github.com/$repo/releases/download"
 name_prefix="SuperTTC-SGr-Iosevka"
 if [ -n "$version" ]; then
-	wget -q --show-progress "$url_prefix/$tag/${name_prefix}FixedSlab-$version.zip" -O slab.zip &&
-		wget -q --show-progress "$url_prefix/$tag/${name_prefix}TermSlab-$version.zip" -O term.zip &&
-		unzip slab.zip -d "$folder" "*.ttc" &&
-		unzip term.zip -d "$folder" "*.ttc" &&
-		rm slab.zip term.zip
+	wget -q --show-progress "$url_prefix/$tag/${name_prefix}FixedSlab-$version.zip" -O slab.zip
+	wget -q --show-progress "$url_prefix/$tag/${name_prefix}TermSlab-$version.zip" -O term.zip
+	unzip slab.zip -d "$folder" "*.ttc"
+	unzip term.zip -d "$folder" "*.ttc"
+	rm -f slab.zip term.zip
 fi

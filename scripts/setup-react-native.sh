@@ -51,7 +51,6 @@ if ! command -v scrcpy &>/dev/null; then
 	echo
 	echo -e "\n${GREEN}Installing scrcpy...${NC}"
 	git clone https://github.com/Genymobile/scrcpy
-	cd scrcpy
-	./install_release.sh
+	(cd scrcpy && ./install_release.sh)
 	rm -rf ./scrcpy
 fi
