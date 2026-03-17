@@ -1,0 +1,11 @@
+(
+    name: "Code",
+    description: "Syntax: code:<repo-name>\nExample: code:my-project",
+    query: (
+        regex: "^code:.*",
+        help: "code:",
+        isolate: true,
+    ),
+    bin: (path: "code-plugin"),
+    icon: Name("com.visualstudio.code"),
+)

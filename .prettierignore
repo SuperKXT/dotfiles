@@ -1,0 +1,9 @@
+# Ignore artifacts:
+build
+coverage
+node_modules
+dist
+build
+pnpm-lock.yaml
+tsconfig.vitest-temp.json
+*.ron

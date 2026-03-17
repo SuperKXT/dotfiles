@@ -1,0 +1,8 @@
+{
+  "name": "dotfiles",
+  "type": "module",
+  "devDependencies": {
+    "@types/node": "latest",
+    "prettier": "^3.8.1"
+  }
+}

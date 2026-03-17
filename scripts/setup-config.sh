@@ -15,6 +15,7 @@ sudo usermod -a -G dialout "$USER"
 echo -e "\n${GREEN}Setting Up Pop Launcher Plugins...${NC}"
 mkdir -p ~/.local/share/pop-launcher/plugins/web
 echo '( rules: [ ( matches: ["www"], queries: [(name: "Open Website", query: "http://")] ), ] )' >~/.local/share/pop-launcher/plugins/web/config.ron
+ln -sfT ~/dotfiles/config/pop-launcher/code-plugin ~/.local/share/pop-launcher/plugins/code-plugin
 
 echo -e "\n${GREEN}Setting Up Tela Icon Theme...${NC}"
 git clone https://github.com/vinceliuice/Tela-icon-theme ~/tela
