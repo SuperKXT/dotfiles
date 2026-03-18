@@ -38,9 +38,6 @@ echo -e "\n${GREEN}Setting Up Cosmic Config...${NC}"
 # rm -f  ~/dotfiles/config/cosmic/com.system76.CosmicSettings.Wallpaper/v1/recent-folders
 cp -rT "$config_folder"/cosmic/ ~/.config/cosmic/
 
-echo -e "\n${GREEN}Setting Tilix Config...${NC}"
-dconf load /com/gexperts/Tilix/ <"$config_folder"/tilix.dconf
-
 echo -e "\n${GREEN}Setting Up UFW firewall...${NC}"
 sudo ufw enable
 sudo ufw allow ssh

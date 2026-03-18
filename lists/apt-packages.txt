@@ -1,7 +1,6 @@
 build-essential
 direnv
 bat
-tilix
 gcc
 make
 libssl-dev
