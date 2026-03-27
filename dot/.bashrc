@@ -168,6 +168,34 @@ nvm-update() {
 	fi
 }
 
+# Connect to a named alias via RustDesk
+rdp() {
+    local name="$1"
+    local peer_dir="$HOME/.config/rustdesk/peers"
+    local peer_file peer_id
+
+    peer_file=$(grep -rl "alias = '$name'" "$peer_dir" 2>/dev/null | head -1)
+    if [[ -z "$peer_file" ]]; then
+        echo "No peer found with alias: $name"
+        return 1
+    fi
+
+    peer_id=$(basename "$peer_file" .toml)
+    rustdesk --connect "$peer_id"
+}
+
+_rdp_complete() {
+    local peer_dir="$HOME/.config/rustdesk/peers"
+    local aliases
+
+    aliases=$(grep -rh "alias = " "$peer_dir" 2>/dev/null \
+        | sed "s/alias = '//;s/'//")
+
+    COMPREPLY=($(compgen -W "$aliases" -- "${COMP_WORDS[COMP_CWORD]}"))
+}
+
+complete -F _rdp_complete rdp
+
 ##############################################################################
 # 04. Setup Environments                                                     #
 ##############################################################################
