@@ -181,7 +181,7 @@ rdp() {
     fi
 
     peer_id=$(basename "$peer_file" .toml)
-    rustdesk --connect "$peer_id"
+    rustdesk --connect "$peer_id" >/dev/null 2>&1 & disown
 }
 
 _rdp_complete() {
