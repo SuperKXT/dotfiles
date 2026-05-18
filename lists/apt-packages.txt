@@ -8,6 +8,7 @@ libreadline-dev
 zlib1g-dev
 libsqlite3-dev
 python-is-python3
+python3-pip
 ffmpeg
 libmagickwand-dev
 gir1.2-appindicator3-0.1
