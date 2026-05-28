@@ -8,7 +8,7 @@ GREEN='\e[32m'
 NC='\e[0m'
 
 # Install Android Studio
-if ! command -v /opt/android-studio-2023.3.1/android-studio/bin/studio.sh &>/dev/null; then
+if ! dpkg -s android-studio &>/dev/null; then
 	echo
 	echo -e "\n${GREEN}Downloading Android Studio...${NC}"
 	sudo add-apt-repository -y ppa:maarten-fonville/android-studio
@@ -25,8 +25,8 @@ egrep -c '(vmx|svm)' /proc/cpuinfo
 sudo kvm-ok
 sudo apt -qq install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
 sudo apt -qq install -y virt-manager
-udo adduser $(id-un) libvirt
-sudo adduser $(id-un) kvm
+sudo adduser $(id -un) libvirt
+sudo adduser $(id -un) kvm
 virsh list --all
 sudo apt -qq install -y virt-manager
 
@@ -40,17 +40,21 @@ echo -e "\n${GREEN}Complete the setup by following: https://docs.expo.dev/get-st
 if ! command -v watchman &>/dev/null; then
 	echo
 	echo -e "\n${GREEN}Installing Watchman...${NC}"
-	wget -q --show-progress https://github.com/facebook/watchman/releases/download/v2023.10.09.00/watchman_ubuntu22.04_v2023.10.09.00.deb -O ./watchman.deb
-	sudo apt -qq install -y ./watchman.deb
-	rm ./watchman.deb
-	sudo bash -c 'echo { \"min_acceptable_nice_value\": 8 } > /etc/watchman.json'
+	tag=$(curl -fsSL "https://api.github.com/repos/facebook/watchman/releases?per_page=20" |
+		jq -r 'map(select(.assets[] | .name | test("linux\\.zip"))) | first | .tag_name')
+	wget -q --show-progress "https://github.com/facebook/watchman/releases/download/${tag}/watchman-${tag}-linux.zip" -O ./watchman.zip
+	unzip -q ./watchman.zip -d ./watchman-extracted
+	watchman_dir=$(find ./watchman-extracted -mindepth 1 -maxdepth 1 -type d | head -1)
+	sudo cp "${watchman_dir}/bin/watchman" /usr/local/bin/watchman
+	sudo cp -r "${watchman_dir}/lib/." /usr/local/lib/
+	sudo ldconfig
+	echo '{ "min_acceptable_nice_value": 8 }' | sudo tee /etc/watchman.json > /dev/null
+	rm -rf ./watchman.zip ./watchman-extracted
 fi
 
 # Installing scrcpy
 if ! command -v scrcpy &>/dev/null; then
 	echo
 	echo -e "\n${GREEN}Installing scrcpy...${NC}"
-	git clone https://github.com/Genymobile/scrcpy
-	(cd scrcpy && ./install_release.sh)
-	rm -rf ./scrcpy
+	sudo apt -qq install -y scrcpy
 fi

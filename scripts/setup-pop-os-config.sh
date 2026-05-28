@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 #################
-#  Theme Setup  #
+#  Pop OS Specific Setup  #
 #################
 
 GREEN='\e[32m'
@@ -37,28 +37,3 @@ echo -e "\n${GREEN}Setting Up Cosmic Config...${NC}"
 # rm -rf ~/dotfiles/config/cosmic/com.system76.CosmicSettingsDaemon
 # rm -f  ~/dotfiles/config/cosmic/com.system76.CosmicSettings.Wallpaper/v1/recent-folders
 cp -rT "$config_folder"/cosmic/ ~/.config/cosmic/
-
-echo -e "\n${GREEN}Setting Up UFW firewall...${NC}"
-sudo ufw enable
-sudo ufw allow ssh
-sudo ufw allow 3000:3050/tcp
-sudo ufw allow 4000:4020/tcp
-sudo ufw allow 5000:5020/tcp
-sudo ufw allow 8000:8010/tcp
-# Expo Go
-sudo ufw allow 8081/tcp
-
-# Update max number of allowed file watchers
-echo -e "\n${GREEN}Configuring SysCTL...${NC}"
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
-[ ! -f "$HOME/.ssh/config" ] &&
-	echo -e "\n${GREEN}Setting Up SSH config...${NC}" &&
-	ssh-keygen -t ed25519 -C "superkxt@outlook.com" -f ~/.ssh/id_github -N "" &&
-	eval "$(ssh-agent -s)" &&
-	ssh-add ~/.ssh/id_github &&
-	cp ~/dotfiles/config/.ssh/* ~/.ssh/ &&
-	echo -e "\n${GREEN}Authenticating gh cli with ssh key...${NC}" &&
-	gh auth login -p ssh -s admin:ssh_signing_key -w &&
-	echo -e "\n${GREEN}Adding SSH signing key...${NC}" &&
-	gh ssh-key add ~/.ssh/id_github.pub --type signing

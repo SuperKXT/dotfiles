@@ -20,59 +20,13 @@ if [ "$EUID" -eq 0 ]; then
 	exit
 fi
 
-# Check if curl is installed, if not install it
-type -p curl >/dev/null || sudo apt -qq install -y curl
-
-# Check if xargs is installed, if not install it
-type -p xargs >/dev/null || sudo apt -qq install -y xargs
-
-# Install apt packages
-echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
-xargs sudo apt -qq install -y <lists/apt-packages.txt
+# Run base install
+./install-wsl.sh
 
 # Install gear-lever (AppImage manager)
 if ! flatpak info it.mijorus.gearlever &>/dev/null 2>&1; then
 	echo -e "\n${GREEN}Installing gear-lever...${NC}"
 	flatpak install -y --noninteractive flathub it.mijorus.gearlever &>/dev/null
-fi
-
-# Install or update nvm
-./scripts/install-nvm.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# Install nvm node versions
-for version in lts/*; do
-	echo -e "\n${GREEN}Setting Up Node Version: $version...${NC}"
-	nvm install "$version" &>/dev/null
-	xargs npm install -g --silent <lists/npm-packages.txt
-	corepack enable &>/dev/null
-	corepack prepare yarn@stable --activate &>/dev/null
-	corepack prepare pnpm@latest --activate &>/dev/null
-done
-nvm alias lts/* default &>/dev/null
-nvm use default &>/dev/null
-
-# Install Deno
-if ! command -v deno &>/dev/null; then
-	echo -e "\n${GREEN}Installing Deno...${NC}"
-	curl -fsSL https://deno.land/x/install/install.sh | sh &>/dev/null
-	export DENO_INSTALL="/home/superkxt/.deno"
-	export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-
-# install gh cli
-if ! command -v gh &>/dev/null; then
-	echo -e "\n${GREEN}Installing GitHub CLI...${NC}"
-	curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg status=none
-	sudo chmod go+r /usr/share/keyrings/githubcli-archive-keyring.gpg
-	echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list >/dev/null
-	sudo apt -qq update &>/dev/null
-	sudo apt -qq install -y gh
-	gh extension install mislav/gh-license &>/dev/null
-	gh auth login -w -s admin:public_key
 fi
 
 # install vs code
@@ -183,15 +137,6 @@ if ! command -v koodo-reader &>/dev/null; then
 	rm ./koodo.deb
 fi
 
-# intall ngrok
-if ! command -v ngrok &>/dev/nulll; then
-	echo -e "\n${GREEN}Installing ngrok...${NC}"
-	curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null
-	echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | sudo tee /etc/apt/sources.list.d/ngrok.list >/dev/null
-	sudo apt -qq update &>/dev/null
-	sudo apt -qq install -y ngrok
-fi
-
 # intall qBitTorrent
 if ! command -v qbittorrent &>/dev/nulll; then
 	echo -e "\n${GREEN}Installing qBitTorrent...${NC}"
@@ -208,15 +153,6 @@ if ! command -v spotify-client &>/dev/null; then
 	echo "deb https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list >/dev/null
 	sudo apt -qq update &>/dev/null
 	sudo apt -qq install -y spotify-client
-fi
-
-
-# install onefetch
-if ! command -v onefetch &>/dev/null; then
-	echo -e "\n${GREEN}Installing onefetch...${NC}"
-	sudo add-apt-repository -y ppa:o2sh/onefetch &>/dev/null
-	sudo apt -qq update &>/dev/null
-	sudo apt -qq install -y onefetch
 fi
 
 # install wine
@@ -274,31 +210,12 @@ if ! flatpak info io.github.cosmic_utils.minimon-applet &>/dev/null; then
 	flatpak install -y --noninteractive io.github.cosmic_utils.minimon-applet &>/dev/null
 fi
 
-# Install Turso CLI
-curl -sSfL https://get.tur.so/install.sh | bash &>/dev/null
-
-# Setup React Native Dev Environment
-sudo chmod u+x scripts/setup-react-native.sh
-scripts/setup-react-native.sh
-
-# Setup Docker
-sudo chmod u+x scripts/install-docker.sh
-scripts/install-docker.sh
-
-# Setup Themes
-sudo chmod u+x scripts/setup-config.sh
-scripts/setup-config.sh
+# Setup PopOs specific config
+sudo chmod u+x scripts/setup-pop-os-config.sh
+scripts/setup-pop-os-config.sh
 
 # Setup Fonts
 sudo chmod u+x scripts/install-fonts.sh
 scripts/install-fonts.sh
-
-# Setup Dotfiles
-echo -e "\n${GREEN}Creating symlinks for dotfiles...${NC}"
-cp -rsTvf ~/dotfiles/dot ~/
-
-# Install Completions
-sudo chmod u+x scripts/install-completions.sh
-scripts/install-completions.sh
 
 source ~/.bashrc
