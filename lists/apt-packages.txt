@@ -58,3 +58,4 @@ gnome-keyring
 libsecret-1-0
 libxkbcommon-dev
 just
+net-tools
