@@ -73,6 +73,8 @@ if [[ -z "$WSL_DISTRO_NAME" ]]; then
 	sudo ufw allow 8000:8010/tcp
 	# Expo Go
 	sudo ufw allow 8081/tcp
+	# Astro
+	sudo ufw allow 4321/tcp
 fi
 
 # Update max number of allowed file watchers
