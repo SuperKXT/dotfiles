@@ -1,6 +1,6 @@
 (
     chart_visible: false,
-    label_visible: true,
+    label_visible: false,
     chart: Line,
     colors: (
         ring: (
