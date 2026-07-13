@@ -9,9 +9,6 @@
 GREEN='\e[32m'
 NC='\e[0m'
 
-# Fix date & time if incorrect
-sudo hwclock -s
-
 # shellcheck source=scripts/latest-git-release.sh
 source ~/dotfiles/scripts/latest-git-release.sh
 

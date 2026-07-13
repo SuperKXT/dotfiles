@@ -36,6 +36,9 @@ sudo apt -qq update &>/dev/null
 echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
 xargs sudo apt -qq install -y <lists/apt-packages.txt
 
+# Fix date & time if incorrect
+sudo hwclock -s
+
 # Install or update nvm
 ./scripts/install-nvm.sh
 
