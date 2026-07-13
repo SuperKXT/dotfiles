@@ -110,11 +110,12 @@ fi
 # install proton vpn
 if ! command -v protonvpn-app &>/dev/null; then
 	echo -e "\n${GREEN}Installing Proton VPN...${NC}"
-	wget -q https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb -O proton_repo.deb
-	sudo dpkg -i ./proton_repo.deb &>/dev/null
-	rm ./proton_repo.deb
-	sudo apt -qq update &>/dev/null
-	sudo apt -qq install -y proton-vpn-gnome-desktop
+	if curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --user-agent "Mozilla/5.0" -o proton_repo.deb https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb; then
+		sudo apt -qq install -y ./proton_repo.deb
+		rm ./proton_repo.deb
+		sudo apt -qq update &>/dev/null
+		sudo apt -qq install -y proton-vpn-gnome-desktop
+	fi
 fi
 
 # Install Dropbox
@@ -138,7 +139,7 @@ if ! command -v koodo-reader &>/dev/null; then
 fi
 
 # intall qBitTorrent
-if ! command -v qbittorrent &>/dev/nulll; then
+if ! command -v qbittorrent &>/dev/null; then
 	echo -e "\n${GREEN}Installing qBitTorrent...${NC}"
 	sudo add-apt-repository -y ppa:qbittorrent-team/qbittorrent-stable &>/dev/null
 	sudo apt -qq update &>/dev/null
