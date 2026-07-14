@@ -28,8 +28,6 @@ rm -rf ~/tela
 echo -e "\n${GREEN}Setting Up Cosmic Config...${NC}"
 # ! Use the following commands to update the cosmic config in the repo
 # cp -rT ~/.config/cosmic/ ~/dotfiles/config/cosmic/
-# rm -rf ~/dotfiles/config/cosmic/com.system76.CosmicTheme.Light
-# rm -rf ~/dotfiles/config/cosmic/com.system76.CosmicTheme.Dark
 # rm -rf ~/dotfiles/config/cosmic/com.system76.CosmicPortal
 # rm -rf ~/dotfiles/config/cosmic/com.system76.CosmicStore
 # rm -rf ~/dotfiles/config/cosmic/com.system76.CosmicPlayer
