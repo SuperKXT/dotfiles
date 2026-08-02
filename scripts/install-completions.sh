@@ -41,7 +41,7 @@ echo -e "\n${GREEN}Adding Gitub CLI Completions...${NC}"
 gh completion -s bash >$DIR/gh
 
 echo -e "\n${GREEN}Adding ngrok Completions...${NC}"
-ngrok completion >$DIR/npm
+ngrok completion >$DIR/ngrok
 
 echo -e "\n${GREEN}Adding PNPM Completions...${NC}"
 pnpm completion bash >$DIR/pnpm

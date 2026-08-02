@@ -36,6 +36,9 @@ sudo apt -qq update &>/dev/null
 echo -e "\n${GREEN}Setting Up APT Packages...${NC}"
 xargs sudo apt -qq install -y <lists/apt-packages.txt
 
+# Fix date & time if incorrect
+sudo hwclock -s
+
 # Install or update nvm
 ./scripts/install-nvm.sh
 
@@ -73,6 +76,8 @@ if [[ -z "$WSL_DISTRO_NAME" ]]; then
 	sudo ufw allow 8000:8010/tcp
 	# Expo Go
 	sudo ufw allow 8081/tcp
+	# Astro
+	sudo ufw allow 4321/tcp
 fi
 
 # Update max number of allowed file watchers
