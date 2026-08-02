@@ -76,6 +76,22 @@ if ! command -v google-chrome &>/dev/null; then
 	rm ./chrome.deb
 fi
 
+# Chrome registers itself as the default browser on install, restore Firefox
+firefox_bin="$(command -v firefox)"
+if [ -n "$firefox_bin" ]; then
+	echo -e "\n${GREEN}Setting Firefox as the default browser...${NC}"
+	for alt in x-www-browser gnome-www-browser; do
+		if update-alternatives --list "$alt" 2>/dev/null | grep -qx "$firefox_bin"; then
+			sudo update-alternatives --set "$alt" "$firefox_bin"
+		fi
+	done
+	# Firefox ships under a different desktop file name per packaging (deb/snap/esr/flatpak)
+	for desktop in firefox.desktop firefox_firefox.desktop firefox-esr.desktop org.mozilla.firefox.desktop; do
+		xdg-settings set default-web-browser "$desktop" &>/dev/null && break
+	done
+	echo "Default browser: $(xdg-settings get default-web-browser)"
+fi
+
 # install anydesk
 if ! command -v anydesk &>/dev/null; then
 	echo
