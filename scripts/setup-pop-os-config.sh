@@ -12,6 +12,16 @@ config_folder=~/dotfiles/config
 echo -e "\n${GREEN}Allowing superkxt to use the serial port (restart required)...${NC}"
 sudo usermod -a -G dialout "$USER"
 
+# Chrome registers itself as the default browser on install, restore Firefox.
+mimeapps="$HOME/.config/cosmic-mimeapps.list"
+if [ -f "$mimeapps" ] && command -v firefox &>/dev/null; then
+	echo -e "\n${GREEN}Setting Firefox as the default browser...${NC}"
+	for mime in text/html application/xhtml+xml x-scheme-handler/http x-scheme-handler/https; do
+		sed -i "s|^${mime}=.*|${mime}=firefox.desktop|" "$mimeapps"
+	done
+	echo "Default browser: $(xdg-mime query default x-scheme-handler/http)"
+fi
+
 echo -e "\n${GREEN}Setting Up Pop Launcher Plugins...${NC}"
 mkdir -p ~/.local/share/pop-launcher/plugins/web
 echo '( rules: [ ( matches: ["www"], queries: [(name: "Open Website", query: "http://")] ), ] )' >~/.local/share/pop-launcher/plugins/web/config.ron
