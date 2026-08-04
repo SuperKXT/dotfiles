@@ -19,6 +19,7 @@ if [ -f "$mimeapps" ] && command -v firefox &>/dev/null; then
 	for mime in text/html application/xhtml+xml x-scheme-handler/http x-scheme-handler/https; do
 		sed -i "s|^${mime}=.*|${mime}=firefox.desktop|" "$mimeapps"
 	done
+	xdg-settings set default-web-browser firefox.desktop
 	echo "Default browser: $(xdg-mime query default x-scheme-handler/http)"
 fi
 
