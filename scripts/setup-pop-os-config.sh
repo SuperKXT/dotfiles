@@ -36,6 +36,9 @@ git clone https://github.com/vinceliuice/Tela-icon-theme ~/tela
 )
 rm -rf ~/tela
 
+echo -e "\n${GREEN}Downloading Wallpaper...${NC}"
+curl -L -o ~/wavey-rainbow.jpg "https://www.dropbox.com/scl/fi/iky4tqj8hpsm7n4s5aqzx/wavey-rainbow.jpg?rlkey=ok7qhdy6x843cchcbie7ovo0v&st=i8sqbtxa&dl=1"
+
 echo -e "\n${GREEN}Setting Up Cosmic Config...${NC}"
 # ! Use the following commands to update the cosmic config in the repo
 # cp -rT ~/.config/cosmic/ ~/dotfiles/config/cosmic/

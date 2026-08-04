@@ -1,6 +1,6 @@
 (
     output: "all",
-    source: Path("/home/superkxt/Dropbox/wallpapers/wavey-rainbow.jpg"),
+    source: Path("/home/superkxt/wavey-rainbow.jpg"),
     filter_by_theme: true,
     rotation_frequency: 300,
     filter_method: Lanczos,
