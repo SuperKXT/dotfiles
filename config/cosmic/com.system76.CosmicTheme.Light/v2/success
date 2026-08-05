@@ -8,7 +8,7 @@
     divider: "#FFFFFFFF",
     on: "#FFFFFFFF",
     disabled: "#185529FF",
-    on_disabled: "#8BAA94FF",
+    on_disabled: "#8CAA94FF",
     border: "#185529FF",
     disabled_border: "#18552980",
 )
