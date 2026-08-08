@@ -104,15 +104,10 @@ if ! command -v rustdesk &>/dev/null; then
 	fi
 fi
 
-# install proton vpn
-if ! command -v protonvpn-app &>/dev/null; then
+# install proton vpn (via flathub, since repo.protonvpn.com is blocked in Pakistan)
+if ! flatpak info com.protonvpn.www &>/dev/null 2>&1; then
 	echo -e "\n${GREEN}Installing Proton VPN...${NC}"
-	if curl -fsSL --retry 3 --retry-delay 2 --retry-all-errors --user-agent "Mozilla/5.0" -o proton_repo.deb https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb; then
-		sudo apt -qq install -y ./proton_repo.deb
-		rm ./proton_repo.deb
-		sudo apt -qq update &>/dev/null
-		sudo apt -qq install -y proton-vpn-gnome-desktop
-	fi
+	flatpak install -y --noninteractive flathub com.protonvpn.www &>/dev/null
 fi
 
 # Install Dropbox
