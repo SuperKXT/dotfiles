@@ -16,6 +16,30 @@ if ! dpkg -s android-studio &>/dev/null; then
 	sudo apt -qq install android-studio
 fi
 
+android_home="$HOME/Android/Sdk"
+ndk_version="25.1.8937393"
+
+# Install Android SDK
+if [ ! -d "${android_home}/cmdline-tools/latest" ]; then
+	echo
+	echo -e "\n${GREEN}Installing Android SDK...${NC}"
+	mkdir -p "${android_home}/cmdline-tools"
+	# Check https://developer.android.com/studio#command-tools for newer versions
+	wget -q --show-progress "https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip" -O ./cmdline-tools.zip
+	unzip -q ./cmdline-tools.zip -d "${android_home}/cmdline-tools"
+	mv "${android_home}/cmdline-tools/cmdline-tools" "${android_home}/cmdline-tools/latest"
+	rm ./cmdline-tools.zip
+
+	export ANDROID_HOME="${android_home}"
+	yes | "${android_home}/cmdline-tools/latest/bin/sdkmanager" --sdk_root="${android_home}" --licenses &>/dev/null
+	"${android_home}/cmdline-tools/latest/bin/sdkmanager" --sdk_root="${android_home}" \
+		"platform-tools" \
+		"platforms;android-36" \
+		"build-tools;36.0.0" \
+		"emulator" \
+		"ndk;${ndk_version}"
+fi
+
 # Setting up KVM
 # https://help.ubuntu.com/community/KVM/Installation
 
