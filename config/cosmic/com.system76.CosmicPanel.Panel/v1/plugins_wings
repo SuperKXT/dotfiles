@@ -2,6 +2,7 @@ Some(([
     "com.system76.CosmicAppletWorkspaces",
     "com.system76.CosmicPanelAppButton",
     "io.github.cosmic_utils.minimon-applet",
+    "io.github.k33wee.clippy-land",
 ], [
     "dev.cappsy.CosmicExtAppletDrives",
     "com.system76.CosmicAppletAudio",

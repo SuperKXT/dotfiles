@@ -3,12 +3,9 @@
         modifiers: [
             Super,
         ],
-        key: "F7",
-    ): System(VolumeLower),
-    (
-        modifiers: [],
-        key: "XF86AudioRaiseVolume",
-    ): Disable,
+        key: "v",
+        description: Some("Toggle ClippyLand"),
+    ): Spawn("cosmic-applet-clippy-land --toggle"),
     (
         modifiers: [],
         key: "XF86AudioLowerVolume",
@@ -23,12 +20,22 @@
         modifiers: [
             Ctrl,
         ],
-        key: "c",
+        key: "F7",
+    ): Disable,
+    (
+        modifiers: [
+            Super,
+        ],
+        key: "F7",
+    ): System(VolumeLower),
+    (
+        modifiers: [],
+        key: "XF86AudioRaiseVolume",
     ): Disable,
     (
         modifiers: [
             Ctrl,
         ],
-        key: "F7",
+        key: "c",
     ): Disable,
 }

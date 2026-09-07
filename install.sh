@@ -180,12 +180,17 @@ if ! flatpak info dev.cappsy.CosmicExtAppletDrives &>/dev/null; then
 	flatpak install -y --noninteractive dev.cappsy.CosmicExtAppletDrives &>/dev/null
 fi
 
-# Install Clipboard Manager (Flatpak version broken due to Wayland data control sandboxing)
-# TODO: Add back in when issues with the applet are fixed: https://github.com/cosmic-utils/clipboard-manager/issues/171
-# if ! flatpak info io.github.cosmic_utils.cosmic-ext-applet-clipboard-manager &>/dev/null; then
-# 	echo -e "\n${GREEN}Installing Clipboard Manager Cosmic Applet...${NC}"
-# 	flatpak install -y --noninteractive io.github.cosmic_utils.cosmic-ext-applet-clipboard-manager &>/dev/null
-# fi
+# Install Clippy Land Clipboard Manager Cosmic Applet
+if ! dpkg -s cosmic-applet-clippy-land &>/dev/null; then
+	echo -e "\n${GREEN}Installing Clippy Land Cosmic Applet...${NC}"
+	repo="k33wee/clippy-land"
+	tag="$(latest_git_release "$repo")"
+	echo "Latest tag: ${tag}"
+	version="${tag:1}"
+	wget -q "https://github.com/${repo}/releases/download/${tag}/cosmic-applet-clippy-land_${version}_amd64.deb" -O clippy-land.deb
+	sudo apt -qq install -y ./clippy-land.deb
+	rm ./clippy-land.deb
+fi
 
 # Install Minimon Cosmic Applet
 if ! flatpak info io.github.cosmic_utils.minimon-applet &>/dev/null; then
