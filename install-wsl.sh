@@ -114,14 +114,6 @@ if [ ! -f "$HOME/.ssh/config" ]; then
 fi
 
 
-# Install Deno
-if ! command -v deno &>/dev/null; then
-	echo -e "\n${GREEN}Installing Deno...${NC}"
-	curl -fsSL https://deno.land/x/install/install.sh | sh &>/dev/null
-	export DENO_INSTALL="/home/superkxt/.deno"
-	export PATH="$DENO_INSTALL/bin:$PATH"
-fi
-
 # intall ngrok
 if ! command -v ngrok &>/dev/null; then
 	echo -e "\n${GREEN}Installing ngrok...${NC}"

@@ -34,9 +34,6 @@ curl --progress-bar https://raw.githubusercontent.com/nvm-sh/nvm/master/bash_com
 echo -e "\n${GREEN}Adding NPM Completions...${NC}"
 npm completion >$DIR/npm
 
-echo -e "\n${GREEN}Adding Deno Completions...${NC}"
-deno completions bash >$DIR/deno
-
 echo -e "\n${GREEN}Adding Gitub CLI Completions...${NC}"
 gh completion -s bash >$DIR/gh
 

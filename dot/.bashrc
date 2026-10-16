@@ -90,7 +90,6 @@ update() {
 	corepack enable pnpm
 	npm-check -gu
 	nvm use default
-	deno upgrade
 }
 
 # Make a directory and move into it
@@ -383,9 +382,6 @@ fi
 # pnpm tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/bash/__tabtab.bash ] && . ~/.config/tabtab/bash/__tabtab.bash || true
-
-export DENO_INSTALL="$HOME/.deno"
-export PATH="$DENO_INSTALL/bin:$PATH"
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 
