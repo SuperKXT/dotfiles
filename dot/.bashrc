@@ -85,11 +85,8 @@ update() {
 		sudo apt autoremove
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
-	nvm use lts/*
-	corepack prepare pnpm@latest --activate
-	corepack enable pnpm
-	npm-check -gu
-	nvm use default
+	pnpm self-update
+	pnpm update -g -Li
 }
 
 # Make a directory and move into it

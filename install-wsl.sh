@@ -48,12 +48,11 @@ export NVM_DIR="$HOME/.nvm"
 
 # Install nvm node versions
 for version in lts/*; do
-	echo -e "\n${GREEN}Setting Up Node Version: $version...${NC}"
+echo -e "\n${GREEN}Setting Up Node Version: $version...${NC}"z
 	nvm install "$version" &>/dev/null
-	xargs npm install -g --silent <lists/npm-packages.txt
-	corepack enable &>/dev/null
-	corepack prepare yarn@stable --activate &>/dev/null
-	corepack prepare pnpm@latest --activate &>/dev/null
+	curl -fsSL https://get.pnpm.io | sh -
+	source ~/.bashrc
+	xargs pnpm add -g -y --silent --dangerously-allow-all-builds <lists/npm-packages.txt
 done
 nvm alias lts/* default &>/dev/null
 nvm use default &>/dev/null
