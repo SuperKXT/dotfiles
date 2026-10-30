@@ -25,9 +25,6 @@ curl --progress-bar https://raw.githubusercontent.com/docker/compose/master/cont
 echo -e "\n${GREEN}Add Git Completions...${NC}"
 curl --progress-bar https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $DIR/git
 
-echo -e "\n${GREEN}Add Yarn Completions...${NC}"
-curl --progress-bar https://raw.githubusercontent.com/dsifford/yarn-completion/master/yarn-completion.bash -o $DIR/yarn
-
 echo -e "\n${GREEN}Adding NVM Completions...${NC}"
 curl --progress-bar https://raw.githubusercontent.com/nvm-sh/nvm/master/bash_completion -o $DIR/nvm
 
@@ -42,5 +39,3 @@ ngrok completion >$DIR/ngrok
 
 echo -e "\n${GREEN}Adding PNPM Completions...${NC}"
 pnpm completion bash >$DIR/pnpm
-
-pm2 completion install
