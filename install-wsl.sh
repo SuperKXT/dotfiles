@@ -46,22 +46,32 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
-# Install nvm node versions
-for version in lts/*; do
-echo -e "\n${GREEN}Setting Up Node Version: $version...${NC}"z
-	nvm install "$version" &>/dev/null
-	curl -fsSL https://get.pnpm.io | sh -
-	source ~/.bashrc
-	xargs pnpm add -g -y --silent --dangerously-allow-all-builds <lists/npm-packages.txt
-done
-nvm alias lts/* default &>/dev/null
+# Install node lts
+echo -e "\n${GREEN}Setting Up Node Version: lts/*...${NC}"
+nvm install 'lts/*' &>/dev/null
+nvm alias default 'lts/*' &>/dev/null
 nvm use default &>/dev/null
+
+# Install pnpm
+if ! command -v pnpm &>/dev/null; then
+	echo -e "\n${GREEN}Installing pnpm...${NC}"
+	curl -fsSL https://get.pnpm.io | sh - &>/dev/null
+fi
+export PNPM_HOME="$HOME/.local/share/pnpm"
+export PATH="$PNPM_HOME/bin:$PATH"
+
+# Install global packages
+echo -e "\n${GREEN}Setting Up Global Packages...${NC}"
+xargs pnpm add -g -y --silent \
+	--allow-build=dtrace-provider \
+	--allow-build=protobufjs \
+	<lists/npm-packages.txt
 
 # install claude code
 if ! command -v claude &>/dev/null; then
 	echo -e "\n${GREEN}Installing Claude Code...${NC}"
 	curl -fsSL https://claude.ai/install.sh | bash &>/dev/null
-	echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
+	export PATH="$HOME/.local/bin:$PATH"
 	claude auth login
 fi
 
