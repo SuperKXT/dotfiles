@@ -126,41 +126,34 @@ gimme() {
 
 # udpate nvm version
 nvm-update() {
-	echo
-	echo "Updating Node Version $1"
-	echo
-	local current
-	local remote
+	printf '\nUpdating Node Version %s\n\n' "$1"
+	local current remote versions
 	current="$(nvm version "$1")"
+	remote="$(nvm version-remote "$1")"
+	if [ "$remote" = "N/A" ]; then
+		echo "Version $1 Not Found On Remote"
+		return 1
+	fi
+
 	if [ "$current" = "N/A" ]; then
 		echo "Version $1 Not Found!"
-		versions="$(nvm ls --no-alias --no-colors | xargs)"
-		versions=${versions//->/}
-		versions=${versions// v/v}
-		versions=${versions//\*/}
-		# ! Don't fix this [shellcheck] warning!
-		versions=($versions)
-		PS3="Select A Version To Use As $1: "
+		mapfile -t versions < <(nvm ls --no-alias --no-colors | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+')
+		if [ ${#versions[@]} -eq 0 ]; then
+			nvm install "$1" --latest-npm
+			return
+		fi
+		PS3="Select A Version To Replace With $1: "
 		select current in "${versions[@]}"; do
-			if [ -n "$current" ]; then
-				break
-			fi
+			[ -n "$current" ] && break
 		done
 		echo
 	fi
 
-	remote="$(nvm version-remote "$1")"
-	if [ "$remote" = "N/A" ]; then
-		echo "Version $1 Not Found On Remote"
-	elif [ "$current" = "$remote" ]; then
+	if [ "$current" = "$remote" ]; then
 		echo "Version $1 Is Up To Date"
 	else
 		echo "Updating $1 From $current To $remote"
-		nvm install "$1" --latest-npm --reinstall-packages-from="$current"
-		nvm use "$current"
-		npm ls -gp --depth=0 | awk -F/ '/node_modules/ && !/\/npm$/ {print $NF}' | xargs npm -g rm
-		nvm use "$1"
-		nvm uninstall "$current"
+		nvm install "$1" --latest-npm && nvm uninstall "$current"
 	fi
 }
 
