@@ -17,6 +17,42 @@ if [ "$EUID" -eq 0 ]; then
 	exit
 fi
 
+# Install a portable fastframe app (ZapFast, Spotifast) from its release tarball.
+# Usage `install_portable_app ":user/:repo" ":binary-name"`
+# The tarball's `*-portable.txt` marker must sit beside the binary, or the app's
+# in-app updater refuses to run. The .deb and .flatpak releases don't auto-update.
+install_portable_app() {
+	local repo="$1" name="$2"
+	local bin="$HOME/.local/bin/$name"
+	local tag
+	tag="$(latest_git_release "$repo")"
+	echo "Latest tag: ${tag}"
+	[ -n "$tag" ] || return 1
+
+	local archive="${name}-${tag}-x86_64-unknown-linux-gnu"
+	local url="https://github.com/${repo}/releases/download/${tag}"
+	local dir
+	dir="$(mktemp -d)"
+	wget -q "${url}/${archive}.tar.gz" -O "${dir}/${archive}.tar.gz" &&
+		wget -q "${url}/checksums.txt" -O "${dir}/checksums.txt" &&
+		(cd "$dir" && grep " ${archive}.tar.gz\$" checksums.txt | sha256sum -c --quiet -) &&
+		tar xzf "${dir}/${archive}.tar.gz" -C "$dir" || {
+		echo "Failed to download or verify ${name}"
+		rm -rf "$dir"
+		return 1
+	}
+
+	local src="${dir}/${archive}"
+	install -Dm755 "${src}/${name}" "$bin"
+	install -Dm644 "${src}/${name}-portable.txt" "${bin}-portable.txt"
+	install -Dm644 "${src}/packaging/icons/${name}.svg" "$HOME/.local/share/icons/hicolor/scalable/apps/${name}.svg"
+	# The launcher may not have ~/.local/bin on its PATH, so use the full path
+	mkdir -p "$HOME/.local/share/applications"
+	sed -E "s|^Exec=${name}( \|\$)|Exec=\"${bin}\"\1|" "${src}/packaging/applications/${name}.desktop" >"$HOME/.local/share/applications/${name}.desktop"
+	update-desktop-database "$HOME/.local/share/applications" &>/dev/null
+	rm -rf "$dir"
+}
+
 # Run base install
 ./install-wsl.sh
 
@@ -146,6 +182,20 @@ if ! command -v spotify-client &>/dev/null; then
 	echo "deb https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list >/dev/null
 	sudo apt -qq update &>/dev/null
 	sudo apt -qq install -y spotify-client
+fi
+
+# install Spotifast
+if [ ! -x "$HOME/.local/bin/spotifast" ]; then
+	echo -e "\n${GREEN}Installing Spotifast...${NC}"
+	# Also claim spotify: links, which the Spotify client registers for above
+	install_portable_app "crmne/spotifast" "spotifast" &&
+		xdg-mime default spotifast.desktop x-scheme-handler/spotify
+fi
+
+# install ZapFast
+if [ ! -x "$HOME/.local/bin/zapfast" ]; then
+	echo -e "\n${GREEN}Installing ZapFast...${NC}"
+	install_portable_app "crmne/zapfast" "zapfast"
 fi
 
 # install wine
