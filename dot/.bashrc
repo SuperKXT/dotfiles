@@ -83,6 +83,8 @@ update() {
 	sudo apt update &&
 		sudo apt full-upgrade -y --allow-downgrades --fix-missing &&
 		sudo apt autoremove
+	flatpak update -y
+	flatpak uninstall --unused -y
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update
