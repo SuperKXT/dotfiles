@@ -158,6 +158,61 @@ fi
 # shellcheck source=scripts/install-bitwarden.sh
 source ~/dotfiles/scripts/install-bitwarden.sh
 
+# install rclone (apt's version is years behind)
+if ! command -v rclone &>/dev/null; then
+	echo -e "\n${GREEN}Installing rclone...${NC}"
+	repo="rclone/rclone"
+	tag="$(latest_git_release "$repo")"
+	echo "Latest tag: ${tag}"
+	wget -q "https://github.com/${repo}/releases/download/${tag}/rclone-${tag}-linux-amd64.deb" -O rclone.deb
+	sudo apt -qq install -y ./rclone.deb fuse3
+	rm ./rclone.deb
+fi
+
+# Sign in to Google Drive and mount it at ~/GoogleDrive on login
+gdrive_signed_in() {
+	rclone config show gdrive 2>/dev/null | grep -q '^token'
+}
+# Load the OAuth client from Bitwarden, since rclone's shared client_id is being retired.
+# Sets gdrive_client_id and gdrive_client_secret.
+gdrive_load_client() {
+	local item
+	[ -x "$bw_bin" ] || return 1
+	if [ "$("$bw_bin" status | jq -r .status)" = "locked" ]; then
+		BW_SESSION="$("$bw_bin" unlock --raw)"
+		export BW_SESSION
+	fi
+	[ -n "${BW_SESSION:-}" ] || return 1
+	"$bw_bin" sync &>/dev/null
+	item="$("$bw_bin" get item rclone-google-drive-client)"
+	gdrive_client_id="$(jq -r '.fields[]? | select(.name == "client_id").value' <<<"$item")"
+	gdrive_client_secret="$(jq -r '.fields[]? | select(.name == "client_secret").value' <<<"$item")"
+	[ -n "$gdrive_client_id" ] && [ -n "$gdrive_client_secret" ]
+}
+if command -v rclone &>/dev/null; then
+	if ! gdrive_signed_in; then
+		echo -e "\n${GREEN}Setting up Google Drive...${NC}"
+		echo "Fetching the Google OAuth client from Bitwarden"
+		if gdrive_load_client; then
+			echo "Sign in to your Google account in the browser window that opens"
+			rclone config create gdrive drive scope=drive client_id="$gdrive_client_id" client_secret="$gdrive_client_secret"
+		else
+			echo "Skipping Google Drive setup: couldn't read rclone-google-drive-client from Bitwarden"
+		fi
+	fi
+	if gdrive_signed_in; then
+		install -Dm644 ~/dotfiles/config/systemd/rclone-gdrive.service ~/.config/systemd/user/rclone-gdrive.service
+		systemctl --user daemon-reload
+		systemctl --user enable --now rclone-gdrive.service
+	fi
+fi
+
+# Nothing after this needs the vault
+if [ -n "${BW_SESSION:-}" ]; then
+	"$bw_bin" lock &>/dev/null
+	unset BW_SESSION
+fi
+
 # install koodo
 if ! command -v koodo-reader &>/dev/null; then
 	echo -e "\n${GREEN}Installing Koodo Reader...${NC}"
