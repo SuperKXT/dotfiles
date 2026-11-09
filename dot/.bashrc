@@ -85,6 +85,11 @@ update() {
 		sudo apt autoremove
 	flatpak update -y
 	flatpak uninstall --unused -y
+	if command -v rclone &>/dev/null; then
+		sudo rclone selfupdate --package deb
+		systemctl --user try-restart rclone-gdrive
+	fi
+	[ -x "$HOME/.local/bin/bw" ] && ~/dotfiles/scripts/install-bitwarden.sh --update-cli
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update
