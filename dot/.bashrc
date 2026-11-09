@@ -85,6 +85,7 @@ update() {
 		sudo apt autoremove
 	flatpak update -y
 	flatpak uninstall --unused -y
+	[ -x "$HOME/.local/bin/bw" ] && ~/dotfiles/scripts/install-bitwarden.sh --update-cli
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update

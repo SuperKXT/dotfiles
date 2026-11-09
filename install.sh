@@ -154,6 +154,10 @@ if ! command -v dropbox &>/dev/null; then
 	rm ./dropbox.deb
 fi
 
+# install Bitwarden and log in (sourced so the Google Drive setup can reuse the session)
+# shellcheck source=scripts/install-bitwarden.sh
+source ~/dotfiles/scripts/install-bitwarden.sh
+
 # install koodo
 if ! command -v koodo-reader &>/dev/null; then
 	echo -e "\n${GREEN}Installing Koodo Reader...${NC}"
