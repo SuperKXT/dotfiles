@@ -146,14 +146,6 @@ if ! flatpak info com.protonvpn.www &>/dev/null 2>&1; then
 	flatpak install -y --noninteractive flathub com.protonvpn.www &>/dev/null
 fi
 
-# Install Dropbox
-if ! command -v dropbox &>/dev/null; then
-	echo -e "\n${GREEN}Installing Dropbox...${NC}"
-	wget -q "https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2026.01.15_amd64.deb" -O dropbox.deb
-	sudo apt -qq install -y ./dropbox.deb
-	rm ./dropbox.deb
-fi
-
 # install Bitwarden and log in (sourced so the Google Drive setup can reuse the session)
 # shellcheck source=scripts/install-bitwarden.sh
 source ~/dotfiles/scripts/install-bitwarden.sh

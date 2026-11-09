@@ -5,5 +5,5 @@
     Music,
     Pictures,
     Videos,
-    Path("/home/superkxt/Dropbox"),
+    Path("/home/superkxt/GoogleDrive"),
 ]

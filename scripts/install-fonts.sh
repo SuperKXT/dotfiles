@@ -5,7 +5,7 @@ source ~/dotfiles/scripts/latest-git-release.sh
 
 folder="$HOME/.local/share/fonts"
 
-cp -r ~/Dropbox/fonts/* "$folder"
+rclone copy gdrive:fonts "$folder"
 
 # Install iosevka fonts
 # Term Slab for Terminal Use
