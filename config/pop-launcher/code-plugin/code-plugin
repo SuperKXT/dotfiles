@@ -1,2 +1,11 @@
 #!/bin/sh
+# The launcher doesn't source the shell profile, so nvm's node isn't on PATH.
+if ! command -v node >/dev/null 2>&1; then
+	NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+	if [ -s "$NVM_DIR/nvm.sh" ]; then
+		. "$NVM_DIR/nvm.sh" --no-use
+		node_path=$(nvm which default 2>/dev/null)
+		[ -x "$node_path" ] && PATH="$(dirname "$node_path"):$PATH"
+	fi
+fi
 exec node "$(dirname "$0")/code-plugin.mts"

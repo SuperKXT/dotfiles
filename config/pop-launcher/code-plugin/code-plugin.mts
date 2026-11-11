@@ -18,7 +18,7 @@ type PluginResponse =
 				name: string;
 				description: string;
 				icon: Icon;
-				category_icon: Icon;
+				category_icon: null;
 				window: null;
 			};
 	  }
@@ -133,7 +133,7 @@ function findRepos(query: string): Repo[] {
 		.map((entry) => entry.repo);
 }
 
-const icon: Icon = { Name: "com.visualstudio.code" };
+const icon: Icon = { Name: "vscode" };
 let repos: Repo[] = [];
 let showingHint = false;
 
@@ -154,7 +154,7 @@ createInterface({ input: process.stdin }).on("line", (line) => {
 					name: "Open Repo in VS Code",
 					description: "Type a repo name to search",
 					icon,
-					category_icon: icon,
+					category_icon: null,
 					window: null,
 				},
 			});
@@ -167,7 +167,7 @@ createInterface({ input: process.stdin }).on("line", (line) => {
 						name,
 						description: path,
 						icon,
-						category_icon: icon,
+						category_icon: null,
 						window: null,
 					},
 				});

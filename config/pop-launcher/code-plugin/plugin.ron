@@ -7,5 +7,4 @@
         isolate: true,
     ),
     bin: (path: "code-plugin"),
-    icon: Name("com.visualstudio.code"),
 )
