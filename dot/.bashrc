@@ -96,6 +96,7 @@ update() {
 	~/dotfiles/scripts/install-watchman.sh --update
 	~/dotfiles/scripts/install-portainer.sh --update
 	~/dotfiles/scripts/install-fonts.sh --update
+	~/dotfiles/scripts/install-tela-icons.sh --update
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update
