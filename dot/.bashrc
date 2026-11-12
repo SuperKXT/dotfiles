@@ -90,6 +90,14 @@ update() {
 		systemctl --user try-restart rclone-gdrive
 	fi
 	[ -x "$HOME/.local/bin/bw" ] && ~/dotfiles/scripts/install-bitwarden.sh --update-cli
+	~/dotfiles/scripts/install-github-deb.sh --update
+	command -v turso &>/dev/null && turso update
+	command -v gh &>/dev/null && gh extension upgrade --all
+	~/dotfiles/scripts/install-watchman.sh --update
+	~/dotfiles/scripts/install-portainer.sh --update
+	~/dotfiles/scripts/install-fonts.sh --update
+	~/dotfiles/scripts/install-tela-icons.sh --update
+	~/dotfiles/scripts/install-android-sdk.sh --update
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update
