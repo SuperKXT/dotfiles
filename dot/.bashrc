@@ -90,6 +90,7 @@ update() {
 		systemctl --user try-restart rclone-gdrive
 	fi
 	[ -x "$HOME/.local/bin/bw" ] && ~/dotfiles/scripts/install-bitwarden.sh --update-cli
+	~/dotfiles/scripts/install-github-deb.sh --update
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update

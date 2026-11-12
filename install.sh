@@ -123,22 +123,8 @@ if ! command -v anydesk &>/dev/null; then
 	fi
 fi
 
-# install RustDesk
-if ! command -v rustdesk &>/dev/null; then
-	echo
-	read -p "Do you want to install RustDesk (y/n)? " -n 1 -r
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		echo -e "\n${GREEN}Installing RustDesk...${NC}"
-		repo="rustdesk/rustdesk"
-		tag="$(latest_git_release "$repo")"
-		echo "Latest tag: ${tag}"
-		version="${tag:1}"
-		wget -q "https://github.com/${repo}/releases/download/${tag}/rustdesk-${tag}-x86_64.deb" -O rustdesk.deb
-		sudo apt -qq install -y ./rustdesk.deb
-		rm ./rustdesk.deb
-	fi
-fi
+# install apps released as GitHub .debs (RustDesk, Koodo Reader, Teams, Clippy Land)
+~/dotfiles/scripts/install-github-deb.sh
 
 # install proton vpn (via flathub, since repo.protonvpn.com is blocked in Pakistan)
 if ! flatpak info com.protonvpn.www &>/dev/null 2>&1; then
@@ -205,18 +191,6 @@ if [ -n "${BW_SESSION:-}" ]; then
 	unset BW_SESSION
 fi
 
-# install koodo
-if ! command -v koodo-reader &>/dev/null; then
-	echo -e "\n${GREEN}Installing Koodo Reader...${NC}"
-	repo="koodo-reader/koodo-reader"
-	tag="$(latest_git_release "$repo")"
-	echo "Latest tag: ${tag}"
-	version="${tag:1}"
-	wget -q "https://github.com/${repo}/releases/download/${tag}/Koodo-Reader-${version}-amd64.deb" -O koodo.deb
-	sudo apt -qq install -y ./koodo.deb
-	rm ./koodo.deb
-fi
-
 # intall qBitTorrent
 if ! command -v qbittorrent &>/dev/null; then
 	echo -e "\n${GREEN}Installing qBitTorrent...${NC}"
@@ -261,19 +235,6 @@ if ! command -v wine &>/dev/null; then
 	sudo apt -qq install -y --install-recommends winehq-stable
 fi
 
-# install MS Teams
-if ! command -v teams-for-linux &>/dev/null; then
-	echo
-	echo -e "\n${GREEN}Installing MS Teams...${NC}"
-	repo="IsmaelMartinez/teams-for-linux"
-	tag="$(latest_git_release "$repo")"
-	echo "Latest tag: ${tag}"
-	version="${tag:1}"
-	wget -q "https://github.com/${repo}/releases/download/${tag}/teams-for-linux_${version}_amd64.deb" -O teams.deb
-	sudo apt -qq install -y ./teams.deb
-	rm ./teams.deb
-fi
-
 # install Bruno
 if ! command -v bruno &>/dev/null; then
 	echo
@@ -299,18 +260,6 @@ if ! flatpak info dev.cappsy.CosmicExtAppletDrives &>/dev/null; then
 	echo -e "\n${GREEN}Installing Drives Cosmic Applet...${NC}"
 	flatpak remote-add --if-not-exists --user cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo &>/dev/null
 	flatpak install -y --noninteractive dev.cappsy.CosmicExtAppletDrives &>/dev/null
-fi
-
-# Install Clippy Land Clipboard Manager Cosmic Applet
-if ! dpkg -s cosmic-applet-clippy-land &>/dev/null; then
-	echo -e "\n${GREEN}Installing Clippy Land Cosmic Applet...${NC}"
-	repo="k33wee/clippy-land"
-	tag="$(latest_git_release "$repo")"
-	echo "Latest tag: ${tag}"
-	version="${tag:1}"
-	wget -q "https://github.com/${repo}/releases/download/${tag}/cosmic-applet-clippy-land_${version}_amd64.deb" -O clippy-land.deb
-	sudo apt -qq install -y ./clippy-land.deb
-	rm ./clippy-land.deb
 fi
 
 # Install Minimon Cosmic Applet
