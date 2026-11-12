@@ -94,6 +94,7 @@ update() {
 	command -v turso &>/dev/null && turso update
 	command -v gh &>/dev/null && gh extension upgrade --all
 	~/dotfiles/scripts/install-watchman.sh --update
+	~/dotfiles/scripts/install-portainer.sh --update
 	~/dotfiles/scripts/install-nvm.sh
 	nvm-update lts/*
 	pnpm self-update
