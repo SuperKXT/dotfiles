@@ -5,7 +5,7 @@
         ],
         key: "v",
         description: Some("Toggle ClippyLand"),
-    ): Spawn("cosmic-applet-clippy-land --toggle"),
+    ): Spawn("flatpak run io.github.k33wee.clippy-land --toggle"),
     (
         modifiers: [],
         key: "XF86AudioLowerVolume",

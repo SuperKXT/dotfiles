@@ -123,7 +123,7 @@ if ! command -v anydesk &>/dev/null; then
 	fi
 fi
 
-# install apps released as GitHub .debs (RustDesk, Koodo Reader, Teams, Clippy Land)
+# install apps released as GitHub .debs (RustDesk, Koodo Reader, Teams)
 ~/dotfiles/scripts/install-github-deb.sh
 
 # install proton vpn (via flathub, since repo.protonvpn.com is blocked in Pakistan)
@@ -267,6 +267,14 @@ if ! flatpak info io.github.cosmic_utils.minimon-applet &>/dev/null; then
 	echo -e "\n${GREEN}Installing Minimon Cosmic Applet...${NC}"
 	flatpak remote-add --if-not-exists --user cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo &>/dev/null
 	flatpak install -y --noninteractive io.github.cosmic_utils.minimon-applet &>/dev/null
+fi
+
+# Install Clippy Land Cosmic Applet (replacing the .deb, which can need a newer glibc than the system has)
+if ! flatpak info io.github.k33wee.clippy-land &>/dev/null; then
+	echo -e "\n${GREEN}Installing Clippy Land Cosmic Applet...${NC}"
+	dpkg -s cosmic-applet-clippy-land &>/dev/null && sudo apt -qq remove -y cosmic-applet-clippy-land
+	flatpak remote-add --if-not-exists --user cosmic https://apt.pop-os.org/cosmic/cosmic.flatpakrepo &>/dev/null
+	flatpak install -y --noninteractive io.github.k33wee.clippy-land &>/dev/null
 fi
 
 # Setup PopOs specific config

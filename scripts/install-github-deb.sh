@@ -18,7 +18,6 @@ apps=(
 	"rustdesk rustdesk/rustdesk rustdesk-{version}-x86_64.deb ask"
 	"koodo-reader koodo-reader/koodo-reader Koodo-Reader-{version}-amd64.deb"
 	"teams-for-linux IsmaelMartinez/teams-for-linux teams-for-linux_{version}_amd64.deb"
-	"cosmic-applet-clippy-land k33wee/clippy-land cosmic-applet-clippy-land_{version}_amd64.deb"
 )
 
 installed_version() {
