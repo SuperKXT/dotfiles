@@ -4,6 +4,7 @@
 node = "lts"
 # Generates mise's shell completions
 usage = "latest"
+"npm:eas-cli" = "latest"
 
 [settings]
 # Let a project's .nvmrc select its Node version

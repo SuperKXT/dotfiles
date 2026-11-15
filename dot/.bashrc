@@ -101,7 +101,6 @@ update() {
 	mise self-update -y
 	mise upgrade
 	pnpm self-update
-	pnpm update -g -Li
 }
 
 # Make a directory and move into it

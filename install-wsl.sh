@@ -39,7 +39,7 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 # Fix date & time if incorrect
 sudo hwclock -s
 
-# Install mise, and with it Node
+# Install mise, and with it Node and the global CLIs
 ./scripts/install-mise.sh
 export PATH="$HOME/.local/share/mise/shims:$PATH"
 
@@ -50,13 +50,6 @@ if ! command -v pnpm &>/dev/null; then
 fi
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME/bin:$PATH"
-
-# Install global packages
-echo -e "\n${GREEN}Setting Up Global Packages...${NC}"
-xargs pnpm add -g -y --silent \
-	--allow-build=dtrace-provider \
-	--allow-build=protobufjs \
-	<lists/npm-packages.txt
 
 # install claude code
 if ! command -v claude &>/dev/null; then
