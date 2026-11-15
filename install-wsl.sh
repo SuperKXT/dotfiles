@@ -39,33 +39,9 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 # Fix date & time if incorrect
 sudo hwclock -s
 
-# Install or update nvm
-./scripts/install-nvm.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# Install node lts
-echo -e "\n${GREEN}Setting Up Node Version: lts/*...${NC}"
-nvm install 'lts/*' &>/dev/null
-nvm alias default 'lts/*' &>/dev/null
-nvm use default &>/dev/null
-
-# Install pnpm
-if ! command -v pnpm &>/dev/null; then
-	echo -e "\n${GREEN}Installing pnpm...${NC}"
-	curl -fsSL https://get.pnpm.io | sh - &>/dev/null
-fi
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME/bin:$PATH"
-
-# Install global packages
-echo -e "\n${GREEN}Setting Up Global Packages...${NC}"
-xargs pnpm add -g -y --silent \
-	--allow-build=dtrace-provider \
-	--allow-build=protobufjs \
-	<lists/npm-packages.txt
+# Install mise, and with it Node, pnpm and the global CLIs
+./scripts/install-mise.sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # install claude code
 if ! command -v claude &>/dev/null; then

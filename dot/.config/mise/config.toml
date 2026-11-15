@@ -1,0 +1,12 @@
+# Global tools, installed by `mise install` and updated by `mise upgrade`
+
+[tools]
+node = "lts"
+pnpm = "latest"
+# Generates mise's shell completions
+usage = "latest"
+"npm:eas-cli" = "latest"
+
+[settings]
+# Let a project's .nvmrc select its Node version
+idiomatic_version_file_enable_tools = ["node"]

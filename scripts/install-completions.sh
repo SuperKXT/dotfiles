@@ -25,8 +25,9 @@ curl --progress-bar https://raw.githubusercontent.com/docker/compose/master/cont
 echo -e "\n${GREEN}Add Git Completions...${NC}"
 curl --progress-bar https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o $DIR/git
 
-echo -e "\n${GREEN}Adding NVM Completions...${NC}"
-curl --progress-bar https://raw.githubusercontent.com/nvm-sh/nvm/master/bash_completion -o $DIR/nvm
+echo -e "\n${GREEN}Adding mise Completions...${NC}"
+rm -f $DIR/nvm
+mise completion bash >$DIR/mise
 
 echo -e "\n${GREEN}Adding NPM Completions...${NC}"
 npm completion >$DIR/npm
