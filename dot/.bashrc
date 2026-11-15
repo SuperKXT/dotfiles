@@ -100,7 +100,6 @@ update() {
 	~/dotfiles/scripts/install-android-sdk.sh --update
 	mise self-update -y
 	mise upgrade
-	pnpm self-update
 }
 
 # Make a directory and move into it
@@ -184,11 +183,6 @@ if [ -f "$HOME"/.bash.profile ]; then
 fi
 
 eval "$(direnv hook bash)"
-
-# pnpm
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME/bin:$PATH"
-# pnpm end
 
 ###-begin-npm-completion-###
 #

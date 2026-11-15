@@ -39,17 +39,9 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 # Fix date & time if incorrect
 sudo hwclock -s
 
-# Install mise, and with it Node and the global CLIs
+# Install mise, and with it Node, pnpm and the global CLIs
 ./scripts/install-mise.sh
 export PATH="$HOME/.local/share/mise/shims:$PATH"
-
-# Install pnpm
-if ! command -v pnpm &>/dev/null; then
-	echo -e "\n${GREEN}Installing pnpm...${NC}"
-	curl -fsSL https://get.pnpm.io | sh - &>/dev/null
-fi
-export PNPM_HOME="$HOME/.local/share/pnpm"
-export PATH="$PNPM_HOME/bin:$PATH"
 
 # install claude code
 if ! command -v claude &>/dev/null; then

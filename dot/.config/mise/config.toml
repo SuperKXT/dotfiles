@@ -2,6 +2,7 @@
 
 [tools]
 node = "lts"
+pnpm = "latest"
 # Generates mise's shell completions
 usage = "latest"
 "npm:eas-cli" = "latest"
