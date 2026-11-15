@@ -4,7 +4,7 @@
 #   01. General ............................. General Bash behavior          #
 #   02. Aliases ............................. Aliases                        #
 #   03. Functions ........................... Helper functions               #
-#   04. Setup Environments .................. node, nvm and bash setup       #
+#   04. Setup Environments .................. node, mise and bash setup      #
 ##############################################################################
 
 ##############################################################################
@@ -98,8 +98,8 @@ update() {
 	~/dotfiles/scripts/install-fonts.sh --update
 	~/dotfiles/scripts/install-tela-icons.sh --update
 	~/dotfiles/scripts/install-android-sdk.sh --update
-	~/dotfiles/scripts/install-nvm.sh
-	nvm-update lts/*
+	mise self-update -y
+	mise upgrade
 	pnpm self-update
 	pnpm update -g -Li
 }
@@ -137,39 +137,6 @@ public-ip() {
 # alias for git log --oneline -n $1
 gimme() {
 	git log --oneline -n "$1"
-}
-
-# udpate nvm version
-nvm-update() {
-	printf '\nUpdating Node Version %s\n\n' "$1"
-	local current remote versions
-	current="$(nvm version "$1")"
-	remote="$(nvm version-remote "$1")"
-	if [ "$remote" = "N/A" ]; then
-		echo "Version $1 Not Found On Remote"
-		return 1
-	fi
-
-	if [ "$current" = "N/A" ]; then
-		echo "Version $1 Not Found!"
-		mapfile -t versions < <(nvm ls --no-alias --no-colors | grep -oE 'v[0-9]+\.[0-9]+\.[0-9]+')
-		if [ ${#versions[@]} -eq 0 ]; then
-			nvm install "$1" --latest-npm
-			return
-		fi
-		PS3="Select A Version To Replace With $1: "
-		select current in "${versions[@]}"; do
-			[ -n "$current" ] && break
-		done
-		echo
-	fi
-
-	if [ "$current" = "$remote" ]; then
-		echo "Version $1 Is Up To Date"
-	else
-		echo "Updating $1 From $current To $remote"
-		nvm install "$1" --latest-npm && nvm uninstall "$current"
-	fi
 }
 
 # Connect to a named alias via RustDesk
@@ -219,59 +186,10 @@ fi
 
 eval "$(direnv hook bash)"
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
 # pnpm
 export PNPM_HOME="$HOME/.local/share/pnpm"
 export PATH="$PNPM_HOME/bin:$PATH"
 # pnpm end
-
-cdnvm() {
-	command cd "$@" || return
-	nvm_path=$(nvm_find_up .nvmrc | tr -d '\n')
-
-	# If there are no .nvmrc file, use the default nvm version
-	if [[ ! $nvm_path = *[^[:space:]]* ]]; then
-
-		declare default_version
-		default_version=$(nvm version default)
-
-		# If there is no default version, set it to `node`
-		# This will use the latest version on your machine
-		if [[ $default_version == "N/A" ]]; then
-			nvm alias default node
-			default_version=$(nvm version default)
-		fi
-
-		# If the current version is not the default version, set it to use the default version
-		if [[ $(nvm current) != "$default_version" ]]; then
-			nvm use default
-		fi
-
-	elif [[ -s $nvm_path/.nvmrc && -r $nvm_path/.nvmrc ]]; then
-		declare nvm_version
-		nvm_version=$(<"$nvm_path"/.nvmrc)
-
-		declare locally_resolved_nvm_version
-		# `nvm ls` will check all locally-available versions
-		# If there are multiple matching versions, take the latest one
-		# Remove the `->` and `*` characters and spaces
-		# `locally_resolved_nvm_version` will be `N/A` if no local versions are found
-		locally_resolved_nvm_version=$(nvm ls --no-colors "$nvm_version" | tail -1 | tr -d '\->*' | tr -d '[:space:]')
-
-		# If it is not already installed, install it
-		# `nvm install` will implicitly use the newly-installed version
-		if [[ "$locally_resolved_nvm_version" == "N/A" ]]; then
-			nvm install "$nvm_version"
-		elif [[ $(nvm current) != "$locally_resolved_nvm_version" ]]; then
-			nvm use "$nvm_version"
-		fi
-	fi
-}
-alias cd='cdnvm'
-cd "$PWD" || return
 
 ###-begin-npm-completion-###
 #
@@ -357,3 +275,6 @@ export ANDROID_NDK_HOME=$ANDROID_HOME/ndk/25.1.8937393
 # Turso
 export PATH="$PATH:/home/superkxt/.turso"
 export PATH="$HOME/.local/bin:$PATH"
+
+# Puts Node and the other mise tools on PATH, switching versions per project
+eval "$(mise activate bash)"

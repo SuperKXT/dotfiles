@@ -39,18 +39,9 @@ xargs sudo apt -qq install -y <lists/apt-packages.txt
 # Fix date & time if incorrect
 sudo hwclock -s
 
-# Install or update nvm
-./scripts/install-nvm.sh
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-# Install node lts
-echo -e "\n${GREEN}Setting Up Node Version: lts/*...${NC}"
-nvm install 'lts/*' &>/dev/null
-nvm alias default 'lts/*' &>/dev/null
-nvm use default &>/dev/null
+# Install mise, and with it Node
+./scripts/install-mise.sh
+export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 # Install pnpm
 if ! command -v pnpm &>/dev/null; then
