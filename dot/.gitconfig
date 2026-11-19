@@ -7,7 +7,6 @@
 	autoSetupMerge = always
 [core]
 	editor = code -w
-	excludesFile = ~/.gitignore
 [commit]
 	template = ~/.gitmessage
 	gpgSign = true
