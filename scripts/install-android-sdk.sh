@@ -13,8 +13,11 @@ android_cli="$tools/latest/bin/android"
 ndk_version="25.1.8937393"
 
 # The Android CLI (cmdline-tools 23+) replaces sdkmanager, and collects usage data unless told not to
+# Its progress bar is wider than most terminals, so each redraw wraps onto a new line and floods the output
+# Piping it makes the CLI print one line per package instead, and pipefail keeps its exit status
 android_sdk() {
-	"$android_cli" --no-metrics --sdk="$sdk" sdk "$@"
+	set -o pipefail
+	"$android_cli" --no-metrics --sdk="$sdk" sdk "$@" | cat
 }
 
 # sdkmanager can't replace the copy it runs from, so it installs the new one into latest-2
