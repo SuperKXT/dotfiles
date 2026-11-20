@@ -11,9 +11,12 @@ current=""
 command -v watchman &>/dev/null && current="$(watchman --version 2>/dev/null)"
 [ -z "$current" ] && [ "${1:-}" = "--update" ] && exit 0
 
+# shellcheck source=scripts/latest-git-release.sh
+source ~/dotfiles/scripts/latest-git-release.sh
+
 # Not every release has a Linux build, so take the newest one that does
-tag="$(curl -fsSL "https://api.github.com/repos/facebook/watchman/releases?per_page=20" |
-	jq -r 'map(select(.assets[] | .name | test("linux\\.zip"))) | first | .tag_name')"
+tag="$(github_api "repos/facebook/watchman/releases?per_page=20" |
+	jq -r 'map(select(any(.assets[]; .name | test("linux\\.zip")))) | first | .tag_name')"
 if [ -z "$tag" ] || [ "$tag" = "null" ]; then
 	echo "Failed to get the latest Watchman release"
 	exit 1
